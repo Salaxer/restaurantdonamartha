@@ -1,47 +1,20 @@
 export default {
   cart: [],
-  products: [
+  images_carousel: [
     {
-      id: '1',
-      image: 'https://arepa.s3.amazonaws.com/camiseta.png',
-      title: 'Camiseta',
-      price: 25,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      image: "https://http2.mlstatic.com/optimize/o:f_webp/resources/exhibitors/MLM-especial-calzado-febrero/babc10d0-6ff5-11eb-af29-33fe95b7f443-home-slider_desktop.jpg",
+      page: "/hola",
+      alt: "Precios de mayoreo"
     },
     {
-      id: '3',
-      image: 'https://arepa.s3.amazonaws.com/mug.png',
-      title: 'Mug',
-      price: 10,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      image: "https://http2.mlstatic.com/optimize/o:f_webp/resources/deals/exhibitors_resources/mlm-home-desktop-slider-picture-beb5b70a-b803-46d5-b816-2bd4947295f5.jpg",
+      page: "/holax2",
+      alt: "La mejor comida del mundo"
     },
     {
-      id: '4',
-      image: 'https://arepa.s3.amazonaws.com/pin.png',
-      title: 'Pin',
-      price: 4,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      image: "https://http2.mlstatic.com/optimize/o:f_webp/resources/exhibitors/MLM-semana-de-la-salud-enero/584b3920-697f-11eb-a9a8-a5203b9c475b-home-slider_desktop.jpg",
+      page: "/holax3",
+      alt: "Super mojarron"
     },
-    {
-      id: '5',
-      image: 'https://arepa.s3.amazonaws.com/stickers1.png',
-      title: 'Stickers',
-      price: 2,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    },
-    {
-      id: '6',
-      image: 'https://arepa.s3.amazonaws.com/stickers2.png',
-      title: 'Stickers',
-      price: 2,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    },
-    {
-      id: '7',
-      image: 'https://arepa.s3.amazonaws.com/hoodie.png',
-      title: 'Hoodie',
-      price: 35,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    },
-  ],
+  ]
 };

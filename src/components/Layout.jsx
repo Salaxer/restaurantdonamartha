@@ -1,10 +1,11 @@
 import React from 'react';
-import Header from './Header';
+import Header from '../templates/Header';
 import Footer from './Footer';
+
 const Layout = ({ children }) => {
   return (
     <div className="Main">
-      <Header />
+      <Header/>
       {children}
       <Footer />
     </div>

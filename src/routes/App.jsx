@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
+import '../styles/desktop.css';
 import Home from '../containers/Home';
 import Checkout from '../containers/Checkout';
 import Information from '../containers/Information';
