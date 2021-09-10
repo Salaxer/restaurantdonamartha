@@ -1,7 +1,10 @@
 import React from 'react';
+import MediaQueryInfo from '../utils/MediaQuery';
 
 const NotFound = () => {
-  return <h1>NotFound</h1>;
+  return(
+    <MediaQueryInfo></MediaQueryInfo>
+  );
 };
 
 export default NotFound;

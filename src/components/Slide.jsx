@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import carrousell from '../utils/carousel';
 import images from '../initialState'
+import { Link } from 'react-router-dom';
 
 const setCarrousell = () =>{
     useEffect(()=>{
-        carrousell(true)
+        carrousell(false);
+        carrousell(true);
         return () => {
-            carrousell(false)
+            carrousell(false);
         }
     })
 }
@@ -19,9 +21,9 @@ const Slide = () => {
                 images.images_carousel.map((item, index) => {
                     return(
                         <div key={index} id={`slide-${index}`} className="slide fade">
-                            <a href={item.page} id={`image_${index+1}`}> 
+                            <Link to={item.page} id={`image_${index+1}`}> 
                                 <img src={item.image} alt={item.alt} srcSet="" />
-                            </a>
+                            </Link>
                         </div>
                     )
                 })

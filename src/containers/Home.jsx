@@ -6,7 +6,7 @@ import Slide from '../components/Slide.jsx'
 const Home = () => {
   return (
     <>
-      <section className="welcome">
+    <section id="welcome" className="welcome">
       <div className="slider-container">
         <Slide images={images_carousel}/>
       </div>

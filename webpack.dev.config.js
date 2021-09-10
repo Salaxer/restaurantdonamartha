@@ -12,7 +12,9 @@ module.exports = {
     chunkFilename: 'js/[id].[chunkhash].js',
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
     compress: true,
     historyApiFallback: true,
     open: true,
