@@ -1,0 +1,78 @@
+/*css Header */
+.header{
+    width: 100%;
+    background-color: var(--fillingcolor);
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+  }
+  .header__picture--img{
+    height: 100%;
+    width: auto;
+  }
+  .header__nav{
+    display: flex;
+    height: 100%;
+    width: auto;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header__nav ul{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+  }
+  .header__nav ul li{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100px;
+    height: 58px;
+    border-radius: 10px;
+  }
+  .header__nav a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  
+  }
+  .header__nav ul li:hover{
+    background-color: var(--maincolorblue);
+  }
+  .header__nav .information{
+    position: absolute;
+    visibility: hidden;
+    top: 60px;
+    padding: 3px;
+    background-color: white;
+    color: var(--fillingcolor);
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px 0px rgba(28, 28, 28, 0.624);
+    transition: all ease-in;
+    z-index: 4;
+  }
+  .header__nav ul li:hover .information{
+    visibility: visible;
+    animation:animateleft 0.5s;
+    left: 10px;
+  }
+  @keyframes animateleft{
+    from{
+      left:-300px;
+      opacity:0;
+    } 
+    to{
+      left:10px;
+      opacity:1;
+    }
+  }

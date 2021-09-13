@@ -16,5 +16,21 @@ export default {
       page: "/holax3",
       alt: "Super mojarron"
     },
+  ],
+  image_discover: [
+    {
+      image: "https://cdn.pixabay.com/photo/2017/12/26/04/51/fish-and-chip-3039746_960_720.jpg",
+      alt: "Hola"
+    },
+    {
+      image: "https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg",
+      alt: "Hola",
+    },
+    {
+      image: "https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_960_720.jpg",
+      alt: "Hola",
+    }
+
+  
   ]
 };

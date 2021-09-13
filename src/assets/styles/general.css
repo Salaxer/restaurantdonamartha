@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+  }
+  :root{
+    --maincolorblue:#0096C1;
+    --maincolorgreen: #00984C; 
+    --fillingcolor: #0B3247;
+    --typografia: 'Bree Serif', serif;
+  }
+  html {
+    font-size: 62.5%; 
+    scroll-behavior: smooth;
+  }

@@ -1,0 +1,36 @@
+
+  
+
+
+ 
+  /* https://as1.ftcdn.net/jpg/02/52/38/80/500_F_252388016_KjPnB9vglSCuUJAumCDNbmMzGdzPAucK.jpg */
+  
+  /* Find Us */
+  
+  .main__findus{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+    width: 100%;
+    height: 500px;
+    padding: 10px;
+    grid-area: 2/3/2/1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100vh;
+    background-attachment: fixed;
+  }
+  .main__findus--title{
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .main__findus--map{
+    width: 100%;
+    margin-top: 30px;
+    height: 80%;
+    border-radius: 20px;
+  }
+  

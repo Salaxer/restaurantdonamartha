@@ -1,0 +1,10 @@
+  /* Main page */
+  .main{
+    margin-top: 410px;
+    padding-top: 10px;
+    position: relative;
+    z-index: 50;
+    display: grid;
+    grid-template: 1fr 1fr/30% 1fr;
+    background-color: whitesmoke;
+  }

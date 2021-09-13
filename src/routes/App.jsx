@@ -1,13 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Home from '../containers/Home';
-import Checkout from '../containers/Checkout';
-import Information from '../containers/Information';
-import Payment from '../containers/Payment';
-import Success from '../containers/Success';
-import NotFound from '../containers/NotFound';
+import Home from '../pages/Home';
+import Checkout from '../pages/Checkout';
+import Information from '../pages/Information';
+import Payment from '../pages/Payment';
+import Success from '../pages/Success';
+import NotFound from '../pages/NotFound';
 import Layout from '../components/Layout';
 
+import '../assets/styles/general.css';
+import '../assets/styles/header.css';
 
 
 const App = () => {
