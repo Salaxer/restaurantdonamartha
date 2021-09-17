@@ -27,43 +27,49 @@ const show_slide = (index) =>{
   };
 
   for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = 'none';
+    slides[i] == undefined ? slides : slides[i].style.display = 'none';
     dots[i].classList.remove('active-dot');
   }
 
-  slides[slider_index].style.display = 'block';
-  dots[slider_index].classList.add('active-dot');
+  slides[slider_index] == undefined ? slides : slides[slider_index].style.display = 'block';
+  dots[slider_index] == undefined ? dots : dots[slider_index].classList.add('active-dot');
 }
 
 const carrousell = (state) =>{
   show_slide(slider_index);
+  
+  const arrow_prev = document.querySelector('#arrow-prev');
+  const arrow_next = document.querySelector('#arrow-next');
+  const dots = document.querySelectorAll('.dot-nav');
 
-  document.querySelector('#arrow-prev').addEventListener('click', () => {
-    show_slide(++slider_index);
-    IntervalSet(false);
-    IntervalSet(true, 3000);
-  });
-  document.querySelector('#arrow-next').addEventListener('click', () => {
-    show_slide(--slider_index);
-    IntervalSet(false);
-    IntervalSet(true, 3000);
-  });
-
-  document.querySelectorAll('.dot-nav').forEach((element) => {
-  element.addEventListener('click', function () {
-  var dots = Array.prototype.slice.call(this.parentElement.children),
-    dot_index = dots.indexOf(element);
-  show_slide(slider_index = dot_index);
-  })
-  });
+  if(arrow_prev){
+    arrow_prev.addEventListener('click', () => {
+      show_slide(++slider_index);
+      IntervalSet(false);
+      IntervalSet(true, 3000);
+    });
+  }
+  if (arrow_next) {
+    arrow_next.addEventListener('click', () => {
+      show_slide(--slider_index);
+      IntervalSet(false);
+      IntervalSet(true, 3000);
+    });
+  }
+  if (dots) {
+    dots.forEach((element) => {
+      element.addEventListener('click', function () {
+      var dots = Array.prototype.slice.call(this.parentElement.children),
+        dot_index = dots.indexOf(element);
+      show_slide(slider_index = dot_index);
+      })
+    });
+  }
 
   window.addEventListener('scroll' , (evt) =>  {
     let altura = window.scrollY / 2;
-    console.log(altura);
-    console.log(window.scrollY);
     let slide_to = document.getElementById('welcome');
-    slide_to.style.top = `${0-altura}px`;
-
+    slide_to == undefined ? slide_to = slide_to : slide_to.style.top = `${0-altura}px`;
     // let transparencia = window.scrollY / window.innerHeight * 2
     // transparencia = transparencia < 1 ? transparencia : 1;
     // let header = document.getElementById('welcome');

@@ -9,11 +9,9 @@ const Discover = () => {
                 <div className="slidefood">
                     {images.image_discover.map( (item, index) => {
                         return(
-                            <>
                                 <div key={index} className="item-slidefood">
                                     <img src={item.image} alt={item.alt}/>
                                 </div>
-                            </>
                         )
                     })}
                 </div>
