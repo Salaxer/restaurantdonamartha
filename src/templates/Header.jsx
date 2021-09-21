@@ -7,6 +7,11 @@ const Header = () => {
     <>
         <header id="header" className="header">
             <img className="header__picture--img" src={logo} alt="Logo del restaurante"/>
+            <input type="checkbox" name="openClose" id="check" />
+            <label className="header__mobile" htmlFor="check">
+              <i id="header__mobile--open" class="fas fa-bars"></i>
+              <i id="header__mobile--close" class="fas fa-times"></i>
+            </label>
             <nav className="header__nav">
                 <ul>
                     <li><Link to="/"><i className="fas fa-store-alt"></i><span className="information">Inicio</span></Link></li>
