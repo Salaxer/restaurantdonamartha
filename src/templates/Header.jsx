@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/Logo1_main.png'
+import logo from '../assets/Logo1_main.png';
+import headerOpenClose from '../utils/headerOpenClose';
+
+const setHeader = () => {
+  useEffect(()=>{
+    headerOpenClose();
+  })
+}
 
 const Header = () => {
+  setHeader()
   return (
     <>
         <header id="header" className="header">
             <img className="header__picture--img" src={logo} alt="Logo del restaurante"/>
             <input type="checkbox" name="openClose" id="check" />
             <label className="header__mobile" htmlFor="check">
-              <i id="header__mobile--open" class="fas fa-bars"></i>
-              <i id="header__mobile--close" class="fas fa-times"></i>
+              <i id="header__mobile--open" className="fas fa-bars"></i>
+              <i id="header__mobile--close" className="fas fa-times"></i>
             </label>
-            <nav className="header__nav">
+            <nav className="header__nav" id="header_nav">
                 <ul>
                     <li><Link to="/"><i className="fas fa-store-alt"></i><span className="information">Inicio</span></Link></li>
                     <li><Link to="/menu"><i className="fab fa-elementor"></i><span className="information">Menu</span></Link></li>
