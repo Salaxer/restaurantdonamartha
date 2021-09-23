@@ -1,13 +1,14 @@
 const headerOpenClose = () =>{
-    let menu = document.getElementById('header_nav');    
+    let lateral_menu = document.getElementById('header_nav');    
     let checkBox = document.getElementById('check');
-    let max_width = window.innerWidth;
+    let open = document.getElementById('header__mobile--open');
+    let close = document.getElementById('header__mobile--close');
     checkBox.addEventListener('change', ()=>{
-        checkBox.checked ? menu.style.left = '0px' : menu.style.left = `-${max_width*0.6}px`;
+        checkBox.checked ? lateral_menu.style.left = '0px' : lateral_menu.style.left = `-461px`;
     })
     window.addEventListener('click',(ev)=>{
-        if (ev.target !== menu && ev.target !== checkBox) {
-            menu.style.left = `-${max_width*0.6}px`;
+        if (ev.target !== lateral_menu && ev.target !== checkBox && ev.target !== open && ev.target !== close) {
+            lateral_menu.style.left = `-461px`;
             checkBox.checked = false;
         }
     })
