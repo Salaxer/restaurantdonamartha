@@ -1,4 +1,4 @@
-# corebo-store
+# restaurantdonamartha
 
 Repository for the frontend part in corebo-store project.
 
@@ -25,3 +25,4 @@ Here the changes already made are sent to production
 Here it is proved that the mode of production locally
 
 `npm run server`
+
