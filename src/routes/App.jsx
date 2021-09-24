@@ -8,9 +8,12 @@ import Success from '../pages/Success';
 import NotFound from '../pages/NotFound';
 import Layout from '../components/Layout';
 
+import globalEvents from '../utils/globalEvents';
+
 import '../assets/styles/general.css';
 import '../assets/styles/header.css';
 
+globalEvents();
 
 const App = () => {
   return (

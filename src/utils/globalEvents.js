@@ -1,4 +1,10 @@
 
 const globalEvents = () =>{
-    return window.addEventListener('')
+    window.addEventListener('scroll' , (evt) =>  {
+        let altura = window.scrollY / 2;
+        let slide_to = document.getElementById('welcome');
+        slide_to == undefined ? slide_to = slide_to : slide_to.style.top = `${0-altura}px`;
+      })
 }
+
+export default globalEvents;

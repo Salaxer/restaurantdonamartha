@@ -32,7 +32,7 @@ const Slide = () => {
                 {
                     images.images_carousel.map((item, index) => {
                         return(
-                            <div key={index} className="dot-nav active-dot"></div>
+                            <div data-key={index} key={index} className="dot-nav active-dot"></div>
                         )
                     })
                 }

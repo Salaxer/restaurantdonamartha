@@ -41,6 +41,7 @@ const carrousell = (state) =>{
   const arrow_prev = document.querySelector('#arrow-prev');
   const arrow_next = document.querySelector('#arrow-next');
   const dots = document.querySelectorAll('.dot-nav');
+  const circles = document.getElementById('dots-wrapper');
 
   if(arrow_prev){
     arrow_prev.addEventListener('click', () => {
@@ -56,26 +57,16 @@ const carrousell = (state) =>{
       IntervalSet(true, 3000);
     });
   }
-  if (dots) {
-    dots.forEach((element) => {
-      element.addEventListener('click', function () {
-      var dots = Array.prototype.slice.call(this.parentElement.children),
-        dot_index = dots.indexOf(element);
-      show_slide(slider_index = dot_index);
-      })
-    });
+  if (circles) {
+    circles.addEventListener('click', (ev)=>{
+      if(ev.target !== circles){
+        let dot_index = parseInt(ev.target.getAttribute('data-key'));
+        show_slide(slider_index = dot_index);
+        IntervalSet(false);
+        IntervalSet(true, 100);
+      }
+    })
   }
-
-  window.addEventListener('scroll' , (evt) =>  {
-    let altura = window.scrollY / 2;
-    let slide_to = document.getElementById('welcome');
-    slide_to == undefined ? slide_to = slide_to : slide_to.style.top = `${0-altura}px`;
-    // let transparencia = window.scrollY / window.innerHeight * 2
-    // transparencia = transparencia < 1 ? transparencia : 1;
-    // let header = document.getElementById('welcome');
-    // header.style.opacity = 1 - transparencia;
-  })
-
   IntervalSet(state);
 }
   
