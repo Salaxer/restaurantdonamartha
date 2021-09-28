@@ -13,6 +13,7 @@ const IntervalSet = (state, time = 0) =>{
   }
   time = 0;
 }
+//
 const show_slide = (index) =>{
   
   const slides = document.querySelectorAll('.slide');
@@ -34,7 +35,7 @@ const show_slide = (index) =>{
   slides[slider_index] == undefined ? slides : slides[slider_index].style.display = 'block';
   dots[slider_index] == undefined ? dots : dots[slider_index].classList.add('active-dot');
 }
-
+// 
 const carrousell = (state) =>{
   show_slide(slider_index);
   
