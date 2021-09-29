@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Checkout from '../pages/Checkout';
@@ -13,9 +13,11 @@ import globalEvents from '../utils/globalEvents';
 import '../assets/styles/general.css';
 import '../assets/styles/header.css';
 
-globalEvents();
 
 const App = () => {
+  useEffect(()=>{
+    globalEvents();
+  })
   return (
     <BrowserRouter>
       <Layout>

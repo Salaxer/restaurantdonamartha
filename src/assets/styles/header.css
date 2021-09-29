@@ -87,7 +87,7 @@
   height: 100%;
   position: relative;
 }
-.header__nav ul li:focus-within{
+.header__nav ul li:focus{
   background-color: var(--maincolorblue);
 }
 .header__nav .information{

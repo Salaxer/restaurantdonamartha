@@ -7,10 +7,8 @@ import Find_us from '../components/Find_us';
 
 const Main = () => {
 
-
   useEffect(()=>{
-    const sizeImage = document.getElementById('welcome');
-    document.getElementById("main").style.marginTop = `${sizeImage.clientHeight + 75}px`;
+  
   })
 
   return (

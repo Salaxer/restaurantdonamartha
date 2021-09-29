@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import carrousell from '../utils/carousel';
 import images from '../initialState'
 import { Link } from 'react-router-dom';
+import Margin from '../utils/MarginFromMain'
 
 const setCarrousell = () =>{
     useEffect(()=>{
@@ -22,7 +23,7 @@ const Slide = () => {
                     return(
                         <div key={index} id={`slide-${index}`} className="slide fade">
                             <Link to={item.page} id={`image_${index+1}`}> 
-                                <img className="imageRes" src={item.image} alt={item.alt} width="600" height="400" />
+                                <img onLoad={((e)=> Margin(e))} className="imageRes" src={item.image} alt={item.alt} />
                             </Link>
                         </div>
                     )
