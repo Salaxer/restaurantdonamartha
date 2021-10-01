@@ -1,7 +1,5 @@
 
 const MarginFromMain = (e)=>{
-    const kk = document.getElementById('welcome');
-    // kk.scrollHeight
     const size = e.target.clientHeight;
     console.log(size);
     if (size !== 0) {

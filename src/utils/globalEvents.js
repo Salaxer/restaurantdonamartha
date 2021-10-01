@@ -1,3 +1,4 @@
+import header from './headerOpenClose';
 
 const globalEvents = () =>{
     window.addEventListener('scroll' , (evt) =>  {
@@ -11,6 +12,9 @@ const globalEvents = () =>{
         console.log(sizeImage);
         document.getElementById("main").style.marginTop = `${sizeImage.clientHeight + 75}px`;
       }
+    })
+    window.addEventListener('click',(ev)=>{
+      header(ev);
     })
 }
 
