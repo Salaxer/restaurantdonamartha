@@ -1,0 +1,6 @@
+.Greeting{
+    grid-area: 1 / 1 / 1/ span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
