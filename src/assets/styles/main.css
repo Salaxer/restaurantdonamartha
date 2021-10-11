@@ -4,6 +4,6 @@
     position: relative;
     z-index: 50;
     display: grid;
-    grid-template: 1fr 1fr/30% 1fr;
-    background-color: whitesmoke;
+    grid-template: 230px 1fr/30% 1fr;
+    background-color: white;
   }

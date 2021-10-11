@@ -8,6 +8,7 @@ export default {
     },
     {
       image: "https://http2.mlstatic.com/optimize/o:f_webp/resources/deals/exhibitors_resources/mlm-home-desktop-slider-picture-beb5b70a-b803-46d5-b816-2bd4947295f5.jpg",
+      // image: "https://scontent.fmex10-1.fna.fbcdn.net/v/t1.6435-9/32266995_777342725986733_4289410617636290560_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=e3f864&_nc_eui2=AeGp930WDn_hNytE-u6isQL0w-QEipK7E2jD5ASKkrsTaNx0posJ4UCYm16oKNx3xVFsAk3Aqqbccjq3df-iPH61&_nc_ohc=Pyb7_CAu1BcAX9Co7ip&_nc_ht=scontent.fmex10-1.fna&oh=276796872fc5e68cd4da6c59e552a7da&oe=618766EE",
       page: "/holax2",
       alt: "La mejor comida del mundo"
     },

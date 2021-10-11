@@ -1,12 +1,17 @@
 import React from 'react';
-import '../assets/styles/greeting.css'
+import '../assets/styles/greeting.css';
+import plants from '../assets/plants.jpg';
 
 const Greeting = () =>{
     return (
-        <div  className="Greeting">
-            <h1>Soy tu padre</h1>
-            <p>Hola como estan todos por aqui :)</p>
-        </div>
+        <>
+            <div  className="Greeting" style={{backgroundImage: `url('${plants}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}}>
+            </div>
+            <div className="text">
+                <h1>Bienvenidos</h1>
+                <p>Soy doña martha y espero que disfruten de la buena comida que preparamos</p>
+            </div>
+        </>
     )
 }
 

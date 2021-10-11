@@ -1,6 +1,36 @@
 .Greeting{
-    grid-area: 1 / 1 / 1/ span 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  grid-area: 1 / 1 / 1/ span 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
   }
+ .text{
+  /* border-radius: 25px; */
+  /* border: 1px solid; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  height: 200px;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translate(50%, 13%);
+  z-index: 2;
+  padding: 20px;
+  text-align: center;
+}
+.text h1{
+  font-size: 5em;
+}
+.text p{
+  font-size: 1.5em;
+}

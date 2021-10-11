@@ -4,14 +4,15 @@
     position: relative;
     right: 25px;
     height: 100%;
-    border: double 25px transparent;
+    padding: 50px;
+    /* border: double 25px transparent;
     border-right: 0px;
     border-top-left-radius: 40px;
     border-bottom-left-radius: 40px;
     background-image: linear-gradient(white, white), 
                       linear-gradient(to bottom, transparent, var(--maincolorgreen));
     background-origin: border-box;
-    background-clip: content-box, border-box;
+    background-clip: content-box, border-box; */
   }
   .container-all{
     position: relative;
