@@ -1,5 +1,6 @@
 import React from "react";
 
+import '../assets/styles/find_us.css';
 const Find_us = () =>{
     return(
         <div className="main__findus">

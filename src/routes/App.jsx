@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from '../pages/Home';
-import Checkout from '../pages/Checkout';
+import menu from '../pages/Menu';
 import Information from '../pages/Information';
 import Payment from '../pages/Payment';
 import Success from '../pages/Success';
@@ -23,7 +23,7 @@ const App = () => {
       <Layout>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/menu" component={menu} />
           <Route exact path="/checkout/information" component={Information} />
           <Route exact path="/checkout/payment" component={Payment} />
           <Route exact path="/checkout/success" component={Success} />

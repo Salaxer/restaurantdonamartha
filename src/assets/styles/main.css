@@ -1,9 +1,17 @@
   /* Main page */
   .main{
-    padding-top: 10px;
     position: relative;
     z-index: 50;
     display: grid;
-    grid-template: 230px 1fr/30% 1fr;
+    grid-template: 500px 1fr 1fr/1fr;
     background-color: white;
+  }
+  @media screen and (min-width: 769px) {
+    .main{
+      position: relative;
+      z-index: 50;
+      display: grid;
+      grid-template: 500px 1fr 1fr/1fr 1fr;
+      background-color: white;
+    }
   }
