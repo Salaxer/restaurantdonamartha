@@ -1,7 +1,7 @@
 /*css Header */
 /* Mobile */
 .header{
-  background-color: rgba(255, 255, 255, 0.981);
+  background-color: rgba(0, 0, 0, 0.981);
   width: 100%;
   /* background-color: var(--fillingcolor); */
   height: 65px;
@@ -12,6 +12,7 @@
   align-items: center;
   position: fixed;
   top: 0;
+  transition: all ease-in .1s;
 }
 .header__picture--img{
   height: 100%;

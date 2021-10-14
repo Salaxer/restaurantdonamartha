@@ -14,28 +14,29 @@
   flex-direction: column;
   width: 80%;
   height: 200px;
-  background-color: rgba(0,0,0, 0.4); 
+  /* background-color: rgba(0,0,0, 0.4);  */
   color: white;
   font-weight: bold;
-  border: 3px solid #f1f1f1;
+  /* border: 3px solid var(--maincolorgreen); */
   position: absolute;
   top: 0%;
   left: 0%;
-  transform: translate(12%, 12%);
+  transform: translate(13%, 70%);
   z-index: 2;
   padding: 20px;
   text-align: center;
 }
 .text h1{
-  font-size: 5em;
+  font-size: 3em;
 }
 .text p{
-  font-size: 1.5em;
+  padding-top: 10px;
+  font-size: 1.1em;
 }
 @media screen and (min-width: 769px) {
   .text{
     width: 50%;
-    transform: translate(50%, 50%); 
+    transform: translate(50%, 100%); 
   }
   .Greeting{
     grid-area: 1 / 1 / 1/ span 2;
@@ -44,5 +45,12 @@
     align-items: center;
     filter: blur(3px);
     -webkit-filter: blur(3px);
+    }
+    .text h1{
+      font-size: 5em;
+    }
+    .text p{
+      padding-top: 10px;
+      font-size: 2em;
     }
 }
