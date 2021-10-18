@@ -3,6 +3,7 @@ import '../assets/styles/main.css'
 import Fb_opinions from '../components/Fb_opinios';
 import Discover from '../components/Discover';
 import Greeting from '../components/Greeting'
+import MenuFood from '../components/MenuFood';
 
 const Main = () => {
 
@@ -17,7 +18,8 @@ const Main = () => {
         <Discover></Discover>
         {/* <!-- Facebook --> */}
         <Fb_opinions/>
-        {/* <!-- Maps --> */}
+        {/* <!-- little Menu --> */}
+        <MenuFood/>
     </section>
   );
 };
