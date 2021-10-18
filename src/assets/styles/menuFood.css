@@ -1,0 +1,42 @@
+.grid_Menu{
+    box-sizing: border-box;
+    grid-area: 3 / 1 / span 3 / span 2;
+    margin: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    border-radius: 20px;
+    padding: 20px;
+    display: grid;
+    grid-template: 50px 1fr 1fr 50px/50% 50%;
+    background-color: #f5f6f7;
+    box-shadow: 0 0px 2px 0px rgb(26, 26, 26, .17);
+}
+.target_food{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 0px 2px 0px rgb(26, 26, 26, .17);
+}
+.general_title_little_menu{
+    padding: 10px 0px;
+    grid-area: 1 / 1 / span 1 / span 2;
+    text-align: center;
+}
+.link_all_menu{
+    grid-area: 4 / 1 / span 3 / span 2;
+    height: 70%;
+}
+.container_image_little{
+    padding: 35px;
+    overflow:hidden;
+}
+.container_image_little img{
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}

@@ -3,15 +3,13 @@
     position: relative;
     z-index: 50;
     display: grid;
-    grid-template: 500px 1fr 1fr/1fr;
-    background-color: white;
+    grid-template: 560px 620px 1fr/1fr;
   }
   @media screen and (min-width: 769px) {
     .main{
       position: relative;
       z-index: 50;
       display: grid;
-      grid-template: 100vh 1fr 1fr/1fr 500px;
-      background-color: white;
+      grid-template: 100vh 640px 1fr/1fr 500px;
     }
   }
