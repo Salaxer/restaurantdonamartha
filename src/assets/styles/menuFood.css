@@ -7,7 +7,7 @@
     border-radius: 20px;
     padding: 20px;
     display: grid;
-    grid-template: 50px 1fr 1fr 50px/50% 50%;
+    grid-template: 50px 1fr 1fr 60px/50% 50%;
     background-color: #f5f6f7;
     box-shadow: 0 0px 2px 0px rgb(26, 26, 26, .17);
 }
@@ -24,12 +24,25 @@
 }
 .general_title_little_menu{
     padding: 10px 0px;
-    grid-area: 1 / 1 / span 1 / span 2;
+    grid-area: 1 / 1 /  2 /  3;
     text-align: center;
+    transition: all ease-in 0.5s;
 }
 .link_all_menu{
-    grid-area: 4 / 1 / span 3 / span 2;
+    background-color: var(--maincolorblue);
+    transition: all ease-in 0.2s;
+    grid-area: 4 / 1 /  5 /  3;
     height: 70%;
+}
+.link_all_menu a{
+    width: 100%;
+    font-size: 1.4rem;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(211, 211, 211);
+}
+.link_all_menu:hover{
+    box-shadow: 0px 2px 4px 0px var(--maincolorgreen)
 }
 .container_image_little{
     padding: 35px;

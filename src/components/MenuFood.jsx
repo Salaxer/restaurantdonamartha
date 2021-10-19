@@ -36,8 +36,8 @@ const MenuFood = () => {
               </Link>
           </div>
           <div className="link_all_menu target_food">
-              <Link to="./hi">
-                <h1>View all Menu</h1>
+              <Link to="./menu">
+                <h1>Mostrar el menu completo</h1>
               </Link>
           </div>
         </div>
