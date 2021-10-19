@@ -1,5 +1,5 @@
 .Greeting{
-  grid-area: 1 / 1 / span 1/ span 2;
+  grid-area:  1 / 1 / 2/ 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,26 +12,40 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 80%;
   height: 200px;
-  /* background-color: rgba(0,0,0, 0.4);  */
-  color: white;
+  /* background-color: rgba(82, 221, 110, 0.179);  */
+  color: rgb(240, 240, 240);
   font-weight: bold;
-  /* border: 3px solid var(--maincolorgreen); */
+  /* box-shadow: 0px 0px 10px 1px var(--maincolorgreen); */
   position: absolute;
   top: 0%;
   left: 0%;
-  transform: translate(40%, 100%);
+  width: 90%;
+  transform: translate(  25% , 100%);
   z-index: 2;
   padding: 20px;
   text-align: center;
 }
 .text h1{
+  text-shadow: 1px 1px 5px rgba(22, 22, 22, 0.96);
   font-size: 3em;
 }
 .text p{
+  text-shadow: 1px 1px 5px rgba(22, 22, 22, 0.96);
   padding-top: 10px;
   font-size: 1.1em;
+}
+@media screen and (min-width:400px) and (  max-width: 537px ) {
+  .text{
+    width: 80%;
+    transform: translate( 14% , 100%);
+  }
+}
+@media screen and (min-width:538px) and (  max-width: 768px ) {
+  .text{
+    width: 70%;
+    transform: translate(25%, 100%);
+  }
 }
 @media screen and (min-width: 769px) {
   .text{
@@ -39,7 +53,7 @@
     transform: translate(50%, 100%); 
   }
   .Greeting{
-    grid-area: 1 / 1 / 1/ span 2;
+    grid-area: 1 / 1 / 2 / 3;
     display: flex;
     justify-content: center;
     align-items: center;

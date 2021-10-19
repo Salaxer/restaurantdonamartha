@@ -1,15 +1,25 @@
   /* Main page */
   .main{
-    position: relative;
     z-index: 50;
     display: grid;
-    grid-template: 560px 620px 1fr/1fr;
+    height: auto;
+    grid-template: 100vh 400px 1fr 1fr / 1fr;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+  }
+  @media screen and (min-width:538px) and (  max-width: 768px ) {
+    .main{
+      z-index: 50;
+      grid-template: 100vh 600px 1fr 1fr / 1fr;
+      padding-bottom: 10px;
+      margin-bottom: 40px;
+    }
   }
   @media screen and (min-width: 769px) {
     .main{
-      position: relative;
       z-index: 50;
-      display: grid;
       grid-template: 100vh 640px 1fr/1fr 500px;
+      padding-bottom: 10px;
+      margin-bottom: 40px;
     }
   }

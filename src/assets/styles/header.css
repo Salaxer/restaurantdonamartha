@@ -52,7 +52,7 @@
 .header__nav{
   position: fixed;
   display: flex;
-  height: 100vh;
+  height: 100%;
   width: 60%;
   align-items: flex-start;
   justify-content: center;
