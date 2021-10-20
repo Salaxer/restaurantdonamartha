@@ -19,14 +19,63 @@ const Footer = () => {
         </div>
       </div>
       <div className="hours">
-        Business Hours
-        Mon:	10:05 AM – 8:00 PM
-        Tue:	10:05 AM – 8:10 PM
-        Wed:	10:05 AM – 8:10 PM
-        Thu:	10:05 AM – 8:10 PM
-        Fri:	10:05 AM – 8:10 PM
-        Sat:	10:05 AM – 8:10 PM
-        Sun:	10:05 AM – 8:10 PM
+        <div className="directions">
+          <h3>dirección</h3>
+          <p>
+          Carretera zapata-zacatepec
+          Zapata - Zacatepec 17
+          San Pedro de los Pinos
+          62790 Atlacholoaya, Mor.
+          Mexico
+          </p>
+        </div>
+        <table>
+          <caption><h3>Horarios de apertura</h3></caption>
+          <tbody>
+            <tr>
+              <td>Mon:</td>
+              <th>10:05 AM</th>
+              <th>–</th>
+              <th>8:00 PM</th>
+            </tr>
+            <tr>
+              <td>Tue:</td>
+              <th>10:05 AM</th>
+              <th>–</th>
+              <th>8:00 PM</th>
+            </tr>
+            <tr>
+              <td>Wed:</td>
+              <th>10:05 AM</th>
+              <th>–</th>
+              <th>8:00 PM</th>
+            </tr>
+            <tr>
+              <td>Thu:</td>
+              <th>10:05 AM</th>
+              <th>–</th>
+              <th>8:00 PM</th>
+            </tr>
+            <tr>
+              <td>Fri:</td>
+              <th>10:05 AM</th>
+              <th>–</th>
+              <th>8:00 PM</th>
+            </tr>
+            <tr>
+              <td>Sat:</td>
+              <th>10:05 AM</th>
+              <th>–</th>
+              <th>8:00 PM</th>
+            </tr>
+            <tr>
+              <td>Sun:</td>
+              <th>10:05 AM</th>
+              <th>–</th>
+              <th>8:00 PM</th>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <Find_us></Find_us>
     </div>
