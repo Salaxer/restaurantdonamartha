@@ -3,14 +3,14 @@
     z-index: 50;
     display: grid;
     height: auto;
-    grid-template: 100vh 400px 1fr 1fr / 1fr;
+    grid-template: 100vh 400px 600px 1fr / 1fr;
     padding-bottom: 10px;
     margin-bottom: 40px;
   }
   @media screen and (min-width:538px) and (  max-width: 768px ) {
     .main{
       z-index: 50;
-      grid-template: 100vh 600px 1fr 1fr / 1fr;
+      grid-template: 100vh 600px 600px 1fr / 1fr;
       padding-bottom: 10px;
       margin-bottom: 40px;
     }

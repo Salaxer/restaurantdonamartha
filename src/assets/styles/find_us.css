@@ -1,23 +1,27 @@
   /* Find Us */
   
-  .main__findus{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 30px;
+  .Footer .main__findus{
+    flex-basis: 100%;
     width: 100%;
-    height: 500px;
+    height: calc(100% - 150px);
     padding: 10px;
+    padding-bottom: 20px;
   }
   .main__findus--title{
-    font-size: 50px;
+    color: white;
+    font-size: 2.3rem;
     font-weight: 700;
     text-align: center;
   }
   .main__findus--map{
     width: 100%;
-    margin-top: 30px;
+    margin-top: 5px;
     height: 80%;
     border-radius: 20px;
   }
+  @media screen and (min-width: 769px) {
+    .Footer .main__findus{
+      flex-basis: 34%;
+      height: 100%;
+    }
+  } 
