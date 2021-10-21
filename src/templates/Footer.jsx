@@ -13,9 +13,9 @@ const Footer = () => {
         <div className="social">
           Siguenos en nuestras redes sociales:
           <br />
-          <a href="https://www.facebook.com/Micheladas-Do%C3%B1a-Martha-101296578313615/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
-          <a href="http://" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-          <a href="http://" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/Micheladas-Do%C3%B1a-Martha-101296578313615/" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i></a>
+          <a href="http://" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+          <a href="http://" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
         </div>
       </div>
       <div className="hours">

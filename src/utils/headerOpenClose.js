@@ -12,12 +12,17 @@ const headerOpenClose = (ev, scrol) =>{
             checkBox.checked = false;
         }
     }
-    if (scrol) {
-        if(scrol >= 200){
-            document.getElementById('header').style.backgroundColor = "#0B3247";
-        }else{
-            document.getElementById('header').style.backgroundColor = "rgba(0, 0, 0, 0.04)";
+    const arrow_prev = document.querySelector('#arrow-prev');
+    if (arrow_prev == null) {
+        if (scrol || window.location.pathname == "/") {
+            if(scrol >= 200){
+                document.getElementById('header').style.backgroundColor = "#0B3247";
+            }else{
+                document.getElementById('header').style.backgroundColor = "rgba(0, 0, 0, 0.04)";
+            }
         }
+    }else{
+        document.getElementById('header').style.backgroundColor = "#0B3247";
     }
 }
 

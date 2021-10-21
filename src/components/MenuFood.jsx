@@ -11,28 +11,28 @@ const MenuFood = () => {
               <h1>Mas pedido</h1>
               <p>Mojarra frita</p>
               <Link to="./hi" className="container_image_little">
-                <img src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="mojarra frita" srcset="" />
+                <img src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="mojarra frita" srcSet="" />
               </Link>
           </div>
           <div className="target_food">
               <h1>Mejor valorado</h1>
               <p>Mojarra frita</p>
               <Link to="./hi" className="container_image_little">
-                <img src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="mojarra frita" srcset="" />
+                <img src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="mojarra frita" srcSet="" />
               </Link>
           </div>
           <div className="target_food">
               <h1>Recomendado</h1>
               <p>Mojarra frita</p>
               <Link to="./hi" className="container_image_little">
-                <img src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="mojarra frita" srcset="" />
+                <img src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="mojarra frita" srcSet="" />
               </Link>
           </div>
           <div className="target_food">
               <h1>Nose</h1>
               <p>Mojarra frita</p>
               <Link to="./hi" className="container_image_little">
-                <img src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="mojarra frita" srcset="" />
+                <img src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="mojarra frita" srcSet="" />
               </Link>
           </div>
           <div className="link_all_menu target_food">

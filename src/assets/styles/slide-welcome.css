@@ -16,15 +16,7 @@
   max-width: 2000px;
   width: 100%;
   height: auto;
-  /* object-fit: cover; */
 }
-/* @supports(object-fit: cover){ */
-  /* .imageRes{ */
-    /* height: auto; */
-    /* object-fit: cover; */
-    /* object-position: center center; */
-  /* } */
-/* } */
 .slider-arrow{
   display: none;
 }

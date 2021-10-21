@@ -10,12 +10,14 @@ const globalEvents = () =>{
     window.addEventListener('resize', (ev) =>{
       const sizeImage = document.getElementById('welcome');
       if (sizeImage) {
-        console.log(sizeImage);
-        document.getElementById("main").style.marginTop = `${sizeImage.clientHeight + 75}px`;
+        let size = document.getElementById("MenuFoodMain");
+        if(size){
+          size.style.marginTop = `${sizeImage.clientHeight + 75}px`;
+        }
       }
     })
     window.addEventListener('click',(ev)=>{
-      header(ev, false);
+        header(ev, false);
     })
 }
 
