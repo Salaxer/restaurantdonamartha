@@ -6,6 +6,7 @@
     grid-template: 100vh 400px 600px 1fr / 1fr;
     padding-bottom: 10px;
     margin-bottom: 40px;
+    background-color: white;
   }
   @media screen and (min-width:538px) and (  max-width: 768px ) {
     .main{

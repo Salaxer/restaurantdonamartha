@@ -5,7 +5,7 @@ import plants from '../assets/plants.jpg';
 const Greeting = () =>{
     return (
         <>
-            <div  className="Greeting" style={{backgroundImage: `url('${plants}')`,backgroundPosition: 'center' ,backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}}>
+            <div id="greeting" className="Greeting" style={{backgroundImage: `url('${plants}')`,backgroundPosition: 'center' ,backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}}>
             </div>
             <div className="text">
                 <h1>Bienvenidos</h1>

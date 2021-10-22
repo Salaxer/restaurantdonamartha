@@ -6,6 +6,9 @@
     height: 100%;
     padding: 20px;
     overflow: hidden;
+    background-color: white;
+    position: relative;
+    z-index: 56;
   }
   .container-all{
     position: relative;

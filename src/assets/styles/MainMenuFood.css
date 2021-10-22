@@ -1,3 +1,35 @@
 .MenuFoodMain{
+    position: relative;
+    background-color: #f5f6f7;
     padding: 10px;
+    z-index: 90;
+    display: flex;
+    justify-content: center;
+}
+.ContainerAllFood{
+    border-radius: 25px;
+    box-shadow: 0px 0px 2px 0px rgba(31, 31, 31, 0.275);
+    width: 80%;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+.titleFood{
+    grid-area: 1 / 1 / 2 / 4;
+    padding: 10px;
+    text-align: center;
+}
+.slideFood{
+    margin: 15px;
+    width: calc(100% - 30px);
+    height: 200px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 1.5px 0px rgba(31, 31, 31, 0.501);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.slideFood .titleFood{
+    flex-basis: 20%;
 }

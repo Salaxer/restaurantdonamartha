@@ -3,12 +3,16 @@
     width: calc(100%);
     display: flex;
     justify-content: center;
+    background-color: white;
+    position: relative;
+    z-index: 55;
     align-items: center;
     height: 100%;
     padding: 20px;
     grid-area: 3 / 1 / 4 / 2;
   }
   .fb-page{
+    background-color: white;
     width: 100%;
     max-width: 470px;
     border-radius: 15px;
@@ -17,6 +21,8 @@
   @media screen and (min-width: 769px) {
     .main__opinions{
       width: calc(100%);
+    background-color: white;
+
       height: 100%;
       padding: 20px;
       grid-area: 2 / 2 / 3 / 3;
