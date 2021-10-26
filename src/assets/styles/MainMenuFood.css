@@ -14,22 +14,71 @@
     display: grid;
     grid-template-columns: 33% 33% 33%;
 }
-.titleFood{
+.searchFood{
     grid-area: 1 / 1 / 2 / 4;
+    display: flex;
     padding: 10px;
+    flex-wrap: wrap;
+    flex-direction: column;
     text-align: center;
 }
+.searchFood .titleFood{
+    font-size: 2.5rem;
+    flex-basis: 20%;
+}
+.formFood{
+    display: flex;
+    width: 100%;
+    margin: 10px 0px;
+    justify-content: space-around;
+}
+.FoodDetails{
+    width: 50%;
+    text-align: center;
+}
+.inputfoodSearch, .sortFood, .selectFood{
+    padding: 3px;
+    height: 30px;
+    outline: none;
+    width: 20%;
+    margin: 10px 0px;
+    border-radius: 10px;
+    border: 1px solid #c0c0c0;
+}
+.inputfoodSearch{
+    width: 55%;
+    border-radius: 10px;
+    border: 1px solid #c0c0c0;
+}
+.slideFood__img{
+
+    height: 70%;
+    width: 100%;
+    border-radius: 10px;
+}
+@supports(object-fit: cover){
+    .slideFood__img{
+      object-fit: cover;
+      object-position: center center;
+    }
+}
+
 .slideFood{
+    overflow: hidden;
     margin: 15px;
     width: calc(100% - 30px);
-    height: 200px;
+    height: 250px;
     border-radius: 15px;
     box-shadow: 0px 0px 1.5px 0px rgba(31, 31, 31, 0.501);
-    padding: 10px;
+    padding: 5px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
+.slideFood:active{
+    background-color: aqua;
+}
 .slideFood .titleFood{
     flex-basis: 20%;
+    font-size: 2.1rem;
 }
