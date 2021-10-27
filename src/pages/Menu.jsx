@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import images_carousel from '../initialState';
 import Welcome from '../containers/Welcome.jsx';
 import '../assets/styles/MainMenuFood.css';
+import MainMenuFood from '../components/MainMenuFood';
 
 const Checkout = () => {
+
+
   return  (
     <div>
       <Welcome images={images_carousel}/>
@@ -27,66 +30,7 @@ const Checkout = () => {
               </select>
             </div>
           </div>
-          <div className="slideFood">
-              <div className="FoodDetails">
-                <h1 className="titleFood">Mojarra Frita</h1>
-                <p className="priceFood">price <span>$90</span></p>
-                <div>
-                  <div>⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <img className="slideFood__img" src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="Mojarron" srcSet="" />
-          </div>
-          <div className="slideFood">
-              <div className="FoodDetails">
-                <h1 className="titleFood">Mojarra Frita</h1>
-                <p className="priceFood">price <span>$90</span></p>
-                <div>
-                  <div>⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <img className="slideFood__img" src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="Mojarron" srcSet="" />
-          </div>
-          <div className="slideFood">
-              <div className="FoodDetails">
-                <h1 className="titleFood">Mojarra Frita</h1>
-                <p className="priceFood">price <span>$90</span></p>
-                <div>
-                  <div>⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <img className="slideFood__img" src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="Mojarron" srcSet="" />
-          </div>
-          <div className="slideFood">
-              <div className="FoodDetails">
-                <h1 className="titleFood">Mojarra Frita</h1>
-                <p className="priceFood">price <span>$90</span></p>
-                <div>
-                  <div>⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <img className="slideFood__img" src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="Mojarron" srcSet="" />
-          </div>
-          <div className="slideFood">
-              <div className="FoodDetails">
-                <h1 className="titleFood">Mojarra Frita</h1>
-                <p className="priceFood">price <span>$90</span></p>
-                <div>
-                  <div>⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <img className="slideFood__img" src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="Mojarron" srcSet="" />
-          </div>
-          <div className="slideFood">
-              <div className="FoodDetails">
-                <h1 className="titleFood">Mojarra Frita</h1>
-                <p className="priceFood">price <span>$90</span></p>
-                <div>
-                  <div>⭐⭐⭐⭐⭐</div>
-                </div>
-              </div>
-              <img className="slideFood__img" src="https://antojandoando.com/wp-content/uploads/2020/04/face.jpg" alt="Mojarron" srcSet="" />
-          </div>
+          <MainMenuFood></MainMenuFood>
         </div>
       </div>
     </div>
