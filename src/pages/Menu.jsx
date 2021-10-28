@@ -6,6 +6,11 @@ import MainMenuFood from '../components/MainMenuFood';
 
 const Checkout = () => {
 
+  const [sort, setSort] = useState("recomended");
+
+  const sortFood =( ev )=>{
+    setSort(ev.target.value);
+  }
 
   return  (
     <div>
@@ -16,21 +21,21 @@ const Checkout = () => {
             <h1 className="titleFood">Carta</h1>
             <div className="formFood">
               <select className="selectFood" name="" id="">
-                <option value="food">Todo</option>
+                <option value="all">Todo</option>
                 <option value="food">Comida</option>
                 <option value="Drink">bebidas</option>
               </select>
               <input type="search" name="inputfoodSearch" placeholder="Buscar" className="inputfoodSearch" id="" />
-              <select className="sortFood" name="" id="">
-                <option value="food">Menor precio a mayor</option>
-                <option value="Drink">Mayor precio a menor</option>
-                <option value="Drink">Mayor pedido</option>
-                {/* <option value="Drink">Mejor valorado</option> */}
-                <option value="Drink">Recomendados</option>
+              <select onChange={sortFood} className="sortFood" name="" id="">
+                <option value="recomended">Recomendados</option>
+                <option value="less">Menor precio a mayor</option>
+                <option value="more">Mayor precio a menor</option>
+                <option value="give">Mas pedido</option>
+                <option value="rating">Mejor valorado</option>
               </select>
             </div>
           </div>
-          <MainMenuFood></MainMenuFood>
+          <MainMenuFood sort={sort}></MainMenuFood>
         </div>
       </div>
     </div>

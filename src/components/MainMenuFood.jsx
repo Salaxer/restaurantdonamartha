@@ -3,10 +3,9 @@ import React from 'react';
 import { RatingStar } from "rating-star";
 import db from '../initialState';
 
-const MainMenuFood = ()=>{
-
+const MainMenuFood = (props)=>{
     const Food = db.AllMenu;
-
+    props.sort == 'less' ?  Food.sort((a,b) => {return(a.rating - b.rating)}) : Food.sort((a,b) => {return(b.rating - a.rating)});
     return(
      <>
          {Food.map((elements, index)=>{
@@ -19,7 +18,7 @@ const MainMenuFood = ()=>{
                         <RatingStar
                             // clickable
                             maxScore={100}
-                            id="123"
+                            id={elements.id}
                             rating={elements.rating}
                         />
                         </div>

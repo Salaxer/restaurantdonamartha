@@ -46,7 +46,7 @@ export default {
       image: "https://cervecerosdemexico.com/wp-content/uploads/2018/09/Micheladas4.jpg",
       title: "Michelada",
       price: 70,
-      rating: 98,
+      rating: 99,
       category: "comida"
     },
     {
@@ -54,7 +54,7 @@ export default {
       image: "https://cervecerosdemexico.com/wp-content/uploads/2018/09/Micheladas4.jpg",
       title: "Mojarra al mojo",
       price: 70,
-      rating: 98,
+      rating: 32,
       category: "comida"
     },
     {
@@ -62,7 +62,7 @@ export default {
       image: "https://cervecerosdemexico.com/wp-content/uploads/2018/09/Micheladas4.jpg",
       title: "Michelada",
       price: 70,
-      rating: 98,
+      rating: 89,
       category: "comida"
     },
     {
@@ -70,7 +70,7 @@ export default {
       image: "https://cervecerosdemexico.com/wp-content/uploads/2018/09/Micheladas4.jpg",
       title: "Michelada",
       price: 70,
-      rating: 98,
+      rating: 60,
       category: "comida"
     }
   ]
