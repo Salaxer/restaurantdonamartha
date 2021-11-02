@@ -34,7 +34,7 @@ export default {
   ],
   AllMenu: [
     {
-      id: 1,
+      id: "321ff23f",
       image: "https://antojandoando.com/wp-content/uploads/2020/04/face.jpg",
       title: "Mojarra frita",
       price: 140,
@@ -42,7 +42,7 @@ export default {
       category: "comida"
     },
     {
-      id: 2,
+      id: "MDMDxqwe",
       image: "https://cervecerosdemexico.com/wp-content/uploads/2018/09/Micheladas4.jpg",
       title: "Michelada",
       price: 70,
@@ -50,7 +50,7 @@ export default {
       category: "comida"
     },
     {
-      id: 3,
+      id: "XTFRewe",
       image: "https://cervecerosdemexico.com/wp-content/uploads/2018/09/Micheladas4.jpg",
       title: "Mojarra al mojo",
       price: 70,
@@ -58,7 +58,7 @@ export default {
       category: "comida"
     },
     {
-      id: 4,
+      id:"MDeexqwe",
       image: "https://cervecerosdemexico.com/wp-content/uploads/2018/09/Micheladas4.jpg",
       title: "Michelada",
       price: 70,
@@ -66,7 +66,7 @@ export default {
       category: "comida"
     },
     {
-      id: 5,
+      id: "LKWEROee",
       image: "https://cervecerosdemexico.com/wp-content/uploads/2018/09/Micheladas4.jpg",
       title: "Michelada",
       price: 70,

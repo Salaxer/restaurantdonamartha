@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import images_carousel from '../initialState';
 import Welcome from '../containers/Welcome.jsx';
-import '../assets/styles/MainMenuFood.css';
 import MainMenuFood from '../components/MainMenuFood';
+
+import '../assets/styles/MainMenuFood.css'; 
 
 const Checkout = () => {
 
+  const [search, setSearch] = useState("");
   const [sort, setSort] = useState("recomended");
-
   const sortFood =( ev )=>{
     setSort(ev.target.value);
   }
-
+  const searchFood =( ev )=>{
+    setSearch(ev.target.value);
+  }
   return  (
     <div>
       <Welcome images={images_carousel}/>
@@ -25,7 +28,7 @@ const Checkout = () => {
                 <option value="food">Comida</option>
                 <option value="Drink">bebidas</option>
               </select>
-              <input type="search" name="inputfoodSearch" placeholder="Buscar" className="inputfoodSearch" id="" />
+              <input onChange={searchFood} type="search" name="inputfoodSearch" placeholder="Buscar" className="inputfoodSearch" id="" />
               <select onChange={sortFood} className="sortFood" name="" id="">
                 <option value="recomended">Recomendados</option>
                 <option value="less">Menor precio a mayor</option>
@@ -35,8 +38,8 @@ const Checkout = () => {
               </select>
             </div>
           </div>
-          <MainMenuFood sort={sort}></MainMenuFood>
-        </div>
+          <MainMenuFood sort={sort} search={search}></MainMenuFood>
+        </div> 
       </div>
     </div>
 
