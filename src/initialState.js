@@ -39,7 +39,10 @@ export default {
       title: "Mojarra frita",
       price: 140,
       rating: 90,
-      category: "comida"
+      category: "comida",
+      ingredients: ["Lechuga", "Pepino", "Jitomate", "Arroz", "Naranja"],
+      details: "La mojarra frita es un platillo clasico, etc",
+      difficulty: 50,
     },
     {
       id: "MDMDxqwe",
@@ -47,7 +50,10 @@ export default {
       title: "Michelada",
       price: 70,
       rating: 99,
-      category: "comida"
+      category: "comida",
+      ingredients: ["Lechuga", "Pepino", "Jitomate", "Arroz", "Naranja"],
+      details: "La mojarra frita es un platillo clasico, etc",
+      difficulty: 50,
     },
     {
       id: "XTFRewe",
@@ -55,7 +61,10 @@ export default {
       title: "Mojarra al mojo",
       price: 70,
       rating: 32,
-      category: "comida"
+      category: "comida",
+      ingredients: ["Lechuga", "Pepino", "Jitomate", "Arroz", "Naranja"],
+      details: "La mojarra frita es un platillo clasico, etc",
+      difficulty: 50,
     },
     {
       id:"MDeexqwe",
@@ -63,7 +72,10 @@ export default {
       title: "Michelada",
       price: 70,
       rating: 89,
-      category: "comida"
+      category: "comida",
+      ingredients: ["Lechuga", "Pepino", "Jitomate", "Arroz", "Naranja"],
+      details: "La mojarra frita es un platillo clasico, etc",
+      difficulty: 50,
     },
     {
       id: "LKWEROee",
@@ -71,7 +83,10 @@ export default {
       title: "Michelada",
       price: 70,
       rating: 60,
-      category: "comida"
+      category: "comida",
+      ingredients: ["Lechuga", "Pepino", "Jitomate", "Arroz", "Naranja"],
+      details: "La mojarra frita es un platillo clasico, etc",
+      difficulty: 50,
     }
   ]
 };
