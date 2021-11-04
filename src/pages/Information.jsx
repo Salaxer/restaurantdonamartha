@@ -20,13 +20,16 @@ const Information = () => {
         <h1 className="singleTitleFood">{result[0].title}</h1>
         <div className="singleFood">
           <div className="singleFoodPrice">
-            <p>Precio $<span>{result[0].price}</span></p>
+            <p>Precio: <span>${result[0].price}</span></p>
           </div>
           <div className="singleFoodIngredients">
-            <p>Ingredientes</p>
-            {result[0].ingredients.map( (data, index) =>{ return(<p key={index}>{data}</p>) })}
+            <p>Ingredientes:</p>
+            {result[0].ingredients.map( (data, index) =>{ return(<span key={index}>{data}</span>) })}
           </div>
-          <div className="singleFoodDetails">{result[0].details}</div>
+          <div className="singleFoodDetails">
+            <p>Detalles: <span>{result[0].details}</span></p>
+          </div>
+          <div className="singleFoodWeight"> <p> Tama&ntilde;o: <span>400gr</span></p> </div>
         </div>
       </div>
     )

@@ -7,6 +7,7 @@
 }
 .slider-container{
   width: 100%;
+  height: 40%;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -20,7 +21,6 @@
 .slider-arrow{
   display: none;
 }
-
 .points{
   display: flex;
   position: absolute;
@@ -77,7 +77,6 @@
   .imageRes {
     width: 100%;
     height: auto;
-    /* object-fit: cover; */
   }
   .slider-arrow{
     display: block;
@@ -107,8 +106,7 @@
     padding: 5px 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-  }
-  
+  }  
   #arrow-next{
     right: 0px;
     background-color: rgb(235, 235, 235);
