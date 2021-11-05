@@ -26,7 +26,7 @@ const Header = () => {
                     <li><Link to="/menu"><i className="fab fa-elementor"></i><span className="information">Menu</span></Link></li>
                     <li><Link to="/delivery"><i className="fas fa-motorcycle"></i><span className="information">Pedidos</span></Link></li>
                     <li><Link to="/reserve"><i className="fas fa-concierge-bell"></i><span className="information">Reservaciones</span></Link></li>
-                    <li><Link to="/sig_in"><i className="fas fa-sign-in-alt"></i><span className="information">Inicia Sesión</span></Link></li>
+                    <li><Link to="/sign_in"><i className="fas fa-sign-in-alt"></i><span className="information">Inicia Sesión</span></Link></li>
                 </ul>
             </nav>
         </header> 

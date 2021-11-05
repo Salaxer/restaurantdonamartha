@@ -13,7 +13,7 @@ const setCarrousell = () =>{
         }
     })
 }
-
+ 
 const Slide = () => {
     setCarrousell();
     return(

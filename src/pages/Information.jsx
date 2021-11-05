@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams} from 'react-router-dom';
+import { useParams, useHistory} from 'react-router-dom';
 import db from '../initialState';
 
 import '../assets/styles/informationFood.css'
@@ -7,6 +7,7 @@ import '../assets/styles/informationFood.css'
 const Food = db.AllMenu;
 
 const Information = () => {
+  let history = useHistory();
   const {FoodId} = useParams();
   const result =  Food.filter(Food =>{
     return `${Food.id}`.includes(FoodId);
@@ -31,6 +32,7 @@ const Information = () => {
           </div>
           <div className="singleFoodWeight"> <p> Tama&ntilde;o: <span>400gr</span></p> </div>
         </div>
+        <button onClick={() => history.goBack()}>Back</button>
       </div>
     )
   }else{
