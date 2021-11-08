@@ -1,30 +1,39 @@
 import {appdb, analytics} from './conexiondb';
 
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, getDocs, addDoc, setDoc, getDoc, deleteDoc, query, where, orderBy, limit} from "firebase/firestore";
 
-const firestore = getFirestore();
+const db = getFirestore();
 
-const specialOfTheDay = doc(firestore, 'dailySpecial/2021-09-14');
+const api = {
+    async list() {
+        const customersOrderQuery = query(
+            collection(db, 'Menu'),
+            limit(2)
+        );
+        const querySnapshot = await (await getDocs(customersOrderQuery)).docs;
+        return console.log(querySnapshot);
+    },
+    async create(docData) {
+        const newDoc = await (await addDoc(collection(db, `Menu`), docData));
+        return console.log(newDoc);
+    },
+    async read(ID) {
+        const gettingDoc = await getDoc(doc(db, `Menu/${ID}`));
+        if (gettingDoc.exists()) {
+            return gettingDoc.data();
+        }else{
+            throw new Error("Don't exists the item")
+        }
+    },
+    async update(ID, updates) {
+        return setDoc(doc(db, `Menu/${ID}`), updates, {merge: true});
+    },
+    // Lo hubiera llamado `delete`, pero `delete` es un keyword en JavaScript asi que no es buena idea :P
+    async remove(ID) {
+        const removeDoc = await deleteDoc(doc(db, `Menu/${ID}`));
+        return console.log(removeDoc);
+    },
+};
 
-async function writeDailySpecial(){
-  const docData = {
-    description: 'A delicious vanilla latte',
-    price: 3.99,
-    milk: 'Whole',
-    vegan: false,
-  };
-  try {
-    await setDoc(specialOfTheDay, docData, {merge: true})
-    console.log(' This value has been written to the database');
-  } catch (error) {
-    console.log(`I got a error: ${error}`);
-  }
-}
-
-const runApp = () =>{
-  console.log('Hi there');
-  writeDailySpecial();
-}
-
-export default runApp;
+export default api;
 
