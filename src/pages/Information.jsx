@@ -32,7 +32,6 @@ const Information = () => {
           </div>
           <div className="singleFoodWeight"> <p> Tama&ntilde;o: <span>400gr</span></p> </div>
         </div>
-        <button onClick={() => history.goBack()}>Back</button>
       </div>
     )
   }else{

@@ -15,6 +15,7 @@ import '../assets/styles/general.css';
 import '../assets/styles/header.css';
 
 
+
 const App = () => {
   useEffect(()=>{
     globalEvents();
