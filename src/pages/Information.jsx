@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useHistory} from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import db from '../initialState';
 
 import '../assets/styles/informationFood.css'
@@ -7,7 +7,6 @@ import '../assets/styles/informationFood.css'
 const Food = db.AllMenu;
 
 const Information = () => {
-  let history = useHistory();
   const {FoodId} = useParams();
   const result =  Food.filter(Food =>{
     return `${Food.id}`.includes(FoodId);
@@ -28,7 +27,7 @@ const Information = () => {
             {result[0].ingredients.map( (data, index) =>{ return(<span key={index}>{data}</span>) })}
           </div>
           <div className="singleFoodDetails">
-            <p>Detalles: <span>{result[0].details}</span></p>
+            <p>Descripci&oacute;n: <span>{result[0].details}</span></p>
           </div>
           <div className="singleFoodWeight"> <p> Tama&ntilde;o: <span>400gr</span></p> </div>
         </div>

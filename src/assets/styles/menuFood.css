@@ -33,6 +33,7 @@
     transition: all ease-in 0.2s;
     grid-area: 6 / 1 /  7 /  2;
     height: 70%;
+    border: 1px solid #ffffff;
 }
 .link_all_menu a{
     width: 100%;
@@ -42,7 +43,8 @@
     color: rgb(211, 211, 211);
 }
 .link_all_menu:hover{
-    box-shadow: 0px 2px 4px 0px var(--maincolorgreen)
+    box-shadow: 0 1px 2px 0 #00984c45, 0 2px 6px 2px #00984c80;
+    border: none;
 }
 .container_image_little{
     padding: 35px;
