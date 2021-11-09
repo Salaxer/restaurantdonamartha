@@ -9,7 +9,7 @@ const Greeting = () =>{
             </div>
             <div className="text">
                 <h1>Bienvenidos</h1>
-                <p>Soy doña martha y espero que disfruten de la buena comida que preparamos</p>
+                <p>Soy do&ntilde;a martha y espero que disfruten de la buena comida que preparamos</p>
             </div>
         </>
     )
