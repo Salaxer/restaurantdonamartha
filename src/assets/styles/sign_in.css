@@ -41,6 +41,7 @@
 .buttons:hover{
     box-shadow: 0 1px 2px 0 rgb(60, 64, 67, 30%), 0 2px 6px 2px rgb(60, 64, 67, 15%);
     border: none;
+    cursor: pointer;
 }
 .Google{
     background-color: rgb(248, 248, 248);
@@ -133,4 +134,21 @@
     font-weight: normal;
     font-size: 2.3rem;
     background-color: var(--maincolorgreen);
+}
+.someError{
+    position: absolute;
+    color: white;
+    bottom: 66px;
+    font-size: 1.2rem;
+    background-color: rgb(204, 43, 14);
+    width: 300px;
+    left: 400px;
+    padding: 10px;
+    border-radius: 10px;
+}
+#buttonSend:disabled{
+    box-shadow: 0 0 0 0 rgb(60, 64, 67, 30%), 0 0 0 0px rgb(60, 64, 67, 15%);
+    border: none;
+    background-color: cadetblue;
+    cursor: no-drop;
 }
