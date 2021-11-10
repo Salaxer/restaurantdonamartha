@@ -1,4 +1,4 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword   } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
@@ -11,6 +11,7 @@ export const Google = () =>{
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
+
       console.log(user);
       // ...
     }).catch((error) => {
@@ -29,20 +30,29 @@ export const Facebook = () =>{
     return console.log('Hello');
 }
 
-export const Email = ({name, email, password}) =>{
-    console.log(email);
-    console.log(password);
-    createUserWithEmailAndPassword(auth, email, password)
+export const Email = async ({name, email, password}) =>{
+  const result = await createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
+    console.log(user);
+    updateProfile(auth.currentUser, {
+      displayName: name
+    }).then(() => {
+      // Profile updated!
+      // ...
+    }).catch((error) => {
+      // An error occurred
+      // ...
+    })
     // ...
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    // ..
+    return {errorMessage, errorCode};
   });
+  return result;
 }
 
 export default {};
