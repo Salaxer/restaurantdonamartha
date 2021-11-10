@@ -78,6 +78,11 @@
   height: 58px;
   border-radius: 10px;
 }
+.header__nav ul li img{
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+}
 .header__nav a{
   text-decoration: none;
   display: flex;

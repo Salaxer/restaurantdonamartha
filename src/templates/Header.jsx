@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/Logo1_main.png';
 import headerOpenClose from '../utils/headerOpenClose';
 
-const setHeader = () => {
-  useEffect(()=>{
-    headerOpenClose();
-  })
-}
+import {verify} from '../auth';
+
 
 const Header = () => {
-  setHeader()
+  const [user, setUser] = useState([]);
+  useEffect( async ()=>{
+    headerOpenClose();
+    verify(setUser);
+  })
   return (
     <>
         <header id="header" className="header">
@@ -26,7 +27,10 @@ const Header = () => {
                     <li><Link to="/menu"><i className="fab fa-elementor"></i><span className="information">Menu</span></Link></li>
                     <li><Link to="/delivery"><i className="fas fa-motorcycle"></i><span className="information">Pedidos</span></Link></li>
                     <li><Link to="/reserve"><i className="fas fa-concierge-bell"></i><span className="information">Reservaciones</span></Link></li>
-                    <li><Link to="/sign_in"><i className="fas fa-sign-in-alt"></i><span className="information">Inicia Sesión</span></Link></li>
+                    {user.length == [] ?
+                    <li><Link to="/signup"><i className="fas fa-sign-in-alt"></i><span className="information">Unete</span></Link></li>:
+                    <li><Link to="/user"><img src={user.photoURL} alt={`foto de ${user.displayName}`} /><span className="information">Perfil</span></Link></li>
+                    }
                 </ul>
             </nav>
         </header> 

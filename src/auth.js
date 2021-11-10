@@ -1,4 +1,11 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
+import { getAuth, 
+  signInWithPopup, 
+  GoogleAuthProvider, 
+  createUserWithEmailAndPassword, 
+  updateProfile,
+  sendSignInLinkToEmail,
+  onAuthStateChanged  } from "firebase/auth";
+import md5 from "md5";
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
@@ -37,7 +44,8 @@ export const Email = async ({name, email, password}) =>{
     const user = userCredential.user;
     console.log(user);
     updateProfile(auth.currentUser, {
-      displayName: name
+      displayName: name,
+      photoURL: `https://s.gravatar.com/avatar/${md5(email.trim().toLowerCase(),{encoder:"binary"})}?d=identicon`
     }).then(() => {
       // Profile updated!
       // ...
@@ -46,13 +54,29 @@ export const Email = async ({name, email, password}) =>{
       // ...
     })
     // ...
-  })
-  .catch((error) => {
+  }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     return {errorMessage, errorCode};
   });
   return result;
+}
+
+export const verify = (func) =>{
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      // ...
+      func(user);
+      console.log(user);
+    } else {
+      // User is signed out
+      // ...
+      func([]);
+    }
+  });
 }
 
 export default {};

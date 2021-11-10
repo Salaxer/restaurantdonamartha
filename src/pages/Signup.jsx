@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import imgGoogle from '../assets/5847f9cbcef1014c0b5e48c8.png'
-import '../assets/styles/sign_in.css';
+import '../assets/styles/signup.css';
 
 import passwordValidator from 'password-validator'; 
 
@@ -10,12 +10,12 @@ import {Google, Facebook, Email} from '../auth';
 var schema = new passwordValidator();
 schema
 .is().min(8)                                    // Minimum length 8
-.is().max(100)                                  // Maximum length 100
+.is().max(40)                                  // Maximum length 40
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
 .has().digits(2)                                // Must have at least 2 digits
 
-const Signin = () => {
+const Signup = () => {
   
   const [form, setForm] = useState({data:{name: "", email: "",password: ""}});
   
@@ -25,6 +25,7 @@ const Signin = () => {
     if (errorPassword.length == 0) {
       spanError.style.visibility = 'hidden';
       const register = await Email({...form.data});
+      console.log(register);
       if (register.errorMessage) {
         alert(`El email que esta  ingresando ya esta en uso`);
       }
@@ -52,8 +53,8 @@ const Signin = () => {
 
 
   return(
-    <div className="Sign_inView">
-      <div className="Sign_in">
+    <div className="SignupView">
+      <div className="Signup">
         <h1 className="title">Registro</h1>
         <button className="inputs buttons Google" onClick={Google}><img className="Google-img" src={imgGoogle} alt="google image"/> Registrate con Google </button>
         <button className="inputs buttons Facebook" onClick={Facebook}> <i className="fab fa-facebook"></i> Registrate con Facebook </button>
@@ -73,4 +74,4 @@ const Signin = () => {
   )
 };
 
-export default Signin;
+export default Signup;

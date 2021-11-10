@@ -1,4 +1,4 @@
-.Sign_inView{
+.SignupView{
     margin-top: 70px;
     width: 100%;
     height: 680px;
@@ -7,7 +7,7 @@
     align-items: center;
     padding: 30px;
 }
-.Sign_in{
+.Signup{
     width: 376px;
     flex-direction: column;
     height: 583px;
