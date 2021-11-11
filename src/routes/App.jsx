@@ -8,6 +8,7 @@ import Success from '../pages/Success';
 import NotFound from '../pages/NotFound';
 import Layout from '../components/Layout';
 import Signup from '../pages/Signup';
+import User from '../pages/User';
 
 import globalEvents from '../utils/globalEvents';
 
@@ -30,6 +31,7 @@ const App = () => {
           <Route exact path="/checkout/payment" component={Payment} />
           <Route exact path="/checkout/success" component={Success} />
           <Route exact path="/Signup" component={Signup} />
+          <Route exact path="/User" component={User} />
           <Route component={NotFound} />
         </Switch>
       </Layout>

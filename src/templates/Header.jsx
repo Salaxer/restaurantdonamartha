@@ -8,9 +8,9 @@ import {verify} from '../auth';
 
 const Header = () => {
   const [user, setUser] = useState([]);
+  verify(setUser);
   useEffect( async ()=>{
     headerOpenClose();
-    verify(setUser);
   })
   return (
     <>

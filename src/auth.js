@@ -4,8 +4,11 @@ import { getAuth,
   createUserWithEmailAndPassword, 
   updateProfile,
   sendSignInLinkToEmail,
-  onAuthStateChanged  } from "firebase/auth";
-import md5 from "md5";
+  onAuthStateChanged,
+  signOut   
+} from "firebase/auth";
+
+  import md5 from "md5";
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
@@ -70,12 +73,20 @@ export const verify = (func) =>{
       const uid = user.uid;
       // ...
       func(user);
-      console.log(user);
     } else {
       // User is signed out
       // ...
       func([]);
     }
+  });
+}
+
+export const closeUser = () =>{
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    console.log('Salido con exito');
+  }).catch((error) => {
+    // An error happened.
   });
 }
 
