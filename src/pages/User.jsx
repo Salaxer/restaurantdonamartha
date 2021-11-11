@@ -3,16 +3,15 @@ import  { Redirect } from 'react-router-dom'
 
 import '../assets/styles/user.css'
 
-import {closeUser, verify} from '../auth';
 
 const User = () => {
 
     const closeSession = async () =>{
-        closeUser();
+        await closeUser();
     }
-    if (user == []) {
-        return <Redirect to='/'  />
-    }
+    // if (user == []) {
+    //     return <Redirect to='/'  />
+    // }
     return(
         <div className="viewUser">
             <h1>Hi there</h1>

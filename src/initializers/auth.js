@@ -1,14 +1,17 @@
+import {appdb, analytics} from './conexiondb';
 import { getAuth, 
   signInWithPopup, 
   GoogleAuthProvider, 
   createUserWithEmailAndPassword, 
   updateProfile,
-  sendSignInLinkToEmail,
+  sendEmailVerification,
   onAuthStateChanged,
   signOut   
 } from "firebase/auth";
 
-  import md5 from "md5";
+import { connect } from 'react-redux';
+
+import md5 from "md5";
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
@@ -40,29 +43,41 @@ export const Facebook = () =>{
     return console.log('Hello');
 }
 
+// Sign up with email, then update profile with gravatar and the name and finally sent Email verification to complete the proccess. 
 export const Email = async ({name, email, password}) =>{
   const result = await createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
-    const user = userCredential.user;
-    console.log(user);
-    updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: `https://s.gravatar.com/avatar/${md5(email.trim().toLowerCase(),{encoder:"binary"})}?d=identicon`
-    }).then(() => {
-      // Profile updated!
-      // ...
-    }).catch((error) => {
-      // An error occurred
-      // ...
-    })
-    // ...
-  }).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    return {errorMessage, errorCode};
-  });
+    // const user = userCredential.user;
+    // console.log('Se ha creado el usuario :)');
+    const photo = `https://s.gravatar.com/avatar/${md5(email.trim().toLowerCase(),{encoder:"binary"})}?d=identicon`;
+    modifyProfile(name, photo, email, true);
+  })
   return result;
+}
+
+export const modifyProfile = async (name, photo, email, newUser) =>{
+  await updateProfile(auth.currentUser, {
+    displayName: name,
+    photoURL: photo
+  }).then(() => {
+    // console.log('Se ha colocado la foto de perfil y el nombre del usuario:)');
+    // Profile updated!
+    if (newUser) {
+      sendEmail(email);
+    }
+  })
+} 
+
+const sendEmail = async (email) =>{
+  const result = await sendEmailVerification(auth.currentUser)
+  .then(() => {
+    console.log(auth.currentUser.displayName);
+    console.log(`Se ha enviado el email de verificación`);
+    console.log(window.location);
+    window.location=`${window.location.origin}/verify/${auth.currentUser.uid}`;
+  });
+    return result;
 }
 
 export const verify = (func) =>{
@@ -86,6 +101,7 @@ export const closeUser = () =>{
     // Sign-out successful.
     console.log('Salido con exito');
   }).catch((error) => {
+    console.log(`Ha ocurrido un error ${error}`);
     // An error happened.
   });
 }

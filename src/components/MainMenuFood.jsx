@@ -3,8 +3,6 @@ import { RatingStar } from "rating-star";
 import db from '../initialState';
 import { Link} from 'react-router-dom';
 
-import api from '../api';
-
 
 const MainMenuFood = ({sort, search})=>{
     const Food = db.AllMenu;

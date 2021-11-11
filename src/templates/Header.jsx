@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/Logo1_main.png';
 import headerOpenClose from '../utils/headerOpenClose';
 
-import {verify} from '../auth';
+import {verify} from '../initializers/auth';
+
+// verify();
 
 
 const Header = () => {
   const [user, setUser] = useState([]);
-  verify(setUser);
   useEffect( async ()=>{
     headerOpenClose();
   })

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
 import imgGoogle from '../assets/5847f9cbcef1014c0b5e48c8.png'
-import '../assets/styles/signup.css';
 
 import passwordValidator from 'password-validator'; 
+import {Google, Facebook, Email} from '../initializers/auth';
+import swal from 'sweetalert';
 
-import {Google, Facebook, Email} from '../auth';
+import '../assets/styles/signup.css';
 
 var schema = new passwordValidator();
 schema
@@ -24,10 +25,12 @@ const Signup = () => {
     const errorPassword = schema.validate(form.data.password, {details: true});
     if (errorPassword.length == 0) {
       spanError.style.visibility = 'hidden';
-      const register = await Email({...form.data});
-      console.log(register);
-      if (register.errorMessage) {
-        alert(`El email que esta  ingresando ya esta en uso`);
+      try {
+        await Email({...form.data});
+      } catch (error) {
+        console.log(error.message);
+        console.log(error.code);
+        swal("Oops!", "Something went wrong!", "success");
       }
     }else{
       spanError.style.visibility = 'visible';
@@ -70,6 +73,7 @@ const Signup = () => {
         <button className="inputs buttons buttonRegister" id="buttonSend" onClick={authForEmail}>Registrarse</button>
         <span style={{visibility:'hidden'}} id="errorFom" className="someError"></span>
       </div>
+      <button onClick={(e) => { swal("Oops!", "Something went wrong!", "success")}}>push</button>
     </div>
   )
 };
