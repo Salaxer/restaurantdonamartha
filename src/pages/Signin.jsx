@@ -3,7 +3,7 @@ import {Link, useLocation, BrowserRouter as Router } from "react-router-dom";
 
 import imgGoogle from '../assets/5847f9cbcef1014c0b5e48c8.png'
 
-import {Google, Facebook, newSignIn} from '../initializers/auth';
+import {Google, Facebook, newSignIn} from '../db/auth';
 import swal from 'sweetalert';
 
 import '../assets/styles/signup.css';

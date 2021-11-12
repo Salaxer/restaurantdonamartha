@@ -5,6 +5,6 @@ import App from './routes/App';
 
 import { Provider } from 'react-redux';
 
-import store from './initializers/store';
+import {store} from './state/store';
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('app'));

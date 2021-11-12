@@ -17,26 +17,26 @@ import '../assets/styles/general.css';
 import '../assets/styles/header.css';
 
 //Firebase
-import {appdb, analytics} from '../initializers/conexiondb';
+import {appdb, analytics} from '../db/conexiondb';
 import {getAuth, onAuthStateChanged } from "firebase/auth";
 
 //React Redux
-import { saveUser } from '../initializers/actions';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../state/index'
 
 const auth = getAuth();
 
 const App = () => {
+
+  //REDUX
+  const dispatch = useDispatch()
+  const {createUser} = bindActionCreators(actionCreators, dispatch);
   useEffect(()=>{
     globalEvents();
     onAuthStateChanged(auth, (user) => {
       if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-          const uid = user.uid;
-          // ...
-          console.log(user);
-          saveUser(user)
+          createUser(user);
       } else {
           // User is signed out
           // ...
@@ -64,8 +64,5 @@ const App = () => {
   );
 };
 
-const mapDispatchToProps = {
-  saveUser
-}
 
-export default connect(null, mapDispatchToProps)(App);
+export default App;

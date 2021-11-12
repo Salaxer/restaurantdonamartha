@@ -3,7 +3,7 @@ import  { Redirect } from 'react-router-dom'
 
 import '../assets/styles/profile.css'
 
-import { closeUser } from '../initializers/auth';
+import { closeUser } from '../db/auth';
 
 const Profile = () => {
 

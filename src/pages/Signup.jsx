@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import imgGoogle from '../assets/5847f9cbcef1014c0b5e48c8.png'
 
 import passwordValidator from 'password-validator'; 
-import {Google, Facebook, Email} from '../initializers/auth';
+import {Google, Facebook, Email} from '../db/auth';
 import swal from 'sweetalert';
 
 import '../assets/styles/signup.css';

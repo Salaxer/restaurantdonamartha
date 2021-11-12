@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/Logo1_main.png';
 import headerOpenClose from '../utils/headerOpenClose';
 
-import {verify} from '../initializers/auth';
+import { useSelector } from 'react-redux';
 
-// verify();
 
 
 const Header = () => {
-  const [user, setUser] = useState([]);
+
+  const user = useSelector(state=>state.user)
   useEffect( async ()=>{
     headerOpenClose();
   })
@@ -23,14 +23,14 @@ const Header = () => {
               <i id="header__mobile--close" className="fas fa-times"></i>
             </label>
             <nav className="header__nav" id="header_nav">
-                <ul>
+                <ul> 
                     <li><Link to="/"><i alt="Hii" className="fas fa-store-alt"></i><span className="information">Inicio</span></Link></li>
                     <li><Link to="/menu"><i className="fab fa-elementor"></i><span className="information">Menu</span></Link></li>
                     <li><Link to="/delivery"><i className="fas fa-motorcycle"></i><span className="information">Pedidos</span></Link></li>
                     <li><Link to="/reserve"><i className="fas fa-concierge-bell"></i><span className="information">Reservaciones</span></Link></li>
-                    {user.length == [] ?
+                    {user == null ?
                     <li><Link to="/signup"><i className="fas fa-sign-in-alt"></i><span className="information">Unete</span></Link></li>:
-                    <li><Link to="/user"><img src={user.photoURL} alt={`foto de ${user.displayName}`} /><span className="information">Perfil</span></Link></li>
+                    <li><Link to="/profile"><img src={user.photoURL} alt={`foto de ${user.displayName}`} /><span className="information">Perfil</span></Link></li>
                     }
                 </ul>
             </nav>
