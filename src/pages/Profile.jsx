@@ -1,13 +1,14 @@
 import React , { useState } from 'react';
 import  { Redirect } from 'react-router-dom'
 
-import '../assets/styles/user.css'
+import '../assets/styles/profile.css'
 
+import { closeUser } from '../initializers/auth';
 
-const User = () => {
+const Profile = () => {
 
     const closeSession = async () =>{
-        await closeUser();
+        await closeUser(false);
     }
     // if (user == []) {
     //     return <Redirect to='/'  />
@@ -21,4 +22,4 @@ const User = () => {
     );
 };
 
-export default User;
+export default Profile;

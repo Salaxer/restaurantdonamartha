@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import imgGoogle from '../assets/5847f9cbcef1014c0b5e48c8.png'
 
@@ -28,9 +29,14 @@ const Signup = () => {
       try {
         await Email({...form.data});
       } catch (error) {
-        console.log(error.message);
         console.log(error.code);
-        swal("Oops!", "Something went wrong!", "success");
+        if(error.code == 'auth/email-already-in-use'){
+          swal("Oops!", "El correo que se ingreso ya existe, porfavor verifica o intenta iniciar sesion con el!", "error");
+        }else if(error.code == 'auth/missing-email'){
+          swal("Oops!", "Verifica que los campos esten completos", "error");
+        }else{
+          swal("Oops!", "Sucedio un error inesperado, porfavor reintenta mas tarde", "error");
+        }
       }
     }else{
       spanError.style.visibility = 'visible';
@@ -54,10 +60,9 @@ const Signup = () => {
     }
   }
 
-
   return(
-    <div className="SignupView">
-      <div className="Signup">
+    <div className="SignView">
+      <div className="Sign">
         <h1 className="title">Registro</h1>
         <button className="inputs buttons Google" onClick={Google}><img className="Google-img" src={imgGoogle} alt="google image"/> Registrate con Google </button>
         <button className="inputs buttons Facebook" onClick={Facebook}> <i className="fab fa-facebook"></i> Registrate con Facebook </button>
@@ -73,7 +78,7 @@ const Signup = () => {
         <button className="inputs buttons buttonRegister" id="buttonSend" onClick={authForEmail}>Registrarse</button>
         <span style={{visibility:'hidden'}} id="errorFom" className="someError"></span>
       </div>
-      <button onClick={(e) => { swal("Oops!", "Something went wrong!", "success")}}>push</button>
+      <p className="alreadySingup">¿Ya tienes una cuenta?, por favor <Link to="/signin"> Inicia Sesi&oacute;n</Link></p>
     </div>
   )
 };

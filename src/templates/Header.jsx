@@ -24,7 +24,7 @@ const Header = () => {
             </label>
             <nav className="header__nav" id="header_nav">
                 <ul>
-                    <li><Link to="/"><i className="fas fa-store-alt"></i><span className="information">Inicio</span></Link></li>
+                    <li><Link to="/"><i alt="Hii" className="fas fa-store-alt"></i><span className="information">Inicio</span></Link></li>
                     <li><Link to="/menu"><i className="fab fa-elementor"></i><span className="information">Menu</span></Link></li>
                     <li><Link to="/delivery"><i className="fas fa-motorcycle"></i><span className="information">Pedidos</span></Link></li>
                     <li><Link to="/reserve"><i className="fas fa-concierge-bell"></i><span className="information">Reservaciones</span></Link></li>

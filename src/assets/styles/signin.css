@@ -1,0 +1,24 @@
+.textForEmail1, .textForPass1{
+    color: #dadce0;
+    position: absolute;
+    left: 30px;
+    font-size: 2.2rem;
+    cursor: text;
+    transition: all ease-in 0.3s;
+}
+.textForEmail1{
+    top: 364px;
+}
+.textForPass1{
+    top: 445px;
+}
+#password:valid + .textForPass1{
+    top: 419px;
+    font-size: 1.4rem; 
+    color: var(--maincolorblue);
+}
+.validemail1{
+    top: 338px;
+    font-size: 1.4rem; 
+    color: var(--maincolorblue);
+}

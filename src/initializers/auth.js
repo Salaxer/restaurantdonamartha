@@ -1,3 +1,4 @@
+//Firebase
 import {appdb, analytics} from './conexiondb';
 import { getAuth, 
   signInWithPopup, 
@@ -6,12 +7,13 @@ import { getAuth,
   updateProfile,
   sendEmailVerification,
   onAuthStateChanged,
-  signOut   
+  signOut,
+  signInWithEmailAndPassword  
 } from "firebase/auth";
 
-import { connect } from 'react-redux';
-
+//Utils
 import md5 from "md5";
+import swal from 'sweetalert';
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
@@ -24,8 +26,7 @@ export const Google = () =>{
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-
-      console.log(user);
+      window.location=`${window.location.origin}/Profile`;
       // ...
     }).catch((error) => {
       // Handle Errors here.
@@ -56,7 +57,31 @@ export const Email = async ({name, email, password}) =>{
   return result;
 }
 
-export const modifyProfile = async (name, photo, email, newUser) =>{
+export const newSignIn = async ({email, password}) =>{
+  await signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    const emailVerified = user.emailVerified;
+    if (!emailVerified) {
+      swal({
+        title: "Ups!",
+        text: "Parece que el correo aun no se ha verificado!, porfavor verificalo e intentelo denuevo",
+        icon: "error",
+        dangerMode: true,
+      })
+      .then( () => {
+        closeUser(true, email);
+      });
+    }else{
+      window.location=`${window.location.origin}/Profile`;
+    }
+    // ...
+  })
+}
+
+//to modify profile of the users
+export const modifyProfile = async (name = "user", photo, email, newUser) =>{
   await updateProfile(auth.currentUser, {
     displayName: name,
     photoURL: photo
@@ -72,34 +97,27 @@ export const modifyProfile = async (name, photo, email, newUser) =>{
 const sendEmail = async (email) =>{
   const result = await sendEmailVerification(auth.currentUser)
   .then(() => {
-    console.log(auth.currentUser.displayName);
-    console.log(`Se ha enviado el email de verificación`);
-    console.log(window.location);
-    window.location=`${window.location.origin}/verify/${auth.currentUser.uid}`;
+    swal({
+      title: "Excelente!",
+      text: "Se ha enviado un correo de verificacion, porfavor verificalo e inicia sesion denuevo!",
+      icon: "success",
+      dangerMode: false,
+    })
+    .then( () => {
+      closeUser(true, email);
+    });
   });
     return result;
 }
 
-export const verify = (func) =>{
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      // ...
-      func(user);
-    } else {
-      // User is signed out
-      // ...
-      func([]);
-    }
-  });
-}
-
-export const closeUser = () =>{
+export const closeUser = (newUSer, email) =>{
   signOut(auth).then(() => {
     // Sign-out successful.
-    console.log('Salido con exito');
+    if (newUSer) {
+      window.location=`${window.location.origin}/Signin/?email=${email}`;
+    }else{
+      window.location=`${window.location.origin}/Signin`;
+    }
   }).catch((error) => {
     console.log(`Ha ocurrido un error ${error}`);
     // An error happened.
