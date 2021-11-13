@@ -119,7 +119,7 @@ export const closeUser = (newUSer, email) =>{
       window.location=`${window.location.origin}/Signin`;
     }
   }).catch((error) => {
-    console.log(`Ha ocurrido un error ${error}`);
+    swal("Oops!", `Sucedio un error inesperado, porfavor reintenta mas tarde ${error.message}`, "error");
     // An error happened.
   });
 }

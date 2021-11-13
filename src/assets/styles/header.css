@@ -80,9 +80,9 @@
   border-radius: 10px;
 }
 .header__nav ul li img{
-  height: 50px;
-  width: 50px;
-  border-radius: 25px;
+  height: 36px;
+  width: 36px;
+  border-radius: 18px;
 }
 .header__nav a{
   text-decoration: none;

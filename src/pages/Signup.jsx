@@ -29,7 +29,6 @@ const Signup = () => {
       try {
         await Email({...form.data});
       } catch (error) {
-        console.log(error.code);
         if(error.code == 'auth/email-already-in-use'){
           swal("Oops!", "El correo que se ingreso ya existe, porfavor verifica o intenta iniciar sesion con el!", "error");
         }else if(error.code == 'auth/missing-email'){
