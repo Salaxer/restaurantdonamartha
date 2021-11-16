@@ -1,4 +1,4 @@
-const userReducer = (state = null, action) =>{
+const userReducer = (state = 'loading', action) =>{
     switch (action.type) {
         case "CREATE":
             return state = action.payload;            

@@ -31,19 +31,18 @@ const App = () => {
 
   //REDUX
   const dispatch = useDispatch()
-  const {createUser} = bindActionCreators(actionCreators, dispatch);
+  const {createUser, deleteUser} = bindActionCreators(actionCreators, dispatch);
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+        createUser(user);
+    } else {
+        // User is signed out
+        // ...
+        deleteUser()
+    }
+  });
   useEffect(()=>{
     globalEvents();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-          createUser(user);
-      } else {
-          // User is signed out
-          // ...
-          console.log(user);
-          console.log('Adios ');
-      }
-    });
   })
   return (
     <BrowserRouter>

@@ -24,8 +24,10 @@ const Signin = () => {
                 await newSignIn({...form.data})
             } catch (error) {
                 console.log(error.code);
-                if (error.code == 'auth/wrong-password' || error.code == 'auth/user-not-found') {
+                if (error.code == 'auth/wrong-password') {
                     swal("Oops!", "El correo o la contraseña no son correctas, por favor verifica denuevo", "error");
+                }else if(error.code == 'auth/user-not-found'){
+                    swal("Oops!", "Parece que el correo ingresado no existe, porfavor crea una cuenta nueva", "error");
                 }else{
                     swal("Oops!", "Sucedio un error inesperado, porfavor reintenta mas tarde", "error");
                 }

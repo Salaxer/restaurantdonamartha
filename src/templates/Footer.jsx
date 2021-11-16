@@ -6,16 +6,16 @@ const Footer = () => {
   return (
     <div className="Footer">
       <div className="contact_us">
-        <div className="tel">Contactanos al <a href="tel:+52777g5073272"> 7775073272</a></div>
+        <div className="tel">Contactanos al <a aria-label="Numero de celular para contactarnos" href="tel:+52777g5073272"> 7775073272</a></div>
         <div>
           O bien envianos un mensaje por whatsapp:
         </div>
         <div className="social">
           Siguenos en nuestras redes sociales:
           <br />
-          <a href="https://www.facebook.com/Micheladas-Do%C3%B1a-Martha-101296578313615/" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i></a>
-          <a href="http://" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
-          <a href="http://" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+          <a aria-label="Facebook del restaurante" href="https://www.facebook.com/Micheladas-Do%C3%B1a-Martha-101296578313615/" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i></a>
+          <a aria-label="Twiter del restaurante" href="http://" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+          <a aria-label="Instagram del restaurante" href="http://" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
         </div>
       </div>
       <div className="hours">

@@ -24,13 +24,13 @@ const Header = () => {
             </label>
             <nav className="header__nav" id="header_nav">
                 <ul> 
-                    <li><Link to="/"><i alt="Hii" className="fas fa-store-alt"></i><span className="information">Inicio</span></Link></li>
-                    <li><Link to="/menu"><i className="fab fa-elementor"></i><span className="information">Menu</span></Link></li>
-                    <li><Link to="/delivery"><i className="fas fa-motorcycle"></i><span className="information">Pedidos</span></Link></li>
-                    <li><Link to="/reserve"><i className="fas fa-concierge-bell"></i><span className="information">Reservaciones</span></Link></li>
+                    <li><Link to="/" aria-label="Inicio"><i alt="Hii" className="fas fa-store-alt"></i><span className="information">Inicio</span></Link></li>
+                    <li><Link to="/menu" aria-label="Menu"><i className="fab fa-elementor"></i><span className="information">Menu</span></Link></li>
+                    <li><Link to="/delivery" aria-label="Pedidos a domicilio"><i className="fas fa-motorcycle"></i><span className="information">Pedidos</span></Link></li>
+                    <li><Link to="/reserve" aria-label="Reservaciones"><i className="fas fa-concierge-bell"></i><span className="information">Reservaciones</span></Link></li>
                     {user == null ?
-                    <li><Link to="/signup"><i className="fas fa-sign-in-alt"></i><span className="information">Unete</span></Link></li>:
-                    <li><Link to="/profile"><img src={user.photoURL} alt={`foto de ${user.displayName}`} /><span className="information">Perfil</span></Link></li>
+                    <li><Link to="/signup" aria-label="Unete a nosotros"><i className="fas fa-sign-in-alt"></i><span className="information">Unete</span></Link></li>:
+                    <li><Link to="/profile" aria-label="Perfil de usuario"><img src={user.photoURL} alt={`foto de ${user.displayName}`} /><span className="information">Perfil</span></Link></li>
                     }
                 </ul>
             </nav>
