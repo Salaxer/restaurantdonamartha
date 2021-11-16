@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {Link, useLocation, BrowserRouter as Router } from "react-router-dom";
 
 import imgGoogle from '../assets/5847f9cbcef1014c0b5e48c8.png'
+import LoaderCircle from '../components/LoaderCircle';
 
 import {Google, Facebook, newSignIn} from '../db/auth';
 import swal from 'sweetalert';
@@ -16,18 +17,34 @@ function useQuery() {
 const Signin = () => {
     const query = useQuery();
   
-    const [form, setForm] = useState({data:{email: query.get("email") ? query.get("email"): "", password: ""}});
+    const [form, setForm] = useState({
+        data:{
+            email: query.get("email") ? query.get("email"): "", 
+            password: ""
+        },
+        loader: false, 
+    });
 
     const newSession = async() =>{
         if (form.data.email !== "" && form.data.password !== "") {
             try {
+                setForm({
+                    ...form,
+                    loader: true
+                });
                 await newSignIn({...form.data})
             } catch (error) {
+                setForm({
+                    ...form,
+                    loader: false
+                });
                 console.log(error.code);
                 if (error.code == 'auth/wrong-password') {
                     swal("Oops!", "El correo o la contraseña no son correctas, por favor verifica denuevo", "error");
-                }else if(error.code == 'auth/user-not-found'){
+                }else if(error.code == 'auth/user-not-found'){ 
                     swal("Oops!", "Parece que el correo ingresado no existe, porfavor crea una cuenta nueva", "error");
+                }else if(error.code == 'auth/network-request-failed'){ //
+                    swal("Oops!", "Conectate a una red porfavor", "error");
                 }else{
                     swal("Oops!", "Sucedio un error inesperado, porfavor reintenta mas tarde", "error");
                 }
@@ -43,7 +60,8 @@ const Signin = () => {
         data: { 
             ...form.data,
             [e.target.name]: e.target.value
-        }
+        },
+        loader: false
         });
         if (e.target.name == 'email' && e.target.value != "") {
         formEmail.classList.add('validemail1')
@@ -65,7 +83,7 @@ const Signin = () => {
         <label className={`textForEmail1 ${query.get("email") ? "validemail1":""}`} id="textForEmail1" htmlFor="email">Correo electronico</label>
         <input className="inputs inputsText" id="password" name="password" type="password" autoComplete="true" required onChange={(e) => formValue(e)}/>
         <label className="textForPass1" htmlFor="password">Contrase&ntilde;a</label>
-        <button className="inputs buttons buttonRegister" id="buttonSend" onClick={newSession}>Ingresar</button>
+        <button className="inputs buttons buttonRegister" id="buttonSend" onClick={newSession}>{form.loader ? <LoaderCircle color="0096C1" /> : `Entrar` }</button>
       </div>
       <p className="alreadySingup">¿No tienes una cuenta?, por favor <Link to="/signup"> Registrate</Link></p>
     </div>

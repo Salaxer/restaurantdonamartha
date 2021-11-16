@@ -7,6 +7,7 @@ import passwordValidator from 'password-validator';
 import {Google, Facebook, Email} from '../db/auth';
 import swal from 'sweetalert';
 
+import LoaderCircle from '../components/LoaderCircle';
 import '../assets/styles/signup.css';
 
 var schema = new passwordValidator();
@@ -19,7 +20,7 @@ schema
 
 const Signup = () => {
   
-  const [form, setForm] = useState({data:{name: "", email: "",password: ""}});
+  const [form, setForm] = useState({data:{name: "", email: "",password: ""}, loader: false});
   
   const authForEmail = async () => {
     const spanError = document.getElementById('errorFom');
@@ -27,12 +28,22 @@ const Signup = () => {
     if (errorPassword.length == 0) {
       spanError.style.visibility = 'hidden';
       try {
+        setForm({
+          ...form,
+          loader: true,
+        });
         await Email({...form.data});
       } catch (error) {
+        setForm({
+          ...form,
+          loader: false,
+        });
         if(error.code == 'auth/email-already-in-use'){
           swal("Oops!", "El correo que se ingreso ya existe, porfavor verifica o intenta iniciar sesion con el!", "error");
         }else if(error.code == 'auth/missing-email'){
           swal("Oops!", "Verifica que los campos esten completos", "error");
+        }else if(error.code == 'auth/network-request-failed'){ //
+          swal("Oops!", "Conectate a una red porfavor", "error");
         }else{
           swal("Oops!", "Sucedio un error inesperado, porfavor reintenta mas tarde", "error");
         }
@@ -49,7 +60,8 @@ const Signup = () => {
       data: { 
           ...form.data,
           [e.target.name]: e.target.value
-      }
+      },
+      loader: false,
     });
     const formEmail = document.getElementById('textForEmail');
     if (e.target.name == 'email' && e.target.value != "") {
@@ -74,7 +86,7 @@ const Signup = () => {
         <label className="textForEmail" id="textForEmail" htmlFor="email">Correo electronico</label>
         <input className="inputs inputsText" id="password" name="password" type="password" autoComplete="true" required onChange={(e) => formValue(e)}/>
         <label className="textForPass" htmlFor="password">Contrase&ntilde;a</label>
-        <button className="inputs buttons buttonRegister" id="buttonSend" onClick={authForEmail}>Registrarse</button>
+        <button className="inputs buttons buttonRegister" id="buttonSend" onClick={authForEmail}>{form.loader ? <LoaderCircle color="0096C1" /> : `Registrarse` }</button>
         <span style={{visibility:'hidden'}} id="errorFom" className="someError"></span>
       </div>
       <p className="alreadySingup">¿Ya tienes una cuenta?, por favor <Link to="/signin"> Inicia Sesi&oacute;n</Link></p>
