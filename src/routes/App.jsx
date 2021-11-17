@@ -36,8 +36,6 @@ const App = () => {
     if (user) {
         createUser(user);
     } else {
-        // User is signed out
-        // ...
         deleteUser()
     }
   });

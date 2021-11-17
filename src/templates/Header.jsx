@@ -5,6 +5,7 @@ import headerOpenClose from '../utils/headerOpenClose';
 
 import { useSelector } from 'react-redux';
 
+import LoaderCircle from '../components/LoaderCircle';
 
 
 const Header = () => {
@@ -30,6 +31,7 @@ const Header = () => {
                     <li><Link to="/reserve" aria-label="Reservaciones"><i className="fas fa-concierge-bell"></i><span className="information">Reservaciones</span></Link></li>
                     {user == null ?
                     <li><Link to="/signup" aria-label="Unete a nosotros"><i className="fas fa-sign-in-alt"></i><span className="information">Unete</span></Link></li>:
+                    user.photoURL == undefined ? <li> <LoaderCircle color="#0096C1" background="transparent" position="static" size="30"/> </li>:
                     <li><Link to="/profile" aria-label="Perfil de usuario"><img src={user.photoURL} alt={`foto de ${user.displayName}`} /><span className="information">Perfil</span></Link></li>
                     }
                 </ul>
