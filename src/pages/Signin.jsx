@@ -83,9 +83,10 @@ const Signin = () => {
         <label className={`textForEmail1 ${query.get("email") ? "validemail1":""}`} id="textForEmail1" htmlFor="email">Correo electronico</label>
         <input className="inputs inputsText" id="password" name="password" type="password" autoComplete="true" required onChange={(e) => formValue(e)}/>
         <label className="textForPass1" htmlFor="password">Contrase&ntilde;a</label>
-        <button className="inputs buttons buttonRegister" id="buttonSend" onClick={newSession}>{form.loader ? <LoaderCircle color="0096C1" /> : `Entrar` }</button>
+        <button className="inputs buttons buttonRegister" id="buttonSend" onClick={newSession}>{form.loader ? <LoaderCircle color="var(--maincolorblue)" /> : `Entrar` }</button>
       </div>
       <p className="alreadySingup">¿No tienes una cuenta?, por favor <Link to="/signup"> Registrate</Link></p>
+      <p className="alreadySingup">¿Olvidaste tu contrase&ntilde;a?, Restablecela <Link aria-label="restablecer contraseña" to="/Restore"> Aqui </Link></p>
     </div>
   )
 };

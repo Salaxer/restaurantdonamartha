@@ -10,8 +10,8 @@ const api = {
             collection(db, 'Menu'),
             limit(2)
         );
-        const querySnapshot = await (await getDocs(customersOrderQuery)).docs;
-        return console.log(querySnapshot);
+        const querySnapshot = (await getDocs(customersOrderQuery));
+        return querySnapshot.docs;
     },
     async create(docData) {
         const newDoc = await (await addDoc(collection(db, `Menu`), docData));

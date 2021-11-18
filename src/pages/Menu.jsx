@@ -1,20 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import images_carousel from '../initialState';
 import Welcome from '../containers/Welcome.jsx';
 import MainMenuFood from '../components/MainMenuFood';
+import globalEvents from '../utils/globalEvents';
 
+//Styles
 import '../assets/styles/MainMenuFood.css'; 
+import LoaderCircle from '../components/LoaderCircle';
+
+//db
+import api from '../db/api'
+
+//React Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../state/index'
+
 
 const Checkout = () => {
+  globalEvents(true)
+
+  //REDUX
+  const dispatch = useDispatch()
+  const { getFood } = bindActionCreators(actionCreators, dispatch);
 
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("recomended");
+
   const sortFood =( ev )=>{
     setSort(ev.target.value);
   }
+
   const searchFood =( ev )=>{
     setSearch(ev.target.value);
   }
+
+  //API TO CALL DATA
+  const [data, seData] = useState({loader: true});
+
+  const getData = async () =>{
+    try {
+      seData({loader: true})
+      const newData = await api.list();
+      getFood(newData);
+      seData({loader: false})
+    } catch (error) {
+      seData({loader: false})
+      getFood('error');
+      console.log(error);
+      console.log('hay un error :(');
+    }
+  }
+
+  const food = useSelector(state=>state.food);
+  console.log(food);
+  
+  useEffect( ()=>{
+    if(food == 'empty'){ 
+      getData();
+    }else{
+      seData({loader: false});
+    }
+  }, [])
+
   return  (
     <div>
       <Welcome images={images_carousel}/>
@@ -38,7 +86,9 @@ const Checkout = () => {
               </select>
             </div>
           </div>
-          <MainMenuFood sort={sort} search={search}></MainMenuFood>
+            {data.loader ? <div className="notAvailable"> <LoaderCircle position="relative" ></LoaderCircle> </div>:
+            <MainMenuFood food={food} ></MainMenuFood>
+            }
         </div> 
       </div>
     </div>

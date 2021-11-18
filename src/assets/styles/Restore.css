@@ -1,0 +1,31 @@
+.viewRestore{
+    margin-top: 70px;
+    width: 100%;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.viewBoxRestore{
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 8px 0 rgb(0, 0, 0, 8%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.titleRestore{
+    font-size: 2rem;
+    margin: 20px;
+}
+.emailRestore{
+    margin: 20px;
+}
+.buttonRestore{
+    margin: 20px;
+    background-color: var(--maincolorgreen);
+    color: white;
+}

@@ -4,7 +4,7 @@ import '../assets/styles/footer.css';
 
 const Footer = () => {
   return (
-    <div className="Footer">
+    <div className="Footer" id="Footer">
       <div className="contact_us">
         <div className="tel">Contactanos al <a aria-label="Numero de celular para contactarnos" href="tel:+52777g5073272"> 7775073272</a></div>
         <div>

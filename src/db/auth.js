@@ -6,7 +6,7 @@ import { getAuth,
   createUserWithEmailAndPassword, 
   updateProfile,
   sendEmailVerification,
-  onAuthStateChanged,
+  sendPasswordResetEmail,
   signOut,
   signInWithEmailAndPassword  
 } from "firebase/auth";
@@ -51,7 +51,7 @@ export const Email = async ({name, email, password}) =>{
     // Signed in 
     // const user = userCredential.user;
     // console.log('Se ha creado el usuario :)');
-    const photo = `https://s.gravatar.com/avatar/${md5(email.trim().toLowerCase(),{encoder:"binary"})}?d=identicon`;
+    const photo = `https://s.gravatar.com/avatar/${md5(email.trim().toLowerCase(),{encoder:"binary"})}?d=identicon&s=200`;
     modifyProfile(name, photo, email, true);
   })
   return result;
@@ -108,6 +108,29 @@ const sendEmail = async (email) =>{
     });
   });
     return result;
+}
+
+export const restorePassword = async (email) =>{
+  const actionCodeSettings = {
+    // URL you want to redirect back to. The domain (www.example.com) for this
+    // URL must be in the authorized domains list in the Firebase Console.
+    url: `${window.location.origin}/Signin/?email=${email}`,
+    // This must be true.
+    handleCodeInApp: true,
+  };
+  const result = await sendPasswordResetEmail(auth, email, actionCodeSettings)
+  .then(() => {
+    swal({
+      title: "Excelente!",
+      text: "Se ha enviado un correo electronico para reestablecer tu contraseña!",
+      icon: "success",
+      dangerMode: false,
+    })
+    .then( () => {
+      window.location=`${window.location.origin}/Signin/`;
+    });
+  })
+  return result;
 }
 
 export const closeUser = (newUSer, email) =>{

@@ -1,32 +1,22 @@
 import React, { useMemo, useState } from 'react';
-import { RatingStar } from "rating-star";
-import db from '../initialState';
 import { Link} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
+import { RatingStar } from "rating-star";
 
-const MainMenuFood = ({sort, search})=>{
-    const Food = db.AllMenu;
-    const [filterFood, setFilterFood] = useState(Food)
-    useMemo(() =>{
-        const result =  Food.filter(Food =>{
-            return `${Food.title}`.toLowerCase().includes(search.toLowerCase());
-        });
-        if(filterFood.length !== result.length){
-            setFilterFood(result);
-          }
-        sort == 'less' ?  filterFood.sort((a,b) => {return(a.rating - b.rating)}) : filterFood.sort((a,b) => {return(b.rating - a.rating)});
-    },[sort,search, Food]);
-    
-    if(filterFood.length === 0){ return(
+import LoaderCircle from './LoaderCircle';
+
+const MainMenuFood = ({food})=>{
+    console.log(food);
+    if (food == 'error') {
+        return <div className="notAvailable"> <p>El producto no se encuentra disponible</p> </div> 
+    }else{
+        return(
         <>
-            <div className="notAvailable"> <p>Lo sentimos, el producto que usted busca no esta disponible</p></div>
-        </>
-        )
-     }else{ return(
-        <>
-        {filterFood.map((elements, index)=>{
-            return(
-                <div className="slideFood" key={elements.id}>
+        {food.map((data, index)=>{
+            const elements = data.data();   
+                return(
+                    <div className="slideFood" key={index}>
                         <div className="FoodDetails">
                             <h1 className="titleFood">{elements.title}</h1>
                             <p className="priceFood">price <span>${elements.price}</span></p>
@@ -38,14 +28,14 @@ const MainMenuFood = ({sort, search})=>{
                             />
                             </div>
                         </div>
-                        <Link className="slideFood__a" to={`/menu/${elements.id}`} >
+                        <Link className="slideFood__a" to={`/menu/${data.id}`} >
                             <img className="slideFood__img" src={elements.image} alt={elements.title} srcSet="" />
                         </Link>
                     </div>
                 )
             })}
         </>   
-       );  
+        );  
     }
 }
 

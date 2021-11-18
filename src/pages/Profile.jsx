@@ -8,7 +8,7 @@ import { closeUser } from '../db/auth';
 //Styles
 import '../assets/styles/profile.css'
 
-import PageLoading from '../components/PageLoading';
+import LoaderCircle from '../components/LoaderCircle';
 
 const Profile = () => {
     const user = useSelector(state=>state.user)
@@ -18,12 +18,12 @@ const Profile = () => {
     if (user == null) {
         return <Redirect to='/'/>  
     }else if(user == 'loading'){
-        return <PageLoading/>
+        return <LoaderCircle background="white" color="var(--maincolorgreen)" />
     }else{
         return(
             <div className="viewUser">
                     <div className="personalInfo">
-                        <img aria-label="foto de perfil" className="personalInfo__IMG" src={`${user.photoURL}&s=200`} alt={`Foto de ${user.displayName}`} srcSet="" />
+                        <img aria-label="foto de perfil" className="personalInfo__IMG" src={`${user.photoURL}`} alt={`Foto de ${user.displayName}`} srcSet="" />
                         <button className="changePhoto" name="photo" aria-label="Cambiar foto"><i className="fas fa-camera"></i></button>
                     </div>
                     <p className="nameUSer" aria-label="nombre de usuario">Hola, {user.displayName}</p>

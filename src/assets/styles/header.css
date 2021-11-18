@@ -15,9 +15,9 @@
   transition: all ease-in .1s;
 }
 
-.header__picture--img{
-  height: 100%;
-  width: auto;
+img.header__picture--img{
+  height: 45px;
+  width: 141.67px;
 }
 .header__mobile{
   display: flex;
