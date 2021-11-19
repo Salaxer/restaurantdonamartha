@@ -17,50 +17,51 @@ import { bindActionCreators } from 'redux'
 import { actionCreators } from '../state/index'
 
 
-const Checkout = () => {
-  globalEvents(true)
+const Menu = () => {
 
-  //REDUX
+  //REDUX config
   const dispatch = useDispatch()
   const { getFood } = bindActionCreators(actionCreators, dispatch);
 
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("recomended");
-
-  const sortFood =( ev )=>{
-    setSort(ev.target.value);
+  //know if the user watch all items to reload new
+  const dataMax = (decided) =>{
+    decided ? setData({verifyScroll: true, newLoader: true}) : setData({verifyScroll: false});
   }
 
-  const searchFood =( ev )=>{
-    setSearch(ev.target.value);
-  }
-
-  //API TO CALL DATA
-  const [data, seData] = useState({loader: true});
-
+  //Sentences to decide the movement of the page
+  const [data, setData] = useState({
+    loader: true, 
+    verifyScroll: false, 
+    lastData: 'none',
+    newLoader: false,
+  });
+ 
+  //getting new data from api if doesn't exist yet
   const getData = async () =>{
     try {
-      seData({loader: true})
+      setData({loader: true})
       const newData = await api.list();
       getFood(newData);
-      seData({loader: false})
+      setData({loader: false, lastData: newData})
     } catch (error) {
-      seData({loader: false})
+      setData({loader: false})
       getFood('error');
-      console.log(error);
-      console.log('hay un error :(');
     }
   }
 
+  //getting data already used
   const food = useSelector(state=>state.food);
-  console.log(food);
   
   useEffect( ()=>{
-    if(food == 'empty'){ 
+    if(food == 'empty' || food == null){ 
       getData();
     }else{
-      seData({loader: false});
+      setData({loader: false});
     }
+    globalEvents(dataMax)
+    return () => {
+      setData({});
+    };
   }, [])
 
   return  (
@@ -76,8 +77,8 @@ const Checkout = () => {
                 <option value="food">Comida</option>
                 <option value="Drink">bebidas</option>
               </select>
-              <input onChange={searchFood} type="search" name="inputfoodSearch" placeholder="Buscar" className="inputfoodSearch" id="" />
-              <select onChange={sortFood} className="sortFood" name="" id="">
+              <input type="search" name="inputfoodSearch" placeholder="Buscar" className="inputfoodSearch" id="" />
+              <select className="sortFood" name="" id="">
                 <option value="recomended">Recomendados</option>
                 <option value="less">Menor precio a mayor</option>
                 <option value="more">Mayor precio a menor</option>
@@ -89,6 +90,7 @@ const Checkout = () => {
             {data.loader ? <div className="notAvailable"> <LoaderCircle position="relative" ></LoaderCircle> </div>:
             <MainMenuFood food={food} ></MainMenuFood>
             }
+            { data.newLoader ? <div className="slideFood"><LoaderCircle position="relative" ></LoaderCircle></div> : null}
         </div> 
       </div>
     </div>
@@ -96,4 +98,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default Menu;

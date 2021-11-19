@@ -5,32 +5,32 @@ import { getFirestore, collection, doc, getDocs, addDoc, setDoc, getDoc, deleteD
 const db = getFirestore();
 
 const api = {
-    async list() {
+    async list(reference = 'Menu') {
         const customersOrderQuery = query(
-            collection(db, 'Menu'),
-            limit(2)
+            collection(db, reference),
+            limit(9)
         );
         const querySnapshot = (await getDocs(customersOrderQuery));
         return querySnapshot.docs;
     },
-    async create(docData) {
-        const newDoc = await (await addDoc(collection(db, `Menu`), docData));
+    async create(docData, reference = 'Menu') {
+        const newDoc = await addDoc(collection(db, reference), docData);
         return console.log(newDoc);
     },
-    async read(ID) {
-        const gettingDoc = await getDoc(doc(db, `Menu/${ID}`));
+    async read(ID, reference = 'Menu') {
+        const gettingDoc = await getDoc(doc(db, `${reference}/${ID}`));
         if (gettingDoc.exists()) {
             return gettingDoc.data();
         }else{
             throw new Error("Don't exists the item")
         }
     },
-    async update(ID, updates) {
-        return setDoc(doc(db, `Menu/${ID}`), updates, {merge: true});
+    async update(ID, updates, reference = 'Menu') {
+        return setDoc(doc(db, `${reference}/${ID}`), updates, {merge: true});
     },
     // Lo hubiera llamado `delete`, pero `delete` es un keyword en JavaScript asi que no es buena idea :P
-    async remove(ID) {
-        const removeDoc = await deleteDoc(doc(db, `Menu/${ID}`));
+    async remove(ID, reference = 'Menu') {
+        const removeDoc = await deleteDoc(doc(db, `${reference}/${ID}`));
         return console.log(removeDoc);
     },
 };

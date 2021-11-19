@@ -86,7 +86,7 @@ const Signup = () => {
         <label className="textForEmail" id="textForEmail" htmlFor="email">Correo electronico</label>
         <input className="inputs inputsText" id="password" name="password" type="password" autoComplete="true" required onChange={(e) => formValue(e)}/>
         <label className="textForPass" htmlFor="password">Contrase&ntilde;a</label>
-        <button className="inputs buttons buttonRegister" id="buttonSend" onClick={authForEmail}>{form.loader ? <LoaderCircle color="0096C1" /> : `Registrarse` }</button>
+        <button className="inputs buttons buttonRegister" id="buttonSend" onClick={authForEmail}>{form.loader ? <LoaderCircle /> : `Registrarse` }</button>
         <span style={{visibility:'hidden'}} id="errorFom" className="someError"></span>
       </div>
       <p className="alreadySingup">¿Ya tienes una cuenta?, por favor <Link to="/signin"> Inicia Sesi&oacute;n</Link></p>

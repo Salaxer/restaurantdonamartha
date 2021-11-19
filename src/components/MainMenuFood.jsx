@@ -7,7 +7,6 @@ import { RatingStar } from "rating-star";
 import LoaderCircle from './LoaderCircle';
 
 const MainMenuFood = ({food})=>{
-    console.log(food);
     if (food == 'error') {
         return <div className="notAvailable"> <p>El producto no se encuentra disponible</p> </div> 
     }else{

@@ -1,5 +1,5 @@
 import React from 'react';
-import  { Redirect } from 'react-router-dom'
+import  { Link, Redirect } from 'react-router-dom'
 
 //Redux
 import { useSelector } from 'react-redux';
@@ -24,7 +24,7 @@ const Profile = () => {
             <div className="viewUser">
                     <div className="personalInfo">
                         <img aria-label="foto de perfil" className="personalInfo__IMG" src={`${user.photoURL}`} alt={`Foto de ${user.displayName}`} srcSet="" />
-                        <button className="changePhoto" name="photo" aria-label="Cambiar foto"><i className="fas fa-camera"></i></button>
+                        <Link to="/Profile/edit" className="changePhoto" name="edit" aria-label="Editar perfil"><i class="far fa-edit"></i></Link>
                     </div>
                     <p className="nameUSer" aria-label="nombre de usuario">Hola, {user.displayName}</p>
                     {/* <span className="userLine"></span> */}

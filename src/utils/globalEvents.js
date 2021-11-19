@@ -1,23 +1,20 @@
 import header from './headerOpenClose';
 
-const globalEvents = (setScroll) =>{
+const globalEvents = (dataMax) =>{
     window.addEventListener('scroll' , (evt) =>  {
         let altura = window.scrollY / 2;
         let slide_to = document.getElementById('welcome');
         let greeting = document.getElementById('greeting');
         slide_to == undefined ? slide_to = slide_to : slide_to.style.top = `${0-altura}px`;
         greeting == undefined ? greeting = greeting : greeting.style.top = `${altura}px`;
-        if(setScroll){
-          const top = window.scrollY
+        if(dataMax){
+          const top = document.documentElement.scrollTop;
           const footer = document.getElementById('Footer');
           const maxTopFooter = footer.offsetTop;
-          const heightFooter = footer.offsetHeight - 50;
-          if (top >= maxTopFooter - heightFooter) {
-            console.log('success');
+          const heightFooter = footer.offsetHeight + 50;
+          if (maxTopFooter - heightFooter < top) {
+            dataMax(true);
           }
-          console.log(maxTopFooter);
-          console.log(heightFooter);
-          console.log(top);
         }
       })
     window.addEventListener('resize', (ev) =>{

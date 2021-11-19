@@ -14,6 +14,7 @@ import { getAuth,
 //Utils
 import md5 from "md5";
 import swal from 'sweetalert';
+import api from './api';
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
@@ -25,8 +26,7 @@ export const Google = () =>{
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       // The signed-in user info.
-      const user = result.user;
-      window.location=`${window.location.origin}/Profile`;
+      createNewConnectionPublic(true, token);
       // ...
     }).catch((error) => {
       // Handle Errors here.
@@ -81,11 +81,16 @@ export const newSignIn = async ({email, password}) =>{
 }
 
 //to modify profile of the users
-export const modifyProfile = async (name = "user", photo, email, newUser) =>{
-  await updateProfile(auth.currentUser, {
-    displayName: name,
-    photoURL: photo
-  }).then(() => {
+export const modifyProfile = async (name, photo, email, newUser, phone) =>{
+  const newName = name ? {displayName: name} : newUser ? {displayName: 'user'} : undefined;
+  const newPhoto = photo ? {photoURL: photo} : undefined;
+  const newPhone = phone ? {phoneNumber: phone}: undefined;
+  const allConstant =  Object.assign(
+    typeof newName === 'undefined' ? {} : newName,
+    typeof newPhoto === 'undefined' ? {} : newPhoto,
+    typeof newPhone === 'undefined' ? {} : newPhone
+  );
+  await updateProfile(auth.currentUser, allConstant).then(() => {
     // console.log('Se ha colocado la foto de perfil y el nombre del usuario:)');
     // Profile updated!
     if (newUser) {
@@ -104,11 +109,28 @@ const sendEmail = async (email) =>{
       dangerMode: false,
     })
     .then( () => {
-      closeUser(true, email);
+      createNewConnectionPublic();
     });
   });
     return result;
 }
+
+const createNewConnectionPublic = async (byGoogle, token = null) =>{
+  const user = {
+    userID: auth.currentUser.uid,
+    userName: auth.currentUser.displayName,
+    photoURL: auth.currentUser.photoURL,
+    type: 'user',
+    token,
+  }
+  await api.create(user, 'Users');
+  if (byGoogle) {
+    window.location=`${window.location.origin}/Profile`;
+  }else{
+    closeUser(true);
+  }
+}
+
 
 export const restorePassword = async (email) =>{
   const actionCodeSettings = {
