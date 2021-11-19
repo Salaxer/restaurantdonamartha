@@ -1,0 +1,94 @@
+.containerProfile{
+    height: 600px;
+    width: 60%;
+    margin: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 1px 2px 0 rgb(0, 0, 0, 12%), 0 0 6px 0 rgb(0, 0, 0, 10%);
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.changue{
+    margin: 10px;
+    width: 90%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+#photo, #newName, #number, #delete, #save, #cancel{
+    width: 50%;
+    height: 30px;
+    margin: 5px;
+}
+#save{
+    background-color: #75b175;
+    color: #060202;
+}
+#cancel{
+    background-color: var(--maincolorblue);
+    color: white;
+}
+#delete{
+    background-color: rgb(119, 45, 32);
+    color: white;
+}
+.changue.delete{
+    margin-top: 50px;
+}
+.changue label{
+    font-size: 1.2rem;
+}
+
+.viewModal{
+    width: 100%;
+    height: 680px ;
+    position: absolute;
+    background-color: #edf0f3e5;
+    transition: all ease 0.3s;
+}
+.modalChangePhoto{
+    position: absolute;
+    width: 50%;
+    height: 300px;
+    top: calc(50% - 200px);
+    left: 25%;
+    background-color: rgb(238, 238, 238);
+    display: flex;
+    box-shadow: 0 1px 9px 1px rgb(0, 0, 0, 12%), 0 0 6px 0 rgb(0, 0, 0, 10%);
+    transition: all ease 0.3s;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 10px ;
+}
+.modalChangePhoto h3{
+    font-size: 1.9rem;
+    margin-bottom: 5px;
+}
+.modalChangePhoto .tab{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    height: 25px;
+    margin-top: 5px;
+    background-color: var(--fillingcolor);
+}
+.modalChangePhoto .tab button{
+    background-color: transparent;
+    flex-basis: 33%;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.modalChangePhoto .tab button:hover{
+    background-color: var(--maincolorgreen);
+}
+#url{
+    margin-top: 30px;
+}

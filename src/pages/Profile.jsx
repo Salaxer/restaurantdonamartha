@@ -24,21 +24,22 @@ const Profile = () => {
             <div className="viewUser">
                     <div className="personalInfo">
                         <img aria-label="foto de perfil" className="personalInfo__IMG" src={`${user.photoURL}`} alt={`Foto de ${user.displayName}`} srcSet="" />
-                        <Link to="/Profile/edit" className="changePhoto" name="edit" aria-label="Editar perfil"><i class="far fa-edit"></i></Link>
+                        <Link to="/Profile/edit" className="editProfile" name="edit" aria-label="Editar perfil"><i className="far fa-edit"></i></Link>
                     </div>
                     <p className="nameUSer" aria-label="nombre de usuario">Hola, {user.displayName}</p>
                     {/* <span className="userLine"></span> */}
                     <div className="ContainerInfo pointRestauant">
-                        <p className="title__info--profile">Puntos acumulados</p>
+                        <h1 className="title__info--profile">Puntos acumulados</h1>
                     </div>
                     <div className="ContainerInfo favorites">
-                        <p className="title__info--profile">Comida guardada</p>
+                        <h1 className="title__info--profile">Comida guardada</h1>
                         <div>
                             Mojarron
                         </div>
                     </div>
                     <div className="ContainerInfo favorites">
-                        <p className="title__info--profile">Reviews</p>
+                        <h1 className="title__info--profile">Rese&ntilde;as</h1>
+                        <p>Aun no tienes ninguna rese&ntilde;a</p>
                     </div>
                 <button onClick={closeSession}>Salir
                 </button>

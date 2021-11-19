@@ -16,7 +16,7 @@
     border-radius: 70px;
     box-shadow: 0 1px 2px 0 rgb(60, 64, 67, 30%), 0 2px 6px 2px rgb(60, 64, 67, 15%);
 }
-.personalInfo .changePhoto{
+.personalInfo .editProfile{
     position: absolute;
     border: none;
     background-color: var(--fillingcolor);
@@ -27,8 +27,13 @@
     right: 0px;
     box-shadow: 0 1px 2px 0 rgb(60, 64, 67, 30%), 0 2px 6px 2px rgb(60, 64, 67, 15%);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.changePhoto i{
+.editProfile i{
+    position: relative;
+    left: 2px;
     color: white;
     font-size: 2rem;
 }

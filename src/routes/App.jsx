@@ -11,6 +11,7 @@ import Signup from '../pages/Signup';
 import Signin from '../pages/Signin';
 import Profile from '../pages/Profile';
 import Restore from '../pages/Restore';
+import EditProfile from '../pages/EditProfile';
 
 import globalEvents from '../utils/globalEvents';
 
@@ -55,6 +56,7 @@ const App = () => {
           <Route exact path="/Signup" component={Signup} />
           <Route exact path="/Signin" component={Signin} />
           <Route exact path="/Profile" component={Profile} />
+          <Route exact path="/Profile/Edit" component={EditProfile} />
           <Route exact path="/Restore" component={Restore} />
           <Route component={NotFound} />
         </Switch>

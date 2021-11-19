@@ -8,13 +8,19 @@ import { getAuth,
   sendEmailVerification,
   sendPasswordResetEmail,
   signOut,
-  signInWithEmailAndPassword  
+  signInWithEmailAndPassword ,
+  deleteUser,
+  reauthenticateWithCredential,
+  AuthCredential,
+  EmailAuthProvider
 } from "firebase/auth";
+
 
 //Utils
 import md5 from "md5";
 import swal from 'sweetalert';
 import api from './api';
+
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
@@ -26,7 +32,7 @@ export const Google = () =>{
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       // The signed-in user info.
-      createNewConnectionPublic(true, token);
+      // createNewConnectionPublic(true, token);
       // ...
     }).catch((error) => {
       // Handle Errors here.
@@ -109,13 +115,13 @@ const sendEmail = async (email) =>{
       dangerMode: false,
     })
     .then( () => {
-      createNewConnectionPublic();
+      createNewConnectionPublic(false, undefined ,email);
     });
   });
     return result;
 }
 
-const createNewConnectionPublic = async (byGoogle, token = null) =>{
+const createNewConnectionPublic = async (byGoogle, token = null, email) =>{
   const user = {
     userID: auth.currentUser.uid,
     userName: auth.currentUser.displayName,
@@ -127,7 +133,7 @@ const createNewConnectionPublic = async (byGoogle, token = null) =>{
   if (byGoogle) {
     window.location=`${window.location.origin}/Profile`;
   }else{
-    closeUser(true);
+    closeUser(true, email);
   }
 }
 
@@ -167,6 +173,71 @@ export const closeUser = (newUSer, email) =>{
     swal("Oops!", `Sucedio un error inesperado, porfavor reintenta mas tarde ${error.message}`, "error");
     // An error happened.
   });
+}
+
+const reAuth = async (password) =>{
+  const user = auth.currentUser;
+  const credential = EmailAuthProvider.credential(
+      user.email,
+      password
+   );
+  const result = await reauthenticateWithCredential(user, credential).then(() => {
+    // User re-authenticated.
+  });
+  return result;
+}
+
+const verifyProvider = (user) =>{
+  if (user.providerData.length == 1) {
+    const result = user.providerData[0];
+    return result.providerId;
+  }else{
+    return 'none'
+  }
+}
+
+export const deleteAccount = async() =>{
+  const user = auth.currentUser;
+  const result  = verifyProvider(user);
+  if(result == 'password'){
+    const passwordTo = await swal({
+      title: "¿Estas seguro que desea eliminar su cuenta?",
+      text: "Esta acción es permanente y no se puede revertir. Para continuar ingrese contraseña",
+      icon: "warning",
+      content: "input",
+      dangerMode: true,
+    });
+    if (passwordTo) {
+      // auth/wrong-password
+      try {
+        const verify = await reAuth(passwordTo)
+        const res = await deleteUser(user).then(() => {
+          // User deleted.
+          swal({
+            title: "Exito",
+            text: "Su cuenta ah sido eliminada exitosamente, lamentamos su retiro",
+            icon: "success",
+            dangerMode: false,
+          })
+        }).catch((error) => {
+          swal("Error!", "ha ocurrido un error inesperado!", "error");
+        });
+      } catch (error) {
+        if (error.code == "auth/wrong-password") {
+          swal("Error!", "Su contraseña es incorrecta", "error");
+        }else{
+          swal("Error!", "Sucedio un error inesperado", "error");
+        }
+      }
+    }else{
+      swal("Error!", "Ingrese su contraseña", "warning");
+    }
+  }else if(result == 'google.com'){
+    swal("Error!", "su cuenta esta enlazada su cuenta de Google, para eliminarla debe de descincular desde su cuenta", "warning");
+  }else{
+    swal("Error!", "su cuenta esta enlazada a distintos provesores, por favor, desvincule la cuenta antes", "warning");
+  }
+  
 }
 
 export default {};
