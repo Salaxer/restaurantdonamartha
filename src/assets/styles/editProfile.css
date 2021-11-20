@@ -1,5 +1,5 @@
 .containerProfile{
-    height: 600px;
+    height: 650px;
     width: 60%;
     margin: 40px;
     display: flex;
@@ -45,7 +45,7 @@
 
 .viewModal{
     width: 100%;
-    height: 680px ;
+    height: 730px ;
     position: absolute;
     background-color: #edf0f3e5;
     transition: all ease 0.3s;
@@ -91,4 +91,16 @@
 }
 #url{
     margin-top: 30px;
+}
+.accepted{
+    margin-top: 20px;
+    width: 150px;
+    height: 30px;
+}
+input#file{
+    margin-top: 30px;
+    border: none;
+}
+input#file:double-button{
+    color: chartreuse;
 }
