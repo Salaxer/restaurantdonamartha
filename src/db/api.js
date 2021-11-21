@@ -1,6 +1,17 @@
 import {appdb, analytics} from './conexiondb';
 
-import { getFirestore, collection, doc, getDocs, addDoc, setDoc, getDoc, deleteDoc, query, where, orderBy, limit} from "firebase/firestore";
+import { getFirestore, 
+    collection, 
+    doc, 
+    getDocs, 
+    addDoc, 
+    setDoc, 
+    getDoc, 
+    deleteDoc, 
+    query, 
+    where, 
+    orderBy,
+    limit} from "firebase/firestore";
 
 const db = getFirestore();
 
@@ -26,12 +37,36 @@ const api = {
         }
     },
     async update(ID, updates, reference = 'Menu') {
-        return setDoc(doc(db, `${reference}/${ID}`), updates, {merge: true});
+        if (reference !== 'Menu') {
+            const updatingQuery = query(
+                collection(db, reference),
+                where("userID", "==", `${ID}`)
+            );
+            const result = await getDocs(updatingQuery);
+            const newID = result.docs[0].id;
+            return await setDoc(doc(db, `${reference}/${newID}`), updates, {merge: true});
+        }else{
+            return await setDoc(doc(db, `${reference}/${ID}`), updates, {merge: true});
+        }
     },
     // Lo hubiera llamado `delete`, pero `delete` es un keyword en JavaScript asi que no es buena idea :P
     async remove(ID, reference = 'Menu') {
-        const removeDoc = await deleteDoc(doc(db, `${reference}/${ID}`));
-        return console.log(removeDoc);
+        if (reference !== 'Menu' ) {
+            const deletingQuery = query(
+                collection(db, reference),
+                where("userID", "==", `${ID}`)
+            );
+            const result = await getDocs(deletingQuery);
+            debugger
+            const newID = result.docs[0].id;
+            const removeDoc = await deleteDoc(doc(db, `${reference}/${newID}`));
+            console.log(removeDoc);
+            console.log(newID);
+            return console.log(removeDoc);
+        }else{
+            const removeDoc = await deleteDoc(doc(db, `${reference}/${ID}`));
+            return console.log(removeDoc);
+        }
     },
 };
 

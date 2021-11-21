@@ -5,7 +5,7 @@ import  { Link, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 //auth
-import { deleteAccount } from '../db/auth';
+import { deleteAccount, modifyProfile } from '../db/auth';
 
 //style
 import '../assets/styles/editProfile.css'
@@ -14,27 +14,70 @@ import '../assets/styles/editProfile.css'
 import getGravatarURL from '../utils/gravatar';
 import LoaderCircle from '../components/LoaderCircle';
 import verifyImage from '../utils/verifyImage';
+import swal from 'sweetalert';
 
 const EditProfile = () => {
     const user = useSelector(state=>state.user)
 
     const verify = async () =>{
-        setData({...data, loadModal: true});
+        if (!data.form.image == "") {
+            setData({...data, loadModal: true});
+           if(data.modeUpload == "LINK"){
+                const result = await verifyImage(data.form.image, data.modeUpload);
+                if (result == 'error') {
+                    setData({...data,showImage: false, loadModal: false, errorImage: true, form:{ ...data.form, image: ''}});
+                }else{
+                    setData({...data, loadModal: false, showImage: true, check: false, errorImage: false});
+                }
+            }else{
+                const result = await verifyImage(data.form.image, data.modeUpload);
+                console.log(result);
+                if (result == 'error') {
+                    setData({...data,showImage: false, loadModal: false, errorImage: true, form:{ ...data.form, image: ''}});
+                }else{
+                    setData({...data, loadModal: false, showImage: true, check: false, errorImage: false, base: result});
+                }
+            }
+        }
         if (data.modeUpload == "GRAVATAR") {
+            setData({...data, loadModal: true});
             const newImage = getGravatarURL(user.email);
             setData({...data,showImage: true, loadModal: false, errorImage: false,check: false, form:{ ...data.form, image: newImage}});
-        }else{
-            const result = await verifyImage(data.form.image, data.modeUpload);
-            if (result == 'error') {
-                setData({...data,showImage: false, loadModal: false, errorImage: true, form:{ ...data.form, image: ''}});
-            }else{
-                setData({...data, loadModal: false, showImage: true, check: false, errorImage: false});
-            }
         }
     }
     
+    const updateAccount = async() =>{
+        if (data.form.name=='' && data.form.image=='') {
+            swal("Oops!", `Parece que no hay nada que guardar`, "warning");
+        }else{
+            try {
+                setData({...data, saving: true});
+                const result = await modifyProfile(data.form.name, data.form.image, null, false, data.modeUpload);
+                if (result) {
+                    console.log(result);
+                    setData({...data, saving: false});
+                    swal({
+                        title: "Excelente!",
+                        text: "Se han actualizado correctamente tus datos!",
+                        icon: "success",
+                        dangerMode: false,
+                    })
+                    .then( () => {
+                        window.location=`${window.location.origin}/Profile`;
+                    });
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
     const deleteUSer = async () =>{
-        await deleteAccount();
+        setData({...data, saving: true});
+        const result = await deleteAccount();
+        if (result) {
+            setData({...data, saving: false});
+        }
     }
 
     const [data, setData] = useState({
@@ -44,10 +87,11 @@ const EditProfile = () => {
         form:{
             image: '',
             name: '',
-            phone: '',
         },
         showImage: false,
         errorImage: false,
+        saving: false,
+        base: ''
     })
 
     const handleModal = (e) =>{
@@ -74,18 +118,13 @@ const EditProfile = () => {
         return(
             <div className="viewUser">
                 <div className="containerProfile">
+                    {data.saving ? <LoaderCircle/> : null}
                     <h1 className="title">Editar el perfil</h1>
                     <div className="changue">
                         <label htmlFor="newName">Cambiar Nombre</label>
                         <input onChange={
                             (e) => {updateForm(e)}
                         } value={data.form.name} className="inputsText" type="text" name="name" id="newName" placeholder={user.displayName}/>
-                    </div>
-                    <div className="changue">
-                        <label htmlFor="number">Cambiar Numero de celular</label>
-                        <input onChange={
-                            (e) => {updateForm(e)}
-                        } value={data.form.phone} className="inputsText" type="text" name="phone" id="number" placeholder={user.phoneNumber}/>
                     </div>
                     <div className="changue">
                         <label htmlFor="photo">Cambiar Foto de perfil</label>
@@ -95,15 +134,15 @@ const EditProfile = () => {
                             height: '100px',
                             display: data.showImage ? 'block' : 'none',
                         }} id="showImage">
-                            <img style={{
+                            <img id="previewImage" style={{
                                 width: '100px',
                                 height: '100px',
-                            }} src={data.form.image} alt="nueva foto de perfil" />
+                            }} src={data.modeUpload == 'FILE' ? data.base: data.form.image } alt="nueva foto de perfil" />
                         </span>
                     </div>
                     <div className="changue">
                         <label htmlFor="save">Guardar Cambios</label>
-                        <button name="save" className="buttons Google" id="save">Guardar</button>
+                        <button name="save" className="buttons Google" onClick={updateAccount} id="save">Guardar</button>
                     </div>
                     <div className="changue">
                         <label htmlFor="cancel">Cancelar Cambios</label>
@@ -129,25 +168,24 @@ const EditProfile = () => {
                             <input value={data.form.image} type="url" name="image" id="url" onChange={
                                 (e) => {updateForm(e)}
                             } className="inputs inputsText" />
-                            <span style={{
-                                display: data.errorImage ? 'block' : 'none',
-                                color: 'red',
-                                fontSize: '1.5rem'
-                            }}>url no valida</span>
-                            <button className="buttons Googlea accepted" onClick={(e) => {verify()}}>Aceptar</button>
                         </> : null}
                         {data.modeUpload == 'FILE' ? <>
                             <input className="buttons" type="file" name="image" id="file" onChange={
-                                 (e) => {updateForm(e)}
+                                 (e) => {setData({...data, form:{ ...data.form, [e.target.name]: e.target.files[0]}})}
                             }/>
                         </> : null}
                         {data.modeUpload == 'GRAVATAR' ? <>
-                        <h2 style={{marginTop: '20px'}}>La foto de perfil se colocara con  
+                        <h2 style={{marginTop: '20px', textAlign: 'center'}}>La foto de perfil se colocara con  
                             <a style={{color: 'black'}} href="http://en.gravatar.com/" target="_blank" rel="noopener noreferrer"> GRAVATAR</a>
                         </h2>
-                        <button className="buttons Googlea accepted" onClick={(e) => {verify()}}>Aceptar</button>
                         </> : null}
                         {data.loadModal ? <LoaderCircle/> : null}
+                        <button className="buttons Googlea accepted" onClick={(e) => {verify()}}>Aceptar</button>
+                        <span style={{
+                                display: data.errorImage ? 'block' : 'none',
+                                color: 'red',
+                                fontSize: '1.5rem'
+                            }}>Verifica que lo que ingreses sea una imagen</span>
                     </div>
                 </div>
             </div>

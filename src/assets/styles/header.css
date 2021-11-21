@@ -84,6 +84,12 @@ img.header__picture--img{
   width: 36px;
   border-radius: 18px;
 }
+@supports(object-fit: cover){
+  .header__nav ul li img{
+    object-fit: cover;
+    object-position: center center;
+  }
+}
 .header__nav a{
   text-decoration: none;
   display: flex;

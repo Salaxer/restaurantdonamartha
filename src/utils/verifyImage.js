@@ -21,6 +21,26 @@ const verifyUrl = async (data, timeoutT) =>{
       });
 }
 
+const verifyFile = async (file) =>{
+    const expresionRegular = /\jpeg|jpg|png$/;
+    if (!expresionRegular.exec(file.type)) {
+        return 'error';
+    }else{
+        if (window.FileReader) {
+            return new Promise(function(resolve, reject) {
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = function (e) {
+                    resolve(e.target.result)
+                }
+                reader.onerror = function (e) {
+                    reject('error')
+                }
+            });
+        }
+    }
+}
+
 
 const verifyImage = async (data, type) =>{
     if (type == 'LINK') {
@@ -31,7 +51,8 @@ const verifyImage = async (data, type) =>{
        })
        return result;
     }else if(type == 'FILE'){
-
+        const result = await verifyFile(data);
+        return result
     }
 }
 

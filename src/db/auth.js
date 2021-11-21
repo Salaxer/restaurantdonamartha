@@ -11,15 +11,16 @@ import { getAuth,
   signInWithEmailAndPassword ,
   deleteUser,
   reauthenticateWithCredential,
-  AuthCredential,
   EmailAuthProvider
 } from "firebase/auth";
 
+import { uploadUserImages, deleteUserImages } from './apiStorage';
+import api from './api';
+
 
 //Utils
-import md5 from "md5";
 import swal from 'sweetalert';
-import api from './api';
+import getGravatarURL from '../utils/gravatar';
 
 
 const provider = new GoogleAuthProvider();
@@ -57,7 +58,7 @@ export const Email = async ({name, email, password}) =>{
     // Signed in 
     // const user = userCredential.user;
     // console.log('Se ha creado el usuario :)');
-    const photo = `https://s.gravatar.com/avatar/${md5(email.trim().toLowerCase(),{encoder:"binary"})}?d=identicon&s=200`;
+    const photo = getGravatarURL(email);
     modifyProfile(name, photo, email, true);
   })
   return result;
@@ -87,25 +88,33 @@ export const newSignIn = async ({email, password}) =>{
 }
 
 //to modify profile of the users
-export const modifyProfile = async (name, photo, email, newUser, phone) =>{
-  const newName = name ? {displayName: name} : newUser ? {displayName: 'user'} : undefined;
-  const newPhoto = photo ? {photoURL: photo} : undefined;
-  const newPhone = phone ? {phoneNumber: phone}: undefined;
-  const allConstant =  Object.assign(
-    typeof newName === 'undefined' ? {} : newName,
-    typeof newPhoto === 'undefined' ? {} : newPhoto,
-    typeof newPhone === 'undefined' ? {} : newPhone
-  );
-  await updateProfile(auth.currentUser, allConstant).then(() => {
+export const modifyProfile = async (name, photo, email, newUser, type) =>{
+  // FILE
+  const user = auth.currentUser;
+  let newPhoto = {}; 
+  if (type == 'FILE' && photo) {
+    const result = await uploadUserImages(photo, user.uid);
+    newPhoto ={photoURL: result};
+  }else{
+    newPhoto = photo ? {photoURL: photo} : {};
+  }
+  const newName = name ? {displayName: name} : newUser ? {displayName: 'user'} : {};
+
+  const allConstant =  Object.assign(newName, newPhoto);
+  return await updateProfile(auth.currentUser, allConstant).then(() => {
     // console.log('Se ha colocado la foto de perfil y el nombre del usuario:)');
     // Profile updated!
     if (newUser) {
-      sendEmail(email);
+      sendEmail(email, newUser);
+    }else{
+      createNewConnectionPublic(false, null, null, newUser);
     }
+    return true;
   })
 } 
 
-const sendEmail = async (email) =>{
+
+const sendEmail = async (email, newUser) =>{
   const result = await sendEmailVerification(auth.currentUser)
   .then(() => {
     swal({
@@ -115,13 +124,13 @@ const sendEmail = async (email) =>{
       dangerMode: false,
     })
     .then( () => {
-      createNewConnectionPublic(false, undefined ,email);
+      createNewConnectionPublic(false, null, email, newUser);
     });
   });
     return result;
 }
 
-const createNewConnectionPublic = async (byGoogle, token = null, email) =>{
+const createNewConnectionPublic = async (byGoogle, token = null, email, update) =>{
   const user = {
     userID: auth.currentUser.uid,
     userName: auth.currentUser.displayName,
@@ -129,11 +138,15 @@ const createNewConnectionPublic = async (byGoogle, token = null, email) =>{
     type: 'user',
     token,
   }
-  await api.create(user, 'Users');
-  if (byGoogle) {
-    window.location=`${window.location.origin}/Profile`;
+  if (update == false) {
+    await api.update(auth.currentUser.uid, user, 'Users');
   }else{
-    closeUser(true, email);
+    await api.create(user, 'Users',);
+    if (byGoogle) {
+      window.location=`${window.location.origin}/Profile`;
+    }else{
+      closeUser(true, email);
+    }
   }
 }
 
@@ -210,7 +223,13 @@ export const deleteAccount = async() =>{
     if (passwordTo) {
       // auth/wrong-password
       try {
-        const verify = await reAuth(passwordTo)
+        const del = await deleteUserImages(user.uid, 'Users');
+      } catch (error) {
+        console.log(error.message);
+      }
+      try {
+        const verify = await reAuth(passwordTo);
+        const remov= await api.remove(user.uid, 'Users');
         const res = await deleteUser(user).then(() => {
           // User deleted.
           swal({
@@ -228,6 +247,7 @@ export const deleteAccount = async() =>{
         }else{
           swal("Error!", "Sucedio un error inesperado", "error");
         }
+        console.log(error);
       }
     }else{
       swal("Error!", "Ingrese su contraseña", "warning");

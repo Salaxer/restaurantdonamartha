@@ -1,6 +1,6 @@
 .containerProfile{
     height: 650px;
-    width: 60%;
+    width: 100%;
     margin: 40px;
     display: flex;
     align-items: center;
@@ -20,7 +20,7 @@
     align-items: center;
 }
 #photo, #newName, #number, #delete, #save, #cancel{
-    width: 50%;
+    width: 90%;
     height: 30px;
     margin: 5px;
 }
@@ -52,10 +52,10 @@
 }
 .modalChangePhoto{
     position: absolute;
-    width: 50%;
+    width: 90%;
     height: 300px;
     top: calc(50% - 200px);
-    left: 25%;
+    left: 5%;
     background-color: rgb(238, 238, 238);
     display: flex;
     box-shadow: 0 1px 9px 1px rgb(0, 0, 0, 12%), 0 0 6px 0 rgb(0, 0, 0, 10%);
@@ -68,8 +68,8 @@
     padding-top: 10px ;
 }
 .modalChangePhoto h3{
-    font-size: 1.9rem;
-    margin-bottom: 5px;
+    font-size: 1.4rem;
+    margin: 8px;
 }
 .modalChangePhoto .tab{
     width: 100%;
@@ -103,4 +103,44 @@ input#file{
 }
 input#file:double-button{
     color: chartreuse;
+}
+
+@supports(object-fit: cover){
+    #previewImage{
+      object-fit: cover;
+      object-position: center center;
+    }
+}
+
+@media screen and (min-width:538px) and (  max-width: 768px ) {
+    .containerProfile{
+        width: 80%;
+    }
+    #photo, #newName, #number, #delete, #save, #cancel{
+        width: 70%;
+    }
+    .modalChangePhoto{
+        width: 80%;
+        left: 10%;
+    }
+    .modalChangePhoto h3{
+        font-size: 1.6rem;
+        margin: 8px;
+    }
+}
+@media screen and (min-width: 769px) {
+    .containerProfile{
+        width: 60%;
+    }
+    #photo, #newName, #number, #delete, #save, #cancel{
+        width: 50%;
+    }
+    .modalChangePhoto{
+        width: 50%;
+        left: 25%;
+    }
+    .modalChangePhoto h3{
+        font-size: 1.95rem;
+        margin: 8px;
+    }
 }
