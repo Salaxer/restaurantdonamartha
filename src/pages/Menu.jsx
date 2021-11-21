@@ -21,11 +21,14 @@ const Menu = () => {
 
   //REDUX config
   const dispatch = useDispatch()
-  const { getFood } = bindActionCreators(actionCreators, dispatch);
+  const { setFood, addFood } = bindActionCreators(actionCreators, dispatch);
 
   //know if the user watch all items to reload new
   const dataMax = (decided) =>{
     decided ? setData({verifyScroll: true, newLoader: true}) : setData({verifyScroll: false});
+    // if (decided) {
+    //   addFood({prueba: 'sorry'});
+    // }
   }
 
   //Sentences to decide the movement of the page
@@ -41,17 +44,16 @@ const Menu = () => {
     try {
       setData({loader: true})
       const newData = await api.list();
-      getFood(newData);
+      setFood(newData);
       setData({loader: false, lastData: newData})
     } catch (error) {
       setData({loader: false})
-      getFood('error');
+      setFood('error');
     }
   }
 
   //getting data already used
   const food = useSelector(state=>state.food);
-  
   useEffect( ()=>{
     if(food == 'empty' || food == null){ 
       getData();

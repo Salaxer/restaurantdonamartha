@@ -5,34 +5,59 @@ import '../assets/styles/informationFood.css'
 
 //db
 import api from '../db/api'
-
+//REDUX
+import { useSelector } from 'react-redux';
+//utils
 import LoaderCircle from '../components/LoaderCircle';
 
 const Information = () => {
+
+  //REDUX config
+
   const {FoodId} = useParams();
 
-  const [data, seData] = useState({food: null,loader: true});
+  const [data, setData] = useState({food: 'empty',loader: true});
 
+  //get data on api
   const getData = async () =>{
     try {
       const newData = await api.read(FoodId);
-      seData({loader: false, food: newData})
-      console.log(newData);
+      setData({loader: false, food: newData})
     } catch (error) {
-      seData({loader: false, food: 'notfound'})
+      setData({loader: false, food: 'notfound'})
     }
   }
   
+  const food = useSelector(state=>state.food);
+  
   useEffect( ()=>{
-    getData();
+    if(food == 'empty' || food == null){ 
+      getData();
+    }else{
+      const single = food.map((data)=>{
+        if (data.id == FoodId) {
+          return data;
+        }
+      })
+      console.log(single);
+      if (single[0]) {
+        setData({loader: false, food: single[0].data()});
+      }else{
+        setData({loader: false, food: 'notfound'});
+      }
+    }
+    return () => {
+      setData({});
+    };
   }, [])
+
   if (data.food == 'notfound') {
     return <h1 style={{marginTop: '70px'}}>No existe el producto ingresado</h1>;
   }else{
     return(
       <>
         {data.loader ? <LoaderCircle background="white"/>: 
-          <div className="InfoFood" id={data.food.id}>
+          <div className="InfoFood">
             <div className="ContainerIMG">
               <img src={data.food.image} alt="" className="ContainerIMG__img" srcSet="" />
             </div>

@@ -30,18 +30,17 @@ const Profile = () => {
                     {/* <span className="userLine"></span> */}
                     <div className="ContainerInfo pointRestauant">
                         <h1 className="title__info--profile">Puntos acumulados</h1>
+                        <p>0</p>
                     </div>
                     <div className="ContainerInfo favorites">
                         <h1 className="title__info--profile">Comida guardada</h1>
-                        <div>
-                            Mojarron
-                        </div>
+                        <p>Aun no tienes comida guardada</p>
                     </div>
                     <div className="ContainerInfo favorites">
                         <h1 className="title__info--profile">Rese&ntilde;as</h1>
                         <p>Aun no tienes ninguna rese&ntilde;a</p>
                     </div>
-                <button onClick={closeSession}>Salir
+                <button name="salir" id="signOut" onClick={closeSession} className="buttons">Cerrar sesi&oacute;n<i className="fas fa-sign-out-alt"></i>
                 </button>
             </div>
         );

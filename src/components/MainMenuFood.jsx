@@ -1,10 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 import { Link} from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import { RatingStar } from "rating-star";
 
-import LoaderCircle from './LoaderCircle';
 
 const MainMenuFood = ({food})=>{
     if (food == 'error') {

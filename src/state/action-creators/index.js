@@ -31,18 +31,18 @@ export const deleteUser = (amount) =>{
     }
 }
 
-export const getFood = (amount) =>{
+export const setFood = (amount) =>{
     return (dispatch) =>{
         dispatch({
-            type: 'GET',
+            type: 'SET',
             payload: amount
         })
     }
 }
-export const deleteFood = (amount) =>{
+export const addFood = (amount) =>{
     return (dispatch) =>{
         dispatch({
-            type: 'DELETE',
+            type: 'ADD',
             payload: amount
         })
     }
