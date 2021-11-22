@@ -16,8 +16,13 @@ import ModalNewImage from "../components/modalNewImage";
 
 // import '../assets/styles/admin.css';
 
+//Redux
+import { useSelector } from 'react-redux';
+
 const NewProduct = () =>{
     const {adminID} = useParams()
+    const conectionID = useSelector(state=>state.conectionID);
+    const user = useSelector(state=>state.user);
 
     const verify = async () =>{
         if (!data.form.image == "") {
@@ -57,7 +62,8 @@ const NewProduct = () =>{
         const _TITLE = form.title;
         const _TYPE = form.type;
         const _FILE = form.image;
-        if (_DETAILS == '' || _INGRE == '' || _PRICE == 0 || _TIME == '' || _TITLE == '' || _TYPE == '' || _FILE == ''){
+        const _SIZE = form.size;
+        if (_DETAILS == '' || _INGRE == '' || _PRICE == 0 || _TIME == '' || _TITLE == '' || _TYPE == '' || _FILE == '' || _SIZE == ''){
            swal("Error","Hay campos vacios", "warning"); 
         }else{
             setData({...data, loader: true});
@@ -73,7 +79,8 @@ const NewProduct = () =>{
                         rating: data.form.rating,
                         time: _TIME,
                         title: _TITLE,
-                        type: _TYPE
+                        type: _TYPE,
+                        size: _SIZE,
                     });
                     console.log(result);
                     const _newID = result.id;
@@ -117,6 +124,7 @@ const NewProduct = () =>{
             rating: 100,
             time: '',
             type: '',
+            size: '',
         },
         modeUpload: undefined, 
         showImage: false,
@@ -143,9 +151,7 @@ const NewProduct = () =>{
         setData({...data, form:{ ...data.form, [e.target.name]: e.target.value}})
     }
 
-    console.log(data);
-
-    if (adminID == 'fwef97uewfkj') {
+    if (adminID === user.uid && conectionID[0].type === "owner") {
         return (
             <div className="viewAdmin">
                 {data.loader ? <LoaderCircle background='white'/>: 
@@ -181,6 +187,10 @@ const NewProduct = () =>{
                         <div className="contentAdmin">
                             <p>Descripcion</p>
                             <input onChange={updateData} type="text" className="inputsText" name="details" id="" />
+                        </div>
+                        <div className="contentAdmin">
+                            <p>Tamaño</p>
+                            <input onChange={updateData} type="text" className="inputsText" name="size" id="" />
                         </div>
                         <div className="contentAdmin">
                             <p>Imagen</p>

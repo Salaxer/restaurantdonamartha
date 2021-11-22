@@ -28,13 +28,22 @@ const Profile = () => {
     const verifyFood = async () =>{
         let newFood = [];
         if (conectionID != 'loading') {
-            for (let i = 0; i < conectionID[0].foodSave.length; ++i) {
-                let id = conectionID[0].foodSave[i];
-                let result = await api.read(id);
-                newFood.push(result)
-            }
-            if (newFood.length >= 1) {
-                setData({...data, food: newFood})
+            if (conectionID[0].foodSave) {
+                for (let i = 0; i < conectionID[0].foodSave.length; ++i) {
+                    let id = conectionID[0].foodSave[i];
+                    let result;
+                    try {
+                        result = await api.read(id);
+                        newFood.push(result)
+                    } catch (error) {
+                        setData({...data, food: 'notFound'})
+                    }
+                }
+                if (newFood.length >= 1) {
+                    setData({...data, food: newFood})
+                }else{
+                    setData({...data, food: 'notFound'})
+                }
             }else{
                 setData({...data, food: 'notFound'})
             }
@@ -45,10 +54,6 @@ const Profile = () => {
         verifyFood();
     }, [conectionID]);
 
-    useEffect(()=>{
-        console.log(data);
-    })
-
     if (user == null) {
         return <Redirect to='/'/>  
     }else if(user == 'loading'){
@@ -56,6 +61,7 @@ const Profile = () => {
     }else{
         return(
             <div className="viewUser">
+                    {conectionID[0].type === "owner" ? <Link id="adminButton" className="buttons Google" to={`/admin/${conectionID[0].userID}`}>Administrar</Link> : null }
                     <div className="personalInfo">
                         <img aria-label="foto de perfil" className="personalInfo__IMG" src={`${user.photoURL}`} alt={`Foto de ${user.displayName}`} srcSet="" />
                         <Link to="/Profile/edit" className="editProfile" name="edit" aria-label="Editar perfil"><i className="far fa-edit"></i></Link>

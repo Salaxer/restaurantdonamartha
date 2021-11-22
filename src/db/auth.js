@@ -33,7 +33,21 @@ export const Google = () =>{
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       // The signed-in user info.
-      createNewConnectionPublic(true, token, null, true);
+      const user = auth.currentUser;
+      const verifyState = async ()=>{
+        try {
+          const userAlreadySingedUp = await api.getUserConection(user.uid);
+          if (userAlreadySingedUp) {
+            window.location=`${window.location.origin}/Profile`;
+          }else{
+            createNewConnectionPublic(true, token, null, true);
+          }
+        } catch (error) {
+          console.log(error);
+          swal("Oops!", `Sucedio un error inesperado, porfavor reintenta mas tarde ${error.message}`, "error");
+        }
+      };
+      verifyState();
       // ...
     }).catch((error) => {
       // Handle Errors here.

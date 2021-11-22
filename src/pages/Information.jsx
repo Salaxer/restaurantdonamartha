@@ -77,12 +77,16 @@ const Information = () => {
 
   const verifySave = () =>{
     if (conectionID != 'loading') {
-      const findHeart = conectionID[0].foodSave.find(element => element == FoodId);
-     if (findHeart) {
-      setData({...data, saveHeart: true});
-     }else{
-      setData({...data, saveHeart: false});
-     }
+      if (conectionID[0].foodSave) {
+        const findHeart = conectionID[0].foodSave.find(element => element == FoodId);
+        if (findHeart) {
+          setData({...data, saveHeart: true});
+        }else{
+          setData({...data, saveHeart: false});
+        }
+      }else{
+        setData({...data, saveHeart: false});
+      }
     }
   }
   useMemo(() =>{
