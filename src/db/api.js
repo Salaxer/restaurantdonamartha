@@ -11,6 +11,9 @@ import { getFirestore,
     query, 
     where, 
     orderBy,
+    arrayUnion, 
+    arrayRemove,
+    updateDoc,
     limit} from "firebase/firestore";
 
 const db = getFirestore();
@@ -26,7 +29,7 @@ const api = {
     },
     async create(docData, reference = 'Menu') {
         const newDoc = await addDoc(collection(db, reference), docData);
-        return console.log(newDoc);
+        return newDoc;
     },
     async read(ID, reference = 'Menu') {
         const gettingDoc = await getDoc(doc(db, `${reference}/${ID}`));
@@ -43,11 +46,13 @@ const api = {
                 where("userID", "==", `${ID}`)
             );
             const result = await getDocs(updatingQuery);
+            console.log(result);
             const newID = result.docs[0].id;
             return await setDoc(doc(db, `${reference}/${newID}`), updates, {merge: true});
         }else{
             return await setDoc(doc(db, `${reference}/${ID}`), updates, {merge: true});
         }
+        return true
     },
     // Lo hubiera llamado `delete`, pero `delete` es un keyword en JavaScript asi que no es buena idea :P
     async remove(ID, reference = 'Menu') {
@@ -57,17 +62,33 @@ const api = {
                 where("userID", "==", `${ID}`)
             );
             const result = await getDocs(deletingQuery);
-            debugger
             const newID = result.docs[0].id;
             const removeDoc = await deleteDoc(doc(db, `${reference}/${newID}`));
-            console.log(removeDoc);
-            console.log(newID);
             return console.log(removeDoc);
         }else{
             const removeDoc = await deleteDoc(doc(db, `${reference}/${ID}`));
             return console.log(removeDoc);
         }
     },
+
+    //For the users
+    async updateUsersSaves(ID, updates, reference = 'Users'){
+        await updateDoc(doc(db, `${reference}/${ID}`), {foodSave: arrayUnion(updates) });
+        return true;
+    },
+    async removeUsersSaves(ID, updates, reference = 'Users'){
+        await updateDoc(doc(db, `${reference}/${ID}`), {foodSave: arrayRemove(updates) });
+        return true;
+    },
+    async getUserConection(ID){
+        const updatingQuery = query(
+            collection(db, 'Users'),
+            where("userID", "==", `${ID}`)
+        );
+        const result = await getDocs(updatingQuery);
+        const newID = result.docs[0]; 
+        return newID.id;
+    }
 };
 
 export default api;

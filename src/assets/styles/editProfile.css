@@ -43,67 +43,7 @@
     font-size: 1.2rem;
 }
 
-.viewModal{
-    width: 100%;
-    height: 730px ;
-    position: absolute;
-    background-color: #edf0f3e5;
-    transition: all ease 0.3s;
-}
-.modalChangePhoto{
-    position: absolute;
-    width: 90%;
-    height: 300px;
-    top: calc(50% - 200px);
-    left: 5%;
-    background-color: rgb(238, 238, 238);
-    display: flex;
-    box-shadow: 0 1px 9px 1px rgb(0, 0, 0, 12%), 0 0 6px 0 rgb(0, 0, 0, 10%);
-    transition: all ease 0.3s;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding-top: 10px ;
-}
-.modalChangePhoto h3{
-    font-size: 1.4rem;
-    margin: 8px;
-}
-.modalChangePhoto .tab{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    height: 25px;
-    margin-top: 5px;
-    background-color: var(--fillingcolor);
-}
-.modalChangePhoto .tab button{
-    background-color: transparent;
-    flex-basis: 33%;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-.modalChangePhoto .tab button:hover{
-    background-color: var(--maincolorgreen);
-}
-#url{
-    margin-top: 30px;
-}
-.accepted{
-    margin-top: 20px;
-    width: 150px;
-    height: 30px;
-}
-input#file{
-    margin-top: 30px;
-    border: none;
-}
-input#file:double-button{
-    color: chartreuse;
-}
+
 
 @supports(object-fit: cover){
     #previewImage{

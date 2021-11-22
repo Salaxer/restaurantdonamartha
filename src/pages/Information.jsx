@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useParams} from 'react-router-dom';
 
 import '../assets/styles/informationFood.css'
@@ -9,41 +9,42 @@ import api from '../db/api'
 import { useSelector } from 'react-redux';
 //utils
 import LoaderCircle from '../components/LoaderCircle';
+import NotFound from './NotFound';
+import { RatingStar } from 'rating-star';
 
 const Information = () => {
 
-  //REDUX config
-
+  //params getting 
   const {FoodId} = useParams();
-
-  const [data, setData] = useState({food: 'empty',loader: true});
+  const [data, setData] = useState({
+    food: 'empty',
+    loader: true, 
+    saveHeart: 'undefine',
+  });
 
   //get data on api
   const getData = async () =>{
     try {
       const newData = await api.read(FoodId);
-      setData({loader: false, food: newData})
+      setData({...data, loader: false, food: newData, rating: newData.rating})
     } catch (error) {
-      setData({loader: false, food: 'notfound'})
+      setData({...data, loader: false, food: 'notfound'})
     }
   }
   
   const food = useSelector(state=>state.food);
+  const conectionID = useSelector(state=>state.conectionID)
   
   useEffect( ()=>{
     if(food == 'empty' || food == null){ 
       getData();
     }else{
-      const single = food.map((data)=>{
-        if (data.id == FoodId) {
-          return data;
-        }
-      })
-      console.log(single);
-      if (single[0]) {
-        setData({loader: false, food: single[0].data()});
+      const single = food.find(element => element.id == FoodId);
+      if (single) {
+        const _FOOD =  single.data();
+        setData({...data, loader: false, food: _FOOD, rating: _FOOD.rating});
       }else{
-        setData({loader: false, food: 'notfound'});
+        setData({...data, loader: false, food: 'notfound'});
       }
     }
     return () => {
@@ -51,29 +52,83 @@ const Information = () => {
     };
   }, [])
 
+  const saveFavorites = async() =>{
+    setData({...data, saveHeart: data.saveHeart ? false : true})
+    // const unSave = document.getElementById('unsaveHeart');
+    setTimeout( async ()=>{
+      const save = document.getElementById('saveHeart');
+      if (data.saveHeart ? false : true) {
+        save.classList.add("heartSound");
+        save.style.pointerEvents = 'none';
+        const result = await api.updateUsersSaves(conectionID[1], FoodId, 'Users');
+        if (result) {
+          save.style.pointerEvents = 'all';
+        }
+      }else{
+        save.classList.remove('heartSound');
+        save.style.pointerEvents = 'none';
+        const result = await api.removeUsersSaves(conectionID[1], FoodId, 'Users');
+        if (result) {
+          save.style.pointerEvents = 'all';
+        }
+      }
+    },100)
+  }
+
+  const verifySave = () =>{
+    if (conectionID != 'loading') {
+      const findHeart = conectionID[0].foodSave.find(element => element == FoodId);
+     if (findHeart) {
+      setData({...data, saveHeart: true});
+     }else{
+      setData({...data, saveHeart: false});
+     }
+    }
+  }
+  useMemo(() =>{
+    verifySave();
+  }, [conectionID]);
+
   if (data.food == 'notfound') {
-    return <h1 style={{marginTop: '70px'}}>No existe el producto ingresado</h1>;
+    return <NotFound/>
   }else{
     return(
       <>
         {data.loader ? <LoaderCircle background="white"/>: 
           <div className="InfoFood">
-            <div className="ContainerIMG">
-              <img src={data.food.image} alt="" className="ContainerIMG__img" srcSet="" />
+            <div className="ContainerIMG" style={{textAlign: data.food.type == 'drink' ? 'center': null}}>
+              <div onClick={saveFavorites} style={{cursor: 'pointer'}} id="saveHeart" className="savePublic">
+                {data.saveHeart == 'undefine' ? null : data.saveHeart ?
+                  <i className="fas fa-heart"></i> :
+                  <i className="far fa-heart"></i>
+                }
+              </div>
+              <img src={data.food.image} alt="" style={{maxWidth: data.food.type == 'drink' ? '300px': null}} className="ContainerIMG__img" srcSet="" />
             </div>
             <h1 className="singleTitleFood">{data.food.title}</h1>
             <div className="singleFood">
               <div className="singleFoodPrice">
-                <p>Precio: <span>${data.food.price}</span></p>
+                <p><span style={{fontSize: '3rem', fontWeight: 'lighter'}}>${data.food.price}</span></p>
+                <RatingStar
+                  maxScore={100}
+                  id="MyRating"
+                  rating={data.rating}
+                />
               </div>
-              <div className="singleFoodIngredients">
-                <p>Ingredientes:</p>
-                {data.food.ingredients.map( (data, index) =>{ return(<span key={index}>{data}</span>) })}
+            </div>
+            <div className="singleFood">
+              <div className="singleFoodDetails">
+                  <p>Ingredientes: <span> {data.food.ingredients}</span></p>
+                  {/* https://antojandoando.com/wp-content/uploads/2020/04/face.jpg */}
               </div>
+            </div>
+            <div className="singleFood">
               <div className="singleFoodDetails">
                 <p>Descripci&oacute;n: <span>{data.food.details}</span></p>
               </div>
-              <div className="singleFoodWeight"> <p> Tama&ntilde;o: <span>400gr</span></p> </div>
+            </div>
+            <div className="singleFood">
+              <div className="singleFoodWeight"> <p> Tama&ntilde;o: <span> {data.food.size}</span></p> </div>
             </div>
           </div>
         }

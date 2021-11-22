@@ -5,7 +5,7 @@ import { RatingStar } from "rating-star";
 
 
 const MainMenuFood = ({food})=>{
-    if (food == 'error') {
+    if (food == 'error' || !food) {
         return <div className="notAvailable"> <p>El producto no se encuentra disponible</p> </div> 
     }else{
         return(

@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import accountReducer from './account';
 import userReducer from './user';
 import foodReducer from './food';
+import conectioneducer from './conectionUser'; 
 
 const reducers = combineReducers({
-    account:  accountReducer,
     user: userReducer,
     food: foodReducer,
+    conectionID: conectioneducer,
 });
 
 export default reducers;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import  { Link, Redirect } from 'react-router-dom'
 
 //Redux
@@ -9,12 +9,46 @@ import { closeUser } from '../db/auth';
 import '../assets/styles/profile.css'
 
 import LoaderCircle from '../components/LoaderCircle';
+import api from '../db/api';
 
 const Profile = () => {
-    const user = useSelector(state=>state.user)
+    const user = useSelector(state=>state.user);
+    const conectionID = useSelector(state=>state.conectionID);
+
     const closeSession = async () =>{
         await closeUser(false);
     }
+
+    const [data, setData] = useState({
+        myUser: conectionID,
+        food: [],
+        loader: false,
+    })
+
+    const verifyFood = async () =>{
+        let newFood = [];
+        if (conectionID != 'loading') {
+            for (let i = 0; i < conectionID[0].foodSave.length; ++i) {
+                let id = conectionID[0].foodSave[i];
+                let result = await api.read(id);
+                newFood.push(result)
+            }
+            if (newFood.length >= 1) {
+                setData({...data, food: newFood})
+            }else{
+                setData({...data, food: 'notFound'})
+            }
+        }
+    }
+    
+    useMemo(() =>{
+        verifyFood();
+    }, [conectionID]);
+
+    useEffect(()=>{
+        console.log(data);
+    })
+
     if (user == null) {
         return <Redirect to='/'/>  
     }else if(user == 'loading'){
@@ -34,7 +68,23 @@ const Profile = () => {
                     </div>
                     <div className="ContainerInfo favorites">
                         <h1 className="title__info--profile">Comida guardada</h1>
-                        <p>Aun no tienes comida guardada</p>
+                        <div className="ContainerAllFood" style={{backgroundColor: 'transparent', boxShadow: 'none'}}>
+                            {data.food == 'notFound' ? <p>Aun no tienes comida guardada</p> : data.food.length == 0 ? 
+                                <LoaderCircle position='relative' size="30px" background="transparent"/> :
+                                data.food.map((item, index)=>{
+                                    return (
+                                        <Link style={{color: 'black', textDecoration: 'none'}}  key={index} to={`/Menu/${conectionID[0].foodSave[index]}`}>
+                                            <div className="slideFood">
+                                                <div className="FoodDetails" style={{width:'90%', height: '80%'}}>
+                                                    <p style={{color: 'black', paddingBottom: '10px', textDecoration: 'none'}} className="title__info--profile">{item.title}</p>
+                                                    <img className="slideFood__img" src={item.image} alt="" />
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    )
+                                })
+                                }
+                        </div>
                     </div>
                     <div className="ContainerInfo favorites">
                         <h1 className="title__info--profile">Rese&ntilde;as</h1>

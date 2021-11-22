@@ -1,19 +1,3 @@
-export const depositMoney = (amount) =>{
-    return (dispatch) =>{
-        dispatch({
-            type: 'DEPOSIT',
-            payload: amount
-        })
-    }
-}
-export const witdtrawMoney = (amount) =>{
-    return (dispatch) =>{
-        dispatch({
-            type: 'WITHDRAW',
-            payload: amount
-        })
-    }
-}
 export const createUser = (amount) =>{
     return (dispatch) =>{
         dispatch({
@@ -43,6 +27,22 @@ export const addFood = (amount) =>{
     return (dispatch) =>{
         dispatch({
             type: 'ADD',
+            payload: amount
+        })
+    }
+}
+export const saveConection = (amount) =>{
+    return (dispatch) =>{
+        dispatch({
+            type: 'SAVECONECTION',
+            payload: amount
+        })
+    }
+}
+export const deleteConection = (amount) =>{
+    return (dispatch) =>{
+        dispatch({
+            type: 'DELETECONECTION',
             payload: amount
         })
     }

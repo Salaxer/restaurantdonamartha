@@ -90,7 +90,7 @@ const Menu = () => {
             </div>
           </div>
             {data.loader ? <div className="notAvailable"> <LoaderCircle position="relative" ></LoaderCircle> </div>:
-            <MainMenuFood food={food} ></MainMenuFood>
+              food == 'empty' ? null : <MainMenuFood food={food} ></MainMenuFood>
             }
             { data.newLoader ? <div className="slideFood"><LoaderCircle position="relative" ></LoaderCircle></div> : null}
         </div> 

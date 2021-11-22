@@ -12,9 +12,12 @@ import '../assets/styles/editProfile.css'
 
 //utils
 import getGravatarURL from '../utils/gravatar';
-import LoaderCircle from '../components/LoaderCircle';
 import verifyImage from '../utils/verifyImage';
 import swal from 'sweetalert';
+
+//components
+import LoaderCircle from '../components/LoaderCircle';
+import ModalNewImage from '../components/modalNewImage'
 
 const EditProfile = () => {
     const user = useSelector(state=>state.user)
@@ -107,9 +110,10 @@ const EditProfile = () => {
     }
 
     useEffect(()=>{
-        console.log(data);
-    })
-
+        return(()=>{
+            setData({});
+        })
+    },[])
     if (user == null) {
         return <Redirect to='/'/>  
     }else if(user == 'loading'){
@@ -153,41 +157,13 @@ const EditProfile = () => {
                         <button onClick={deleteUSer} name="delete" className="buttons Google" id="delete">Eliminar</button>
                     </div>
                 </div>
-                <input type="button" name="close" id="closePhoto"  style={{display: 'none'}}/>
-                <div style={{display: `${data.check ? 'block' : 'none'}`}} onClick={(e) => handleModal(e)} className="viewModal">
-                    <div className="modalChangePhoto">
-                        <h3>Seleccione un modo de subir la imagen</h3>
-                        <div className="tab">
-                            <button onClick={() => modeUploadPhoto('LINK')}>URL</button>
-                            <button onClick={() => modeUploadPhoto('FILE')}>Archivo</button>
-                            <button onClick={() => modeUploadPhoto('GRAVATAR')}>Gravatar</button>
-                        </div>
-                        {data.modeUpload == 'LINK' ? 
-                        <>  
-                            <h2 style={{marginTop: '20px'}}> Ingrese la url de la imagen</h2>
-                            <input value={data.form.image} type="url" name="image" id="url" onChange={
-                                (e) => {updateForm(e)}
-                            } className="inputs inputsText" />
-                        </> : null}
-                        {data.modeUpload == 'FILE' ? <>
-                            <input className="buttons" type="file" name="image" id="file" onChange={
-                                 (e) => {setData({...data, form:{ ...data.form, [e.target.name]: e.target.files[0]}})}
-                            }/>
-                        </> : null}
-                        {data.modeUpload == 'GRAVATAR' ? <>
-                        <h2 style={{marginTop: '20px', textAlign: 'center'}}>La foto de perfil se colocara con  
-                            <a style={{color: 'black'}} href="http://en.gravatar.com/" target="_blank" rel="noopener noreferrer"> GRAVATAR</a>
-                        </h2>
-                        </> : null}
-                        {data.loadModal ? <LoaderCircle/> : null}
-                        <button className="buttons Googlea accepted" onClick={(e) => {verify()}}>Aceptar</button>
-                        <span style={{
-                                display: data.errorImage ? 'block' : 'none',
-                                color: 'red',
-                                fontSize: '1.5rem'
-                            }}>Verifica que lo que ingreses sea una imagen</span>
-                    </div>
-                </div>
+                <ModalNewImage data={data} 
+                    handleModal={handleModal} 
+                    modeUploadPhoto={modeUploadPhoto}
+                    updateForm={updateForm}
+                    verify={verify}
+                    setData={setData}
+                />
             </div>
         );
     }

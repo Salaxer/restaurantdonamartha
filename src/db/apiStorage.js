@@ -5,8 +5,8 @@ const storage = getStorage();
 
 // Create a reference to 'mountains.jpg'
 
-export const deleteUserImages = async (id) =>{
-    const desertRef = ref(storage,  `UsersPhoto/${id}`);
+export const deleteStorageImages = async (id, database = 'UsersPhoto') =>{
+    const desertRef = ref(storage,  `${database}/${id}`);
     // Delete the file
     return await deleteObject(desertRef).then((something) => {
         return something;
@@ -14,8 +14,8 @@ export const deleteUserImages = async (id) =>{
 }
 
 
-export const uploadUserImages = async (img, id) =>{
-    const reference = ref(storage, `UsersPhoto/${id}`);
+export const uploadStorageImages = async (img, id, database = 'UsersPhoto') =>{
+    const reference = ref(storage, `${database}/${id}`);
     const result = await uploadBytes(reference, img).then((snapshot) => {
         console.log('Uploaded a blob or file!');
         const result = getDownloadURL(reference)

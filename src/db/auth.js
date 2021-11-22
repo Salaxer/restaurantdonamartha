@@ -14,7 +14,7 @@ import { getAuth,
   EmailAuthProvider
 } from "firebase/auth";
 
-import { uploadUserImages, deleteUserImages } from './apiStorage';
+import { uploadStorageImages, deleteStorageImages } from './apiStorage';
 import api from './api';
 
 
@@ -33,7 +33,7 @@ export const Google = () =>{
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       // The signed-in user info.
-      // createNewConnectionPublic(true, token);
+      createNewConnectionPublic(true, token, null, true);
       // ...
     }).catch((error) => {
       // Handle Errors here.
@@ -93,7 +93,7 @@ export const modifyProfile = async (name, photo, email, newUser, type) =>{
   const user = auth.currentUser;
   let newPhoto = {}; 
   if (type == 'FILE' && photo) {
-    const result = await uploadUserImages(photo, user.uid);
+    const result = await uploadStorageImages(photo, user.uid);
     newPhoto ={photoURL: result};
   }else{
     newPhoto = photo ? {photoURL: photo} : {};
@@ -223,7 +223,7 @@ export const deleteAccount = async() =>{
     if (passwordTo) {
       // auth/wrong-password
       try {
-        const del = await deleteUserImages(user.uid, 'Users');
+        const del = await deleteStorageImages(user.uid, 'Users');
       } catch (error) {
         console.log(error.message);
       }
@@ -253,11 +253,11 @@ export const deleteAccount = async() =>{
       swal("Error!", "Ingrese su contraseña", "warning");
     }
   }else if(result == 'google.com'){
-    swal("Error!", "su cuenta esta enlazada su cuenta de Google, para eliminarla debe de descincular desde su cuenta", "warning");
+    swal("Error!", "su cuenta esta enlazada a su cuenta de Google, para eliminarla debe de desvincular desde su cuenta", "warning");
   }else{
-    swal("Error!", "su cuenta esta enlazada a distintos provesores, por favor, desvincule la cuenta antes", "warning");
+    swal("Error!", "su cuenta esta enlazada a distintos proveedores, por favor, desvincule la cuenta antes", "warning");
   }
-  
+  return true;
 }
 
 export default {};
