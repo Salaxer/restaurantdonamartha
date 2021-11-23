@@ -64,8 +64,6 @@ const NewOffer = () =>{
         }else{
             setData({...data, loader: true});
             if (data.modeUpload == 'FILE') {
-                console.log(data);
-                console.log('Hola');
                 try {
                     const result = await api.create({
                         description: _DESCRIPTION,
@@ -73,13 +71,9 @@ const NewOffer = () =>{
                         title: _TITLE,
                         terms: _TERMS,
                     }, 'Offers');
-                    console.log(result);
                     const _newID = result.id;
-                    console.log(_newID);
                     const newUrl = await uploadStorageImages(_FILE, _newID, 'offerStorage')
-                    console.log(newUrl);
                     const final = await api.update(_newID, {image: newUrl}, 'Offers');
-                    console.log(final);
                     setData({...data, loader: false});
                     if (final) {
                         swal("Exito","Se ha subido con exito","success");

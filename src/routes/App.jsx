@@ -15,6 +15,7 @@ import EditProfile from '../pages/EditProfile';
 import admin from '../pages/admin';
 import NewProduct from '../pages/NewProduct';
 import NewOffer from '../pages/NewOffer';
+import Offer from '../pages/Offers';
 
 import globalEvents from '../utils/globalEvents';
 
@@ -73,6 +74,7 @@ const App = () => {
           <Route exact path="/admin/:adminID" component={admin} />
           <Route exact path="/admin/:adminID/product" component={NewProduct} />
           <Route exact path="/admin/:adminID/offer" component={NewOffer} />
+          <Route exact path="/offers/:offerID" component={Offer} />
           <Route component={NotFound} />
         </Switch>
       </Layout>

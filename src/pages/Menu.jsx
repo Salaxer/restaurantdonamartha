@@ -22,32 +22,37 @@ const Menu = () => {
   //REDUX config
   const dispatch = useDispatch()
   const { setFood, addFood } = bindActionCreators(actionCreators, dispatch);
-
-  //know if the user watch all items to reload new
-  const dataMax = (decided) =>{
-    decided ? setData({verifyScroll: true, newLoader: true}) : setData({verifyScroll: false});
-    // if (decided) {
-    //   addFood({prueba: 'sorry'});
-    // }
-  }
-
+  
   //Sentences to decide the movement of the page
+  const [lastData, setLastData] = useState();
+
   const [data, setData] = useState({
     loader: true, 
     verifyScroll: false, 
-    lastData: 'none',
     newLoader: false,
   });
- 
+
+  //know if the user watch all items to reload new
+  const dataMax = (decided, lastData) =>{
+    console.log(lastData);
+    // decided ? setData({verifyScroll: true, newLoader: true}) : setData({verifyScroll: false});
+  } ;
+
+  useMemo(()=>{
+    dataMax(lastData);
+  },[lastData])
+
   //getting new data from api if doesn't exist yet
   const getData = async () =>{
     try {
-      setData({loader: true})
+      setData({...data, loader: true})
       const newData = await api.list();
       setFood(newData);
-      setData({loader: false, lastData: newData})
+      setLastData(newData[newData.length-1])
+      setData({...data, loader: false})
+      globalEvents(dataMax);
     } catch (error) {
-      setData({loader: false})
+      setData({...data, loader: false})
       setFood('error');
     }
   }
@@ -58,9 +63,10 @@ const Menu = () => {
     if(food == 'empty' || food == null){ 
       getData();
     }else{
-      setData({loader: false});
+      setLastData(food[food.length-1]);
+      setData({...data, loader: false});
+      globalEvents(dataMax);
     }
-    globalEvents(dataMax)
     return () => {
       setData({});
     };

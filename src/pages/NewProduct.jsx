@@ -186,7 +186,7 @@ const NewProduct = () =>{
                         </div>
                         <div className="contentAdmin">
                             <p>Descripcion</p>
-                            <input onChange={updateData} type="text" className="inputsText" name="details" id="" />
+                            <textarea className="inputsText" name="details" onChange={updateData} rows="10" cols="40"/>
                         </div>
                         <div className="contentAdmin">
                             <p>Tamaño</p>

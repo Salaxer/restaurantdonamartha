@@ -19,11 +19,16 @@ import { getFirestore,
 const db = getFirestore();
 
 const api = {
-    async list(reference = 'Menu') {
-        const customersOrderQuery = query(
-            collection(db, reference),
-            limit(9)
-        );
+    async list(reference = 'Menu', orderQuery) {
+        let customersOrderQuery;
+        if (orderQuery) {
+            customersOrderQuery = orderQuery;
+        }else{
+            customersOrderQuery = query(
+                collection(db, reference),
+                limit(5)
+            );
+        }
         const querySnapshot = (await getDocs(customersOrderQuery));
         return querySnapshot.docs;
     },

@@ -7,9 +7,6 @@ import MenuFood from '../components/MenuFood';
 
 const Main = () => {
 
-  useEffect(()=>{
-  
-  })
 
   return (
     <section id="main" className="main">
