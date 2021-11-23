@@ -74,14 +74,14 @@ const Profile = () => {
                     </div>
                     <div className="ContainerInfo favorites">
                         <h1 className="title__info--profile">Comida guardada</h1>
-                        <div className="ContainerAllFood" style={{backgroundColor: 'transparent', boxShadow: 'none'}}>
+                        <div className="ContainerSaveFood ContainerAllFood" style={{backgroundColor: 'transparent', boxShadow: 'none'}}>
                             {data.food == 'notFound' ? <p>Aun no tienes comida guardada</p> : data.food.length == 0 ? 
                                 <LoaderCircle position='relative' size="30px" background="transparent"/> :
                                 data.food.map((item, index)=>{
                                     return (
                                         <Link style={{color: 'black', textDecoration: 'none'}}  key={index} to={`/Menu/${conectionID[0].foodSave[index]}`}>
-                                            <div className="slideFood">
-                                                <div className="FoodDetails" style={{width:'90%', height: '80%'}}>
+                                            <div className="slideFood" style={{margin: '5px', width: '95%'}}>
+                                                <div className="FoodDetails" style={{width:'95%', height: '80%'}}>
                                                     <p style={{color: 'black', paddingBottom: '10px', textDecoration: 'none'}} className="title__info--profile">{item.title}</p>
                                                     <img className="slideFood__img" src={item.image} alt="" />
                                                 </div>

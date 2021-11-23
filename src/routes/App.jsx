@@ -14,6 +14,7 @@ import Restore from '../pages/Restore';
 import EditProfile from '../pages/EditProfile';
 import admin from '../pages/admin';
 import NewProduct from '../pages/NewProduct';
+import NewOffer from '../pages/NewOffer';
 
 import globalEvents from '../utils/globalEvents';
 
@@ -71,6 +72,7 @@ const App = () => {
           <Route exact path="/Restore" component={Restore} />
           <Route exact path="/admin/:adminID" component={admin} />
           <Route exact path="/admin/:adminID/product" component={NewProduct} />
+          <Route exact path="/admin/:adminID/offer" component={NewOffer} />
           <Route component={NotFound} />
         </Switch>
       </Layout>

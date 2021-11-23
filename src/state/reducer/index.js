@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import userReducer from './user';
 import foodReducer from './food';
-import conectioneducer from './conectionUser'; 
+import conectionReducer from './conectionUser';
+import offerReducer from './offers'; 
 
 const reducers = combineReducers({
     user: userReducer,
     food: foodReducer,
-    conectionID: conectioneducer,
+    conectionID: conectionReducer,
+    offer: offerReducer,
 });
 
 export default reducers;

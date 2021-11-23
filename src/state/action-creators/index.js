@@ -47,3 +47,11 @@ export const deleteConection = (amount) =>{
         })
     }
 }
+export const setOffer = (amount) =>{
+    return (dispatch) =>{
+        dispatch({
+            type: 'NEWOFFER',
+            payload: amount
+        })
+    }
+}

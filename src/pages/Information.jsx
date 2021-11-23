@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import LoaderCircle from '../components/LoaderCircle';
 import NotFound from './NotFound';
 import { RatingStar } from 'rating-star';
+import swal from 'sweetalert';
 
 const Information = () => {
 
@@ -76,7 +77,7 @@ const Information = () => {
   }
 
   const verifySave = () =>{
-    if (conectionID != 'loading') {
+    if (conectionID != 'loading' && conectionID != null) {
       if (conectionID[0].foodSave) {
         const findHeart = conectionID[0].foodSave.find(element => element == FoodId);
         if (findHeart) {
@@ -87,8 +88,15 @@ const Information = () => {
       }else{
         setData({...data, saveHeart: false});
       }
+    }else{
+      setData({...data, saveHeart: false});
     }
   }
+
+  const alertSingin = () =>{
+    swal("Oops","Para agregarlo a tus favoritos primero tiene que unirte a nosotrs","warning");
+  }
+
   useMemo(() =>{
     verifySave();
   }, [conectionID]);
@@ -101,7 +109,7 @@ const Information = () => {
         {data.loader ? <LoaderCircle background="white"/>: 
           <div className="InfoFood">
             <div className="ContainerIMG" style={{textAlign: data.food.type == 'drink' ? 'center': null}}>
-              <div onClick={saveFavorites} style={{cursor: 'pointer'}} id="saveHeart" className="savePublic">
+              <div onClick={ conectionID == null ? alertSingin :saveFavorites} style={{cursor: 'pointer'}} id="saveHeart" className="savePublic">
                 {data.saveHeart == 'undefine' ? null : data.saveHeart ?
                   <i className="fas fa-heart"></i> :
                   <i className="far fa-heart"></i>
@@ -133,6 +141,9 @@ const Information = () => {
             </div>
             <div className="singleFood">
               <div className="singleFoodWeight"> <p> Tama&ntilde;o: <span> {data.food.size}</span></p> </div>
+            </div>
+            <div className="singleFood">
+              <div className="singleFoodWeight"> </div>
             </div>
           </div>
         }

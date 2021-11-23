@@ -40,7 +40,7 @@ const api = {
         }
     },
     async update(ID, updates, reference = 'Menu') {
-        if (reference !== 'Menu') {
+        if (reference == 'Users') {
             const updatingQuery = query(
                 collection(db, reference),
                 where("userID", "==", `${ID}`)
@@ -50,13 +50,13 @@ const api = {
             const newID = result.docs[0].id;
             return await setDoc(doc(db, `${reference}/${newID}`), updates, {merge: true});
         }else{
-            return await setDoc(doc(db, `${reference}/${ID}`), updates, {merge: true});
+            await setDoc(doc(db, `${reference}/${ID}`), updates, {merge: true});
         }
         return true
     },
     // Lo hubiera llamado `delete`, pero `delete` es un keyword en JavaScript asi que no es buena idea :P
     async remove(ID, reference = 'Menu') {
-        if (reference !== 'Menu' ) {
+        if (reference == 'Users' ) {
             const deletingQuery = query(
                 collection(db, reference),
                 where("userID", "==", `${ID}`)
