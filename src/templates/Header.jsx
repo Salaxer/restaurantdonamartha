@@ -27,8 +27,8 @@ const Header = () => {
                 <ul> 
                     <li><Link to="/" aria-label="Inicio"><i alt="Hii" className="fas fa-store-alt"></i><span className="information">Inicio</span></Link></li>
                     <li><Link to="/menu" aria-label="Menu"><i className="fab fa-elementor"></i><span className="information">Menu</span></Link></li>
-                    <li><Link to="/delivery" aria-label="Pedidos a domicilio"><i className="fas fa-motorcycle"></i><span className="information">Pedidos</span></Link></li>
-                    <li><Link to="/reserve" aria-label="Reservaciones"><i className="fas fa-concierge-bell"></i><span className="information">Reservaciones</span></Link></li>
+                    {/* <li><Link to="/delivery" aria-label="Pedidos a domicilio"><i className="fas fa-motorcycle"></i><span className="information">Pedidos</span></Link></li> */}
+                    {/* <li><Link to="/reserve" aria-label="Reservaciones"><i className="fas fa-concierge-bell"></i><span className="information">Reservaciones</span></Link></li> */}
                     {user == null ?
                     <li><Link to="/signup" aria-label="Unete a nosotros"><i className="fas fa-sign-in-alt"></i><span className="information">Unete</span></Link></li>:
                     user.photoURL == undefined ? <li> <LoaderCircle color="#0096C1" background="transparent" position="static" size="30"/> </li>:
