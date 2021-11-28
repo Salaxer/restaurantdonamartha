@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import images_carousel from '../initialState';
 import Welcome from '../containers/Welcome.jsx';
 import MainMenuFood from '../components/MainMenuFood';
-import globalEvents from '../utils/globalEvents';
 
 //Styles
 import '../assets/styles/MainMenuFood.css'; 
@@ -10,11 +9,15 @@ import LoaderCircle from '../components/LoaderCircle';
 
 //db
 import api from '../db/api'
+import { QueryMenu } from '../db/queryCreators';
 
 //React Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../state/index'
+
+//utils
+import globalEvents from '../utils/globalEvents';
 
 
 const Menu = () => {
@@ -25,22 +28,32 @@ const Menu = () => {
   
   //Sentences to decide the movement of the page
   const [lastData, setLastData] = useState();
-
+  const [update, setUpdate] = useState(false)
   const [data, setData] = useState({
     loader: true, 
     verifyScroll: false, 
     newLoader: false,
   });
 
+  const NewUpdate = async () =>{
+    if (lastData) {
+      update ? setData({...data, verifyScroll: true, newLoader: true}) : setData({...data, verifyScroll: false});
+      const obtainQuery = QueryMenu(lastData);
+      try {
+        const datanew = await api.list('Menu', obtainQuery)
+        setLastData(datanew[datanew.length-1])
+        addFood(datanew);
+        console.log(datanew);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+  
   //know if the user watch all items to reload new
-  const dataMax = (decided, lastData) =>{
-    console.log(lastData);
-    // decided ? setData({verifyScroll: true, newLoader: true}) : setData({verifyScroll: false});
-  } ;
-
   useMemo(()=>{
-    dataMax(lastData);
-  },[lastData])
+    NewUpdate();
+  },[update])
 
   //getting new data from api if doesn't exist yet
   const getData = async () =>{
@@ -50,7 +63,7 @@ const Menu = () => {
       setFood(newData);
       setLastData(newData[newData.length-1])
       setData({...data, loader: false})
-      globalEvents(dataMax);
+      globalEvents(setUpdate);
     } catch (error) {
       setData({...data, loader: false})
       setFood('error');
@@ -59,16 +72,18 @@ const Menu = () => {
 
   //getting data already used
   const food = useSelector(state=>state.food);
+  console.log(food);
   useEffect( ()=>{
     if(food == 'empty' || food == null){ 
       getData();
     }else{
       setLastData(food[food.length-1]);
       setData({...data, loader: false});
-      globalEvents(dataMax);
+      globalEvents(setUpdate);
     }
     return () => {
       setData({});
+      globalEvents(false);
     };
   }, [])
 
@@ -98,7 +113,7 @@ const Menu = () => {
             {data.loader ? <div className="notAvailable"> <LoaderCircle position="relative" ></LoaderCircle> </div>:
               food == 'empty' ? null : <MainMenuFood food={food} ></MainMenuFood>
             }
-            { data.newLoader ? <div className="slideFood"><LoaderCircle position="relative" ></LoaderCircle></div> : null}
+            { data.newLoader ? <div className="containSlide"><div className="slideFood"><LoaderCircle position="relative" ></LoaderCircle></div></div> : null}
         </div> 
       </div>
     </div>

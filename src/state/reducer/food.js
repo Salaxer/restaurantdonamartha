@@ -3,7 +3,7 @@ const reducer = (state = 'empty', action) =>{
         case "SET":
             return state = action.payload;   
         case "ADD":
-            return state =+ action.payload;            
+            return state = state.concat(action.payload);            
         default:
             return state;
     }

@@ -13,21 +13,23 @@ const MainMenuFood = ({food})=>{
         {food.map((data, index)=>{
             const elements = data.data();   
                 return(
-                    <div className="slideFood" key={index}>
-                        <div className="FoodDetails">
-                            <h1 className="titleFood">{elements.title}</h1>
-                            <p className="priceFood">price <span>${elements.price}</span></p>
-                            <div>
-                            <RatingStar
-                                maxScore={100}
-                                id={index.toString()}
-                                rating={elements.rating}
-                            />
+                    <div className="containSlide" key={index}>
+                        <div className="slideFood" >
+                            <Link className="slideFood__a" to={`/menu/${data.id}`} >
+                                <img className="slideFood__img" src={elements.image} alt={elements.title} srcSet="" />
+                            </Link>
+                            <div className="FoodDetails">
+                                <h1 className="titleFood">{elements.title}</h1>
+                                <p className="priceFood">price <span>${elements.price}</span></p>
+                                <div>
+                                <RatingStar
+                                    maxScore={100}
+                                    id={index.toString()}
+                                    rating={elements.rating}
+                                />
+                                </div>
                             </div>
                         </div>
-                        <Link className="slideFood__a" to={`/menu/${data.id}`} >
-                            <img className="slideFood__img" src={elements.image} alt={elements.title} srcSet="" />
-                        </Link>
                     </div>
                 )
             })}
