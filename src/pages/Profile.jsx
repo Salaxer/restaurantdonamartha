@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import  { Link, Redirect } from 'react-router-dom'
+import  { Link, Navigate } from 'react-router-dom'
 
 //Redux
 import { useSelector } from 'react-redux';
@@ -55,7 +55,7 @@ const Profile = () => {
     }, [conectionID]);
 
     if (user == null) {
-        return <Redirect to='/'/>  
+        return <Navigate to='/'/>  
     }else if(user == 'loading'){
         return <LoaderCircle background="white" color="var(--maincolorgreen)" />
     }else{

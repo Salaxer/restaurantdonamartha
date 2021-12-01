@@ -14,7 +14,7 @@ import api from '../db/api';
 //utils
 import LoaderCircle from './LoaderCircle';
 
-const setCarrousell = () =>{
+const SetCarrousell = () =>{
     useEffect(()=>{
         carrousell(false);
         carrousell(true);
@@ -26,7 +26,7 @@ const setCarrousell = () =>{
  
 const Slide = () => {
 
-    setCarrousell();
+    SetCarrousell();
 
     const dispatch = useDispatch()
     const {setOffer} = bindActionCreators(actionCreators, dispatch);

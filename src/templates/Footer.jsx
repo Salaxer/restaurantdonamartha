@@ -1,6 +1,6 @@
 import React from 'react';
-import Find_us from '../components/Find_us';
 import '../assets/styles/footer.css';
+import FindUs from '../components/Find_us';
 
 const Footer = () => {
   return (
@@ -77,7 +77,7 @@ const Footer = () => {
           </tbody>
         </table>
       </div>
-      <Find_us></Find_us>
+      <FindUs></FindUs>
     </div>
   );
 };

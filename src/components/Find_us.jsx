@@ -2,7 +2,7 @@ import React from "react";
 
 import '../assets/styles/find_us.css';
 
-const Find_us = () =>{
+const FindUs = () =>{
     return(
         <div className="main__findus">
           <h1 className="main__findus--title">Encuentranos</h1>
@@ -11,4 +11,4 @@ const Find_us = () =>{
     );
 }
 
-export default Find_us;
+export default FindUs;

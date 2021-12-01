@@ -47,7 +47,7 @@ const MenuFood = () => {
               </Link>
           </div>
           <div className="target_food">
-              {data.food == 'loading' ? null : 
+              {data.food === 'loading' ? null : 
               <>
                 <h1>Mejor valorado</h1>
                 <p>{data.food.title}</p>

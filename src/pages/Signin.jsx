@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link, useLocation, BrowserRouter as Router } from "react-router-dom";
+import {Link, useLocation } from "react-router-dom";
 
 import imgGoogle from '../assets/5847f9cbcef1014c0b5e48c8.png'
 import LoaderCircle from '../components/LoaderCircle';
@@ -39,11 +39,11 @@ const Signin = () => {
                     loader: false
                 });
                 console.log(error.code);
-                if (error.code == 'auth/wrong-password') {
+                if (error.code === 'auth/wrong-password') {
                     swal("Oops!", "El correo o la contraseña no son correctas, por favor verifica denuevo", "error");
-                }else if(error.code == 'auth/user-not-found'){ 
+                }else if(error.code === 'auth/user-not-found'){ 
                     swal("Oops!", "Parece que el correo ingresado no existe, porfavor crea una cuenta nueva", "error");
-                }else if(error.code == 'auth/network-request-failed'){ //
+                }else if(error.code === 'auth/network-request-failed'){ //
                     swal("Oops!", "Conectate a una red porfavor", "error");
                 }else{
                     swal("Oops!", "Sucedio un error inesperado, porfavor reintenta mas tarde", "error");
@@ -63,9 +63,9 @@ const Signin = () => {
         },
         loader: false
         });
-        if (e.target.name == 'email' && e.target.value != "") {
+        if (e.target.name === 'email' && e.target.value !== "") {
         formEmail.classList.add('validemail1')
-        }else if(e.target.name == 'email' && e.target.value == ""){
+        }else if(e.target.name === 'email' && e.target.value === ""){
         formEmail.classList.remove('validemail1')
         }
     }
@@ -74,7 +74,7 @@ const Signin = () => {
     <div className="SignView">
       <div className="Sign">
         <h1 className="title">Inicia Sesi&oacute;n</h1>
-        <button className="inputs buttons Google" onClick={Google}><img className="Google-img" src={imgGoogle} alt="google image"/> Inicia con Google </button>
+        <button className="inputs buttons Google" onClick={Google}><img className="Google-img" src={imgGoogle} alt="google"/> Inicia con Google </button>
         <button className="inputs buttons Facebook" onClick={Facebook}> <i className="fab fa-facebook"></i> Inicia con Facebook </button>
         <div className="divisorLine">
           <span className="divisorLine-text">O</span>

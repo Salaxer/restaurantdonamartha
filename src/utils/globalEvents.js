@@ -5,8 +5,12 @@ const globalEvents = (setUpdate) =>{
         let altura = window.scrollY / 2;
         let slide_to = document.getElementById('welcome');
         let greeting = document.getElementById('greeting');
-        slide_to == undefined ? slide_to = slide_to : slide_to.style.top = `${0-altura}px`;
-        greeting == undefined ? greeting = greeting : greeting.style.top = `${altura}px`;
+        if (slide_to) {
+          slide_to.style.top = `${0-altura}px`;
+        }
+        if (greeting) {
+          greeting.style.top = `${altura}px`;
+        }
         if(setUpdate){
           const top = document.documentElement.scrollTop;
           const footer = document.getElementById('Footer');

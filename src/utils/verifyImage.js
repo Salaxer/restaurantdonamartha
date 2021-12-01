@@ -22,7 +22,7 @@ const verifyUrl = async (data, timeoutT) =>{
 }
 
 const verifyFile = async (file) =>{
-    const expresionRegular = /\jpeg|jpg|png$/;
+    const expresionRegular = /jpeg|jpg|png$/;
     if (!expresionRegular.exec(file.type)) {
         return 'error';
     }else{
@@ -43,14 +43,14 @@ const verifyFile = async (file) =>{
 
 
 const verifyImage = async (data, type) =>{
-    if (type == 'LINK') {
+    if (type === 'LINK') {
         const result = await verifyUrl(data).then((result)=>{
             return result;
         }).catch((error) =>{
             return error;
        })
        return result;
-    }else if(type == 'FILE'){
+    }else if(type === 'FILE'){
         const result = await verifyFile(data);
         return result
     }

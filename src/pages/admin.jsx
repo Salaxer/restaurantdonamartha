@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { useParams } from 'react-router';
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 //Style
 import '../assets/styles/admin.css';
 
-const admin = () =>{
+const Admin = () =>{
     const {adminID} = useParams()
     const conectionID = useSelector(state=>state.conectionID);
     const user = useSelector(state=>state.user);
@@ -44,4 +44,4 @@ const admin = () =>{
     }
 }
 
-export default admin
+export default Admin

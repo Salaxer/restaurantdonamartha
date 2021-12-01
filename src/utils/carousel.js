@@ -19,21 +19,29 @@ const show_slide = (index) =>{
   const slides = document.querySelectorAll('.slide');
   const dots = document.querySelectorAll('.dot-nav');
   
-  if (index >= slides.length){
-    slider_index = 0;
+  if (slides && dots) {
+    if (index >= slides.length){
+      slider_index = 0;
+    }
+  
+    if (slider_index < 0) { 
+      slider_index = slides.length - 1;
+    };
+  
+    for (let i = 0; i < slides.length; i++) {
+      dots[i].classList.remove('active-dot');
+      if (slides[i]) {
+        slides[i].style.display = 'none';
+      }
+    }
+    
+    if (slides[slider_index] ) {
+      slides[slider_index].style.display = 'block';
+    }
+    if (dots[slider_index]) {
+      dots[slider_index].classList.add('active-dot');
+    }
   }
-
-  if (slider_index < 0) { 
-    slider_index = slides.length - 1;
-  };
-
-  for (let i = 0; i < slides.length; i++) {
-    slides[i] == undefined ? slides : slides[i].style.display = 'none';
-    dots[i].classList.remove('active-dot');
-  }
-
-  slides[slider_index] == undefined ? slides : slides[slider_index].style.display = 'block';
-  dots[slider_index] == undefined ? dots : dots[slider_index].classList.add('active-dot');
 }
 // 
 const carrousell = (state) =>{
@@ -41,7 +49,6 @@ const carrousell = (state) =>{
   
   const arrow_prev = document.querySelector('#arrow-prev');
   const arrow_next = document.querySelector('#arrow-next');
-  const dots = document.querySelectorAll('.dot-nav');
   const circles = document.getElementById('dots-wrapper');
 
   if(arrow_prev){

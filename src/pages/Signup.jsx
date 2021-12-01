@@ -25,7 +25,7 @@ const Signup = () => {
   const authForEmail = async () => {
     const spanError = document.getElementById('errorFom');
     const errorPassword = schema.validate(form.data.password, {details: true});
-    if (errorPassword.length == 0) {
+    if (errorPassword.length === 0) {
       spanError.style.visibility = 'hidden';
       try {
         setForm({
@@ -38,11 +38,11 @@ const Signup = () => {
           ...form,
           loader: false,
         });
-        if(error.code == 'auth/email-already-in-use'){
+        if(error.code === 'auth/email-already-in-use'){
           swal("Oops!", "El correo que se ingreso ya existe, porfavor verifica o intenta iniciar sesion con el!", "error");
-        }else if(error.code == 'auth/missing-email'){
+        }else if(error.code === 'auth/missing-email'){
           swal("Oops!", "Verifica que los campos esten completos", "error");
-        }else if(error.code == 'auth/network-request-failed'){ //
+        }else if(error.code === 'auth/network-request-failed'){ //
           swal("Oops!", "Conectate a una red porfavor", "error");
         }else{
           swal("Oops!", "Sucedio un error inesperado, porfavor reintenta mas tarde", "error");
@@ -64,9 +64,9 @@ const Signup = () => {
       loader: false,
     });
     const formEmail = document.getElementById('textForEmail');
-    if (e.target.name == 'email' && e.target.value != "") {
+    if (e.target.name === 'email' && e.target.value !== "") {
       formEmail.classList.add('validemail')
-    }else if(e.target.name == 'email' && e.target.value == ""){
+    }else if(e.target.name === 'email' && e.target.value === ""){
       formEmail.classList.remove('validemail')
     }
   }
@@ -75,7 +75,7 @@ const Signup = () => {
     <div className="SignView">
       <div className="Sign">
         <h1 className="title">Registro</h1>
-        <button className="inputs buttons Google" onClick={Google}><img className="Google-img" src={imgGoogle} alt="google image"/> Registrate con Google </button>
+        <button className="inputs buttons Google" onClick={Google}><img className="Google-img" src={imgGoogle} alt="google"/> Registrate con Google </button>
         <button className="inputs buttons Facebook" onClick={Facebook}> <i className="fab fa-facebook"></i> Registrate con Facebook </button>
         <div className="divisorLine">
           <span className="divisorLine-text">O</span>
