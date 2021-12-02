@@ -31,19 +31,24 @@ const Menu = () => {
   const [update, setUpdate] = useState(false)
   const [data, setData] = useState({
     loader: true, 
-    verifyScroll: false, 
+    withoutData: false, 
     newLoader: false,
   });
 
   const NewUpdate = async () =>{
     if (lastData) {
-      update ? setData({...data, verifyScroll: true, newLoader: true}) : setData({...data, verifyScroll: false});
+      setData({...data, newLoader: true});
       const obtainQuery = QueryMenu(lastData);
       try {
         const datanew = await api.list('Menu', obtainQuery)
-        setLastData(datanew[datanew.length-1])
-        addFood(datanew);
         console.log(datanew);
+        if (datanew.length !== 0) {
+          addFood(datanew);
+          setLastData(datanew[datanew.length-1])
+          setData({...data, newLoader: false, withoutData: false});
+        }else{
+          setData({...data, newLoader: false, withoutData: true});
+        }
       } catch (error) {
         console.log(error);
       }
@@ -61,8 +66,8 @@ const Menu = () => {
       setData({...data, loader: true})
       const newData = await api.list();
       setFood(newData);
-      setLastData(newData[newData.length-1])
-      setData({...data, loader: false})
+      setLastData(newData[newData.length-1]);
+      setData({...data, loader: false});
       globalEvents(setUpdate);
     } catch (error) {
       setData({...data, loader: false})
@@ -72,7 +77,7 @@ const Menu = () => {
 
   //getting data already used
   const food = useSelector(state=>state.food);
-  console.log(food);
+  console.log(data);
   useEffect( ()=>{
     if(food == 'empty' || food == null){ 
       getData();
@@ -113,7 +118,10 @@ const Menu = () => {
             {data.loader ? <div className="notAvailable"> <LoaderCircle position="relative" ></LoaderCircle> </div>:
               food == 'empty' ? null : <MainMenuFood food={food} ></MainMenuFood>
             }
-            { data.newLoader ? <div className="containSlide"><div className="slideFood"><LoaderCircle position="relative" ></LoaderCircle></div></div> : null}
+            { data.newLoader ?  <div className="containSlide"><div className="slideFood"><LoaderCircle position="relative" ></LoaderCircle></div></div> : null}
+            {
+              data.withoutData ? <div className="containSlide"><div className="slideFood" style={{alignItems: 'center'}}><h1>no hay mas productos</h1></div></div> : null
+            }
         </div> 
       </div>
     </div>

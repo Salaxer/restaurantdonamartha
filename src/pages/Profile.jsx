@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import  { Link, Navigate } from 'react-router-dom'
 
 //Redux
@@ -27,7 +27,7 @@ const Profile = () => {
 
     const verifyFood = async () =>{
         let newFood = [];
-        if (conectionID != 'loading') {
+        if (conectionID !== 'loading') {
             if (conectionID[0].foodSave) {
                 for (let i = 0; i < conectionID[0].foodSave.length; ++i) {
                     let id = conectionID[0].foodSave[i];
@@ -54,14 +54,14 @@ const Profile = () => {
         verifyFood();
     }, [conectionID]);
 
-    if (user == null) {
+    if (user === null) {
         return <Navigate to='/'/>  
-    }else if(user == 'loading'){
+    }else if(user === 'loading'){
         return <LoaderCircle background="white" color="var(--maincolorgreen)" />
     }else{
         return(
             <div className="viewUser">
-                    {conectionID[0].type === "owner" ? <Link id="adminButton" className="buttons Google" to={`/admin/${conectionID[0].userID}`}>Administrar</Link> : null }
+                    {conectionID[0].type ==="owner" ? <Link id="adminButton" className="buttons Google" to={`/admin/${conectionID[0].userID}`}>Administrar</Link> : null }
                     <div className="personalInfo">
                         <img aria-label="foto de perfil" className="personalInfo__IMG" src={`${user.photoURL}`} alt={`Foto de ${user.displayName}`} srcSet="" />
                         <Link to="/Profile/edit" className="editProfile" name="edit" aria-label="Editar perfil"><i className="far fa-edit"></i></Link>
@@ -75,7 +75,7 @@ const Profile = () => {
                     <div className="ContainerInfo favorites">
                         <h1 className="title__info--profile">Comida guardada</h1>
                         <div className="ContainerSaveFood ContainerAllFood" style={{backgroundColor: 'transparent', boxShadow: 'none'}}>
-                            {data.food == 'notFound' ? <p>Aun no tienes comida guardada</p> : data.food.length == 0 ? 
+                            {data.food === 'notFound' ? <p>Aun no tienes comida guardada</p> : data.food.length === 0 ? 
                                 <LoaderCircle position='relative' size="30px" background="transparent"/> :
                                 data.food.map((item, index)=>{
                                     return (

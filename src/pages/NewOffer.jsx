@@ -25,11 +25,11 @@ const NewOffer = () =>{
     const user = useSelector(state=>state.user);
 
     const verify = async () =>{
-        if (!data.form.image == "") {
+        if (!data.form.image === "") {
             setData({...data, loadModal: true});
-           if(data.modeUpload == "LINK"){
+           if(data.modeUpload === "LINK"){
                 const result = await verifyImage(data.form.image, data.modeUpload);
-                if (result == 'error') {
+                if (result === 'error') {
                     setData({...data,showImage: false, loadModal: false, errorImage: true, form:{ ...data.form, image: ''}});
                 }else{
                     setData({...data, loadModal: false, showImage: true, check: false, errorImage: false});
@@ -37,14 +37,14 @@ const NewOffer = () =>{
             }else{
                 const result = await verifyImage(data.form.image, data.modeUpload);
                 console.log(result);
-                if (result == 'error') {
+                if (result === 'error') {
                     setData({...data,showImage: false, loadModal: false, errorImage: true, form:{ ...data.form, image: ''}});
                 }else{
                     setData({...data, loadModal: false, showImage: true, check: false, errorImage: false, base: result});
                 }
             }
         }
-        if (data.modeUpload == "GRAVATAR") {
+        if (data.modeUpload === "GRAVATAR") {
             swal("error", "opcion no disponible para subir", "error")
         }
     }
@@ -59,11 +59,11 @@ const NewOffer = () =>{
         const _TITLE = form.title;
         const _FILE = form.image;
         const _TERMS = form.terms;
-        if (_DESCRIPTION == '' || _TITLE == '' || _FILE == '' || _TERMS == ''){
+        if (_DESCRIPTION === '' || _TITLE === '' || _FILE === '' || _TERMS === ''){
            swal("Error","Hay campos vacios", "warning"); 
         }else{
             setData({...data, loader: true});
-            if (data.modeUpload == 'FILE') {
+            if (data.modeUpload === 'FILE') {
                 try {
                     const result = await api.create({
                         description: _DESCRIPTION,
@@ -113,7 +113,7 @@ const NewOffer = () =>{
     })
 
     const handleModal = (e) =>{
-        if (e.target.className == "viewModal" ||  e.target.name == "photo") {
+        if (e.target.className === "viewModal" ||  e.target.name === "photo") {
             data.check ? setData({...data, check: false}) : setData({...data, check: true});
         }
     }
@@ -163,7 +163,7 @@ const NewOffer = () =>{
                                 <img id="previewImage" style={{
                                     width: '300px',
                                     height: '150px',
-                                }} src={data.modeUpload == 'FILE' ? data.base: data.form.image } alt="nueva foto de perfil" />
+                                }} src={data.modeUpload === 'FILE' ? data.base: data.form.image } alt="nueva foto de perfil" />
                             </span>
                         </div>
                         <button onClick={uploadProduct} className="buttons adminButtons" style={{

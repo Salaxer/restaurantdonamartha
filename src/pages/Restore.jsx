@@ -18,11 +18,11 @@ const Restore = () =>{
             });
             await restorePassword(form.email);
         }catch(error){
-            if ( error.code == 'auth/network-request-failed') {
+            if ( error.code === 'auth/network-request-failed') {
                 swal("Oops!" , "Parece que no hay internet", "error");
-            }else if(error.code == 'auth/invalid-email'){
+            }else if(error.code === 'auth/invalid-email'){
                 swal("Error" , "Ingresa un correo valido", "error");
-            }else if(error.code == 'auth/user-not-found'){
+            }else if(error.code === 'auth/user-not-found'){
                 swal({
                     title: "Error",
                     text: "La cuenta no se encontro, registrate ahora",

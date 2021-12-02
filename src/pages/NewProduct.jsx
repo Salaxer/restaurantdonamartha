@@ -25,26 +25,25 @@ const NewProduct = () =>{
     const user = useSelector(state=>state.user);
 
     const verify = async () =>{
-        if (!data.form.image == "") {
+        if (data.form.image) {
             setData({...data, loadModal: true});
-           if(data.modeUpload == "LINK"){
+           if(data.modeUpload === 'LINK'){
                 const result = await verifyImage(data.form.image, data.modeUpload);
-                if (result == 'error') {
+                if (result === 'error') {
                     setData({...data,showImage: false, loadModal: false, errorImage: true, form:{ ...data.form, image: ''}});
                 }else{
                     setData({...data, loadModal: false, showImage: true, check: false, errorImage: false});
                 }
             }else{
                 const result = await verifyImage(data.form.image, data.modeUpload);
-                console.log(result);
-                if (result == 'error') {
+                if (result === 'error') {
                     setData({...data,showImage: false, loadModal: false, errorImage: true, form:{ ...data.form, image: ''}});
                 }else{
                     setData({...data, loadModal: false, showImage: true, check: false, errorImage: false, base: result});
                 }
             }
         }
-        if (data.modeUpload == "GRAVATAR") {
+        if (data.modeUpload === 'GRAVATAR') {
             swal("error", "opcion no disponible para subir", "error")
         }
     }
@@ -63,13 +62,11 @@ const NewProduct = () =>{
         const _TYPE = form.type;
         const _FILE = form.image;
         const _SIZE = form.size;
-        if (_DETAILS == '' || _INGRE == '' || _PRICE == 0 || _TIME == '' || _TITLE == '' || _TYPE == '' || _FILE == '' || _SIZE == ''){
+        if (_DETAILS === '' || _INGRE === '' || _PRICE === 0 || _TIME === '' || _TITLE === '' || _TYPE === '' || _FILE === '' || _SIZE === ''){
            swal("Error","Hay campos vacios", "warning"); 
         }else{
             setData({...data, loader: true});
-            if (data.modeUpload == 'FILE') {
-                console.log(data);
-                console.log('Hola');
+            if (data.modeUpload === 'FILE') {
                 try {
                     const result = await api.create({
                         details: _DETAILS,
@@ -82,20 +79,15 @@ const NewProduct = () =>{
                         type: _TYPE,
                         size: _SIZE,
                     });
-                    console.log(result);
                     const _newID = result.id;
-                    console.log(_newID);
                     const newUrl = await uploadStorageImages(_FILE, _newID, 'adminStorage')
-                    console.log(newUrl);
                     const final = await api.update(_newID, {image: newUrl});
-                    console.log(final);
                     setData({...data, loader: false});
                     if (final) {
                         swal("Exito","Se ha subido con exito","success");
                     }
                 } catch (error) {
                     setData({...data, loader: false});
-                    console.log(error.message);
                     swal("Error!","algo fallo al subir, intente denuevo","error");
                 }
             }else{
@@ -133,7 +125,7 @@ const NewProduct = () =>{
     })
 
     const handleModal = (e) =>{
-        if (e.target.className == "viewModal" ||  e.target.name == "photo") {
+        if (e.target.className === "viewModal" ||  e.target.name === "photo") {
             data.check ? setData({...data, check: false}) : setData({...data, check: true});
         }
     }
@@ -204,7 +196,7 @@ const NewProduct = () =>{
                                 <img id="previewImage" style={{
                                     width: '300px',
                                     height: '150px',
-                                }} src={data.modeUpload == 'FILE' ? data.base: data.form.image } alt="nueva foto de perfil" />
+                                }} src={data.modeUpload === 'FILE' ? data.base: data.form.image } alt="nueva foto de perfil" />
                             </span>
                         </div>
                         <button onClick={uploadProduct} className="buttons adminButtons" style={{

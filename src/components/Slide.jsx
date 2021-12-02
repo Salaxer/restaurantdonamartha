@@ -1,9 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import carrousell from '../utils/carousel';
 import { Link } from 'react-router-dom';
 import Margin from '../utils/MarginFromMain';
-
-import images from '../initialState'
 
 //REDUX
 import { useDispatch, useSelector } from 'react-redux';
@@ -51,7 +49,7 @@ const Slide = () => {
     }
 
     useEffect(()=>{
-        if (Offers == 'empty' || Offers == null) {
+        if (Offers === 'empty' || Offers === null) {
             getOffers();
         }else{
             setData({...data, offers: Offers});
@@ -66,7 +64,7 @@ const Slide = () => {
     return(
         <>
             {
-                data.offers == 'empty' ? <LoaderCircle/> : data.offers.map((item, index) => {
+                data.offers === 'empty' ? <LoaderCircle/> : data.offers.map((item, index) => {
                     const element = item.data();
                     return(
                         <div key={index} id={`slide-${index}`} className="slide fade">
@@ -79,7 +77,7 @@ const Slide = () => {
             }
             <div id="dots-wrapper" className="points">
                 {
-                     data.offers == 'empty' ? null : data.offers.map((item, index) => {
+                     data.offers === 'empty' ? null : data.offers.map((item, index) => {
                         return(
                             <div data-key={index} key={index} className="dot-nav active-dot"></div>
                         )

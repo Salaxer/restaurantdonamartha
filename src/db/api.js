@@ -26,7 +26,7 @@ const api = {
         }else{
             customersOrderQuery = query(
                 collection(db, reference),
-                limit(3)
+                limit(10)
             );
         }
         const querySnapshot = (await getDocs(customersOrderQuery));
