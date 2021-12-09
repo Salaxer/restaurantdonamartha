@@ -89,7 +89,7 @@ const Profile = () => {
                                         </Link>
                                     )
                                 })
-                                }
+                            }
                         </div>
                     </div>
                     <div className="ContainerInfo favorites">

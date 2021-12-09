@@ -92,7 +92,10 @@ const api = {
         );
         const result = await getDocs(updatingQuery);
         const newID = result.docs[0]; 
-        return newID.id;
+        if (newID) {
+            return newID.id;
+        }
+        return false;        
     }
 };
 

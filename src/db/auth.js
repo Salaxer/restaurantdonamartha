@@ -152,7 +152,7 @@ const createNewConnectionPublic = async (byGoogle, token = null, email, update) 
     type: 'user',
     token,
   }
-  if (update == false) {
+  if (!update) {
     await api.update(auth.currentUser.uid, user, 'Users');
   }else{
     await api.create(user, 'Users',);
