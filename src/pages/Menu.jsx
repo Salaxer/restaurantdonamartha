@@ -41,7 +41,6 @@ const Menu = () => {
       const obtainQuery = QueryMenu(lastData);
       try {
         const datanew = await api.list('Menu', obtainQuery)
-        console.log(datanew);
         if (datanew.length !== 0) {
           addFood(datanew);
           setLastData(datanew[datanew.length-1])
@@ -77,7 +76,6 @@ const Menu = () => {
 
   //getting data already used
   const food = useSelector(state=>state.food);
-  console.log(data);
   useEffect( ()=>{
     if(food == 'empty' || food == null){ 
       getData();

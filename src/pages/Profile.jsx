@@ -79,7 +79,7 @@ const Profile = () => {
                                 <LoaderCircle position='relative' size="30px" background="transparent"/> :
                                 data.food.map((item, index)=>{
                                     return (
-                                        <Link style={{color: 'black', textDecoration: 'none'}}  key={index} to={`/Menu/${conectionID[0].foodSave[index]}`}>
+                                        <Link style={{color: 'black', textDecoration: 'none', marginTop: '20px'}}  key={index} to={`/Menu/${conectionID[0].foodSave[index]}`}>
                                             <div className="slideFood" style={{margin: '5px', width: '95%'}}>
                                                 <div className="FoodDetails" style={{width:'95%', height: '80%'}}>
                                                     <p style={{color: 'black', paddingBottom: '10px', textDecoration: 'none'}} className="title__info--profile">{item.title}</p>
